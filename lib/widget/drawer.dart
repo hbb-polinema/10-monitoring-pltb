@@ -4,6 +4,7 @@ import 'package:manajemen_aset/asset/asset_screen.dart';
 import 'package:manajemen_aset/home/home_screen.dart';
 import 'package:manajemen_aset/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/location/location_screen.dart';
+import 'package:manajemen_aset/monitoring/monitoring_energy.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -28,6 +29,8 @@ class _MyDrawerState extends State<MyDrawer> {
       container = const LocationScreen();
     } else if (currentPage == DrawerSections.laporan) {
       container = const LaporanScreen();
+    } else if (currentPage == DrawerSections.monitoring) {
+      container = const MonitoringEnergy();
     } else if (currentPage == DrawerSections.logout) {
       _logOut();
     }
@@ -66,8 +69,13 @@ class _MyDrawerState extends State<MyDrawer> {
               currentPage == DrawerSections.location ? true : false),
           menuItem(4, "Laporan", Icons.description,
               currentPage == DrawerSections.laporan ? true : false),
-          Divider(),
-          menuItem(5, "Logout", Icons.logout,
+          menuItem(
+              5,
+              "Monitoring Produksi Ennergi",
+              Icons.stacked_line_chart_outlined,
+              currentPage == DrawerSections.monitoring ? true : false),
+          const Divider(),
+          menuItem(6, "Logout", Icons.logout,
               currentPage == DrawerSections.logout ? true : false),
         ],
       ),
@@ -90,12 +98,14 @@ class _MyDrawerState extends State<MyDrawer> {
             } else if (id == 4) {
               currentPage = DrawerSections.laporan;
             } else if (id == 5) {
+              currentPage = DrawerSections.monitoring;
+            } else if (id == 6) {
               currentPage = DrawerSections.logout;
             }
           });
         },
         child: Padding(
-          padding: EdgeInsets.all(15.0),
+          padding: const EdgeInsets.all(15.0),
           child: Row(
             children: [
               Expanded(
@@ -109,7 +119,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 flex: 3,
                 child: Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                   ),
@@ -128,6 +138,7 @@ enum DrawerSections {
   asset,
   location,
   laporan,
+  monitoring,
   logout,
 }
 
