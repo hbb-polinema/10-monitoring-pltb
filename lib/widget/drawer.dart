@@ -36,8 +36,8 @@ class _MyDrawerState extends State<MyDrawer> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue[200],
-        // title: Text("Rapid Tech"),
+        backgroundColor: const Color.fromARGB(225, 0, 74, 173),
+        elevation: 0,
       ),
       body: container,
       drawer: Drawer(

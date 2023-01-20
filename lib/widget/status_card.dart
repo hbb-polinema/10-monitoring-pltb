@@ -19,7 +19,7 @@ class StatusCard extends StatelessWidget {
         //     MaterialPageRoute(builder: (contex) => ReadingStatusPage()));
       },
       child: Container(
-        height: 140,
+        height: 500,
         decoration: BoxDecoration(
           color: Colors.white,
           // color: const Color(0xffF4E6BE),
@@ -37,22 +37,22 @@ class StatusCard extends StatelessWidget {
           children: [
             Image.asset(
               img,
-              height: 50,
+              height: 30,
             ),
             const SizedBox(
-              height: 6,
+              height: 10,
             ),
             Text(
               title,
               style: const TextStyle(
-                  fontSize: 25,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                   color: Colors.black87),
               textAlign: TextAlign.center,
             ),
             Text(
               subTitle,
-              style: const TextStyle(fontSize: 18, color: Colors.black87),
+              style: const TextStyle(fontSize: 13, color: Colors.black87),
             )
           ],
         ),

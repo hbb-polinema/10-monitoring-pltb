@@ -31,14 +31,16 @@ class _SelectedDateChartState extends State<SelectedDateChart> {
     super.initState();
   }
 
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  // @override
+  // void dispose() {
+  //   super.dispose();
+  // }
 
   Future fetchSelected() async {
     _chartData = await getDataSelect;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   Future connectAPI(String date) async {

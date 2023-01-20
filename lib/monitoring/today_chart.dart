@@ -33,7 +33,9 @@ class _TodayChartState extends State<TodayChart> {
 
   Future fetchRealtime() async {
     _chartData = await getData;
-    setState(() {});
+    if (mounted) {
+      setState(() {});
+    }
   }
 
   Future connectAPI(String date) async {

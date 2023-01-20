@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/widget/drawer.dart';
 import 'package:manajemen_aset/login/login_screen.dart';
-import 'package:manajemen_aset/main_page.dart';
 
 class AuthService extends StatelessWidget {
   const AuthService({Key? key}) : super(key: key);
