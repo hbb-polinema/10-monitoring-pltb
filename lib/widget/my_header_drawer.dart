@@ -21,7 +21,7 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            margin: EdgeInsets.only(bottom: 10),
+            margin: const EdgeInsets.only(bottom: 10),
             height: 70,
             decoration: const BoxDecoration(
               shape: BoxShape.circle,
@@ -30,10 +30,10 @@ class _MyHeaderDrawerState extends State<MyHeaderDrawer> {
               ),
             ),
           ),
-          // const Text(
-          //   "username",
-          //   style: TextStyle(color: Colors.white, fontSize: 20),
-          // ),
+          const Text(
+            "username",
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
           Text(
             user.email!,
             style: TextStyle(
