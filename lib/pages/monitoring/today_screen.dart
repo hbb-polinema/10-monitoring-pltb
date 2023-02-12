@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/monitoring/today_chart.dart';
+import 'package:manajemen_aset/pages/monitoring/today_chart.dart';
 
 class TodayScreen extends StatefulWidget {
   const TodayScreen({Key? key}) : super(key: key);

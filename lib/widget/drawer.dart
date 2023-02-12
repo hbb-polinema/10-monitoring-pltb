@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/asset/asset_screen.dart';
-import 'package:manajemen_aset/home/home_screen.dart';
-import 'package:manajemen_aset/laporan/laporan_screen.dart';
-import 'package:manajemen_aset/location/location_screen.dart';
-import 'package:manajemen_aset/monitoring/monitoring_energy.dart';
+import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
+import 'package:manajemen_aset/pages/home/home_screen.dart';
+import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
+import 'package:manajemen_aset/pages/location/location_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_energy.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class MyDrawer extends StatefulWidget {
@@ -24,7 +24,7 @@ class _MyDrawerState extends State<MyDrawer> {
     if (currentPage == DrawerSections.home) {
       container = const HomeScreen();
     } else if (currentPage == DrawerSections.asset) {
-      container = const AssetScreen();
+      container = const AssetList();
     } else if (currentPage == DrawerSections.location) {
       container = const LocationScreen();
     } else if (currentPage == DrawerSections.laporan) {

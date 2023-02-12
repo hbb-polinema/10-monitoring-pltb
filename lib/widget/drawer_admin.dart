@@ -1,7 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/home/home_screen.dart';
-import 'package:manajemen_aset/user/user_list_page.dart';
+import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
+import 'package:manajemen_aset/pages/cluster/cluster_list_page.dart';
+import 'package:manajemen_aset/pages/home/home_screen.dart';
+import 'package:manajemen_aset/pages/pengecekan/pengecekan_list_page.dart';
+import 'package:manajemen_aset/pages/perangkat/perangkat_list_page.dart';
+import 'package:manajemen_aset/pages/perawatan/perawatan_list_page.dart';
+import 'package:manajemen_aset/pages/perbaikan/perbaikan_list_page.dart';
+import 'package:manajemen_aset/pages/user/user_list_page.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class DrawerAdmin extends StatefulWidget {
@@ -21,7 +27,19 @@ class _DrawerAdminState extends State<DrawerAdmin> {
     if (currentPage == DrawerSectionsAdmin.home) {
       container = const HomeScreen();
     } else if (currentPage == DrawerSectionsAdmin.users) {
-      container = const ListUser();
+      container = const UserList();
+    } else if (currentPage == DrawerSectionsAdmin.cluster) {
+      container = const ClusterList();
+    } else if (currentPage == DrawerSectionsAdmin.perangkat) {
+      container = const ListPerangkat();
+    } else if (currentPage == DrawerSectionsAdmin.aset) {
+      container = const AssetList();
+    } else if (currentPage == DrawerSectionsAdmin.pengecekan) {
+      container = const ListPengecekan();
+    } else if (currentPage == DrawerSectionsAdmin.perawatan) {
+      container = const ListPerawatan();
+    } else if (currentPage == DrawerSectionsAdmin.perbaikan) {
+      container = const ListPerbaikan();
     } else if (currentPage == DrawerSectionsAdmin.logout) {
       _logOut();
     }
@@ -54,9 +72,21 @@ class _DrawerAdminState extends State<DrawerAdmin> {
         children: [
           menuItem(1, "Home", Icons.home,
               currentPage == DrawerSectionsAdmin.home ? true : false),
-          menuItem(2, "Users", Icons.people,
+          menuItem(2, "User", Icons.people,
               currentPage == DrawerSectionsAdmin.users ? true : false),
-          menuItem(3, "Logout", Icons.logout,
+          menuItem(3, "Cluster", Icons.map,
+              currentPage == DrawerSectionsAdmin.logout ? true : false),
+          menuItem(4, "Data Perangkat", Icons.grid_view_rounded,
+              currentPage == DrawerSectionsAdmin.logout ? true : false),
+          menuItem(5, "Aset", Icons.inventory,
+              currentPage == DrawerSectionsAdmin.logout ? true : false),
+          menuItem(6, "Pengecekan Aset", Icons.check_box,
+              currentPage == DrawerSectionsAdmin.logout ? true : false),
+          menuItem(7, "Perawatan Aset", Icons.settings,
+              currentPage == DrawerSectionsAdmin.logout ? true : false),
+          menuItem(8, "Perbaikan Aset", Icons.error,
+              currentPage == DrawerSectionsAdmin.logout ? true : false),
+          menuItem(9, "Logout", Icons.exit_to_app,
               currentPage == DrawerSectionsAdmin.logout ? true : false),
         ],
       ),
@@ -75,6 +105,18 @@ class _DrawerAdminState extends State<DrawerAdmin> {
             } else if (id == 2) {
               currentPage = DrawerSectionsAdmin.users;
             } else if (id == 3) {
+              currentPage = DrawerSectionsAdmin.cluster;
+            } else if (id == 4) {
+              currentPage = DrawerSectionsAdmin.perangkat;
+            } else if (id == 5) {
+              currentPage = DrawerSectionsAdmin.aset;
+            } else if (id == 6) {
+              currentPage = DrawerSectionsAdmin.pengecekan;
+            } else if (id == 7) {
+              currentPage = DrawerSectionsAdmin.perawatan;
+            } else if (id == 8) {
+              currentPage = DrawerSectionsAdmin.perbaikan;
+            } else if (id == 9) {
               currentPage = DrawerSectionsAdmin.logout;
             }
           });
@@ -86,7 +128,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
               Expanded(
                 child: Icon(
                   icon,
-                  size: 20,
+                  // size: 20,
                   color: Colors.black,
                 ),
               ),
@@ -95,6 +137,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
                 child: Text(
                   title,
                   style: const TextStyle(
+                    fontWeight: FontWeight.w600,
                     color: Colors.black,
                     fontSize: 16,
                   ),
@@ -111,6 +154,12 @@ class _DrawerAdminState extends State<DrawerAdmin> {
 enum DrawerSectionsAdmin {
   home,
   users,
+  cluster,
+  perangkat,
+  aset,
+  pengecekan,
+  perawatan,
+  perbaikan,
   logout,
 }
 

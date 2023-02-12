@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/monitoring/selected_date_screen.dart';
-import 'package:manajemen_aset/monitoring/today_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/selected_date_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/today_screen.dart';
 
 class MonitoringEnergy extends StatefulWidget {
   const MonitoringEnergy({Key? key}) : super(key: key);

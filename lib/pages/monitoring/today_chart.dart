@@ -155,6 +155,32 @@ class _TodayChartState extends State<TodayChart> {
     List<String> calcDate = [];
 
     for (var i = 0; i < 10; i++) {
+    //   var currHour = DateTime.now().hour;
+    //   if(currHour %1 !=0){
+    //     currHour=currHour-(currHour %1);
+    //   }
+    //   var newHour=currHour-i*1;
+    //   var hour='';
+    //   var min=0;
+    //   if(newHour <0){
+    //     newHour=60+newHour;
+    //     min=1;
+    //   }
+    //   if(newHour<10){
+    //     hour="0$newHour";
+    //   }else{
+    //     hour=newHour.toString();
+    //   }
+    //   await connectAPI(DateFormat("yyyy-MM-dd $hour:mm")
+    //           .format(DateTime.now().subtract(Duration(minutes: min)))
+    //           .toString())
+    //       .then((value) {
+    //     data.add(value['real_data'][0]["value"] + 0.0);
+    //     date.add(value['real_data'][0]["date"]);
+    //     calcData.add(value['calc_data'][0]["value"] + 0.0);
+    //     calcDate.add(value['calc_data'][0]["date"]);
+    //   });
+
       var currSecs = DateTime.now().second;
       if (currSecs % 5 != 0) {
         currSecs = currSecs - (currSecs % 5);

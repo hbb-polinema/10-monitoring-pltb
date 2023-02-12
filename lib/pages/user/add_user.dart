@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/user/user_controller.dart';
+import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
 
 class AddUser extends StatefulWidget {
@@ -12,6 +14,7 @@ class AddUser extends StatefulWidget {
 class _AddUserState extends State<AddUser> {
   final addUserKey = GlobalKey<FormState>();
 
+  // text field controller
   TextEditingController emailC = TextEditingController();
   TextEditingController namaC = TextEditingController();
 
@@ -39,7 +42,7 @@ class _AddUserState extends State<AddUser> {
                   controller: namaC,
                   validator: (val) {
                     if (val!.isEmpty) {
-                      return 'Please enter this section';
+                      return 'Wajib diisi';
                     }
                     return null;
                   },
@@ -54,7 +57,7 @@ class _AddUserState extends State<AddUser> {
                   controller: emailC,
                   validator: (val) {
                     if (val!.isEmpty) {
-                      return 'Please enter this section';
+                      return 'Wajib diisi';
                     }
                     return null;
                   },
@@ -83,7 +86,7 @@ class _AddUserState extends State<AddUser> {
                   ),
                   validator: (value) {
                     if (value == null) {
-                      return 'Please choose this reading status';
+                      return 'Pilih role user';
                     }
                     return null;
                   },
@@ -98,7 +101,7 @@ class _AddUserState extends State<AddUser> {
                     onPressed: () async {
                       if (addUserKey.currentState!.validate() &&
                           selectedVal != null) {
-                        await UserController.createUser(
+                        await DatabaseService().addUser(
                           email: emailC.text,
                           nama: namaC.text,
                           role: selectedVal,
@@ -116,11 +119,8 @@ class _AddUserState extends State<AddUser> {
                       }
                     },
                     child: const Text(
-                      "Submit",
-                      style: TextStyle(
-                        fontSize: 16,
-                        letterSpacing: 2,
-                      ),
+                      "Simpan",
+                      style: TextStyle(fontSize: 16),
                     ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
