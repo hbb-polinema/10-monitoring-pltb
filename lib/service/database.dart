@@ -63,6 +63,12 @@ class DatabaseService {
     return userCollection.orderBy('nama').snapshots();
   }
 
+  // user role
+  Stream<DocumentSnapshot<Map<String, dynamic>>> userRole() async* {
+    String? uid = auth.currentUser?.uid;
+    yield* firestore.collection("user").doc(uid).snapshots();
+  }
+
 // CLUSTER
   // menambahkan cluster
   Future<void> addCluster({

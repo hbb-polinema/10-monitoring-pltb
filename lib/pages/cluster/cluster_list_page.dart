@@ -23,117 +23,139 @@ class _ClusterListState extends State<ClusterList> {
           } else if (snapshot.hasData || snapshot.data != null) {
             return Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(225, 0, 74, 173),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  // search
                   child: TextField(
                     onChanged: (value) {},
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
                       hintText: "Cari...",
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        size: 26.0,
+                      ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8.0),
-                        ),
+                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular((10.0)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    final documentSnapshot = snapshot.data!.docs[index];
-                    final String docId = snapshot.data!.docs[index].id;
-                    String cluster = documentSnapshot['nama'];
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                        child: Card(
-                          child: ListTile(
-                            title: Text(cluster),
-                            trailing: PopupMenuButton<int>(
-                              iconSize: 20,
-                              itemBuilder: (context) => [
-                                // PopupMenuItem 1
-                                PopupMenuItem(
-                                  value: 1,
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.edit),
-                                      SizedBox(width: 10),
-                                      Text("Edit Cluster")
-                                    ],
-                                  ),
-                                ),
-                                // PopupMenuItem 2
-                                PopupMenuItem(
-                                  value: 2, 
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.delete),
-                                      SizedBox(width: 10),
-                                      Text("Hapus Cluster")
-                                    ],
-                                  ),
-                                ),
-                              ],
-                              onSelected: (value) {
-                                if (value == 1) {
-                                  // edit cluster
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EditCluster(
-                                        clusterId: docId,
-                                        currentCluster: cluster,
-                                      ),
-                                    ),
-                                  );
-                                } else if (value == 2) {
-                                  // hapus cluster
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title: const Text("Hapus"),
-                                      content: const Text(
-                                        "Apakah anda yakin untuk hapus cluster ini? ",
-                                      ),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text(
-                                            "Batal",
-                                            style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  225, 125, 122, 116),
-                                            ),
-                                          ),
-                                        ),
-                                        TextButton(
-                                          onPressed: () async {
-                                            await DatabaseService()
-                                                .deleteCluster(
-                                              docId: docId,
-                                              nama: cluster,
-                                            );
-                                            Navigator.pop(context);
-                                          },
-                                          child: const Text("Hapus"),
-                                        ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      final documentSnapshot = snapshot.data!.docs[index];
+                      final String docId = snapshot.data!.docs[index].id;
+                      String cluster = documentSnapshot['nama'];
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                          child: Card(
+                            child: ListTile(
+                              title: Text(cluster),
+                              trailing: PopupMenuButton<int>(
+                                iconSize: 20,
+                                itemBuilder: (context) => [
+                                  // PopupMenuItem 1
+                                  PopupMenuItem(
+                                    value: 1,
+                                    child: Row(
+                                      children: const [
+                                        Icon(Icons.edit),
+                                        SizedBox(width: 10),
+                                        Text("Edit Cluster")
                                       ],
                                     ),
-                                  );
-                                }
-                              },
+                                  ),
+                                  // PopupMenuItem 2
+                                  PopupMenuItem(
+                                    value: 2,
+                                    child: Row(
+                                      children: const [
+                                        Icon(Icons.delete),
+                                        SizedBox(width: 10),
+                                        Text("Hapus Cluster")
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                                onSelected: (value) {
+                                  if (value == 1) {
+                                    // edit cluster
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EditCluster(
+                                          clusterId: docId,
+                                          currentCluster: cluster,
+                                        ),
+                                      ),
+                                    );
+                                  } else if (value == 2) {
+                                    // hapus cluster
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Text("Hapus"),
+                                        content: const Text(
+                                          "Apakah anda yakin untuk hapus cluster ini? ",
+                                        ),
+                                        actions: <Widget>[
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text(
+                                              "Batal",
+                                              style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    225, 125, 122, 116),
+                                              ),
+                                            ),
+                                          ),
+                                          TextButton(
+                                            onPressed: () async {
+                                              await DatabaseService()
+                                                  .deleteCluster(
+                                                docId: docId,
+                                                nama: cluster,
+                                              );
+                                              Navigator.pop(context);
+                                            },
+                                            child: const Text("Hapus"),
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                },
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ],
             );

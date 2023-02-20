@@ -4,40 +4,46 @@ import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
 import 'package:manajemen_aset/pages/home/home_screen.dart';
 import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/pages/location/location_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_energy.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
-class MyDrawer extends StatefulWidget {
-  const MyDrawer({Key? key}) : super(key: key);
+class DrawerPemilik extends StatefulWidget {
+  const DrawerPemilik({Key? key}) : super(key: key);
 
   @override
-  State<MyDrawer> createState() => _MyDrawerState();
+  State<DrawerPemilik> createState() => _DrawerPemilikState();
 }
 
-class _MyDrawerState extends State<MyDrawer> {
-  var currentPage = DrawerSections.home;
+class _DrawerPemilikState extends State<DrawerPemilik> {
+  var currentPage = DrawerSectionsPemilik.home;
   var container;
+  var title;
 
   @override
   Widget build(BuildContext context) {
     container;
-    if (currentPage == DrawerSections.home) {
+    if (currentPage == DrawerSectionsPemilik.home) {
       container = const HomeScreen();
-    } else if (currentPage == DrawerSections.asset) {
+    } else if (currentPage == DrawerSectionsPemilik.asset) {
       container = const AssetList();
-    } else if (currentPage == DrawerSections.location) {
-      container = const LocationScreen();
-    } else if (currentPage == DrawerSections.laporan) {
+      title = const Text('Aset');
+    } else if (currentPage == DrawerSectionsPemilik.monitoring) {
+      container = const MonitoringScreen();
+      title = const Text('Monitoring');
+    } else if (currentPage == DrawerSectionsPemilik.laporan) {
       container = const LaporanScreen();
-    } else if (currentPage == DrawerSections.monitoring) {
-      container = const MonitoringEnergy();
-    } else if (currentPage == DrawerSections.logout) {
+      title = const Text('Laporan');
+    } else if (currentPage == DrawerSectionsPemilik.rekomendasi) {
+      container = const LocationScreen();
+      title = const Text('Rekomendasi Perbaikan Aset');
+    } else if (currentPage == DrawerSectionsPemilik.logout) {
       _logOut();
     }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(225, 0, 74, 173),
         elevation: 0,
+        title: title,
       ),
       body: container,
       drawer: Drawer(
@@ -45,7 +51,7 @@ class _MyDrawerState extends State<MyDrawer> {
           child: Column(
             children: [
               const MyHeaderDrawer(),
-              MyDrawerList(),
+              drawerPemilikList(),
             ],
           ),
         ),
@@ -53,7 +59,7 @@ class _MyDrawerState extends State<MyDrawer> {
     );
   }
 
-  Widget MyDrawerList() {
+  Widget drawerPemilikList() {
     return Container(
       padding: const EdgeInsets.only(
         top: 15,
@@ -62,21 +68,21 @@ class _MyDrawerState extends State<MyDrawer> {
         // shows the list of menu drawer
         children: [
           menuItem(1, "Home", Icons.home,
-              currentPage == DrawerSections.home ? true : false),
+              currentPage == DrawerSectionsPemilik.home ? true : false),
           menuItem(2, "Asset", Icons.inventory,
-              currentPage == DrawerSections.asset ? true : false),
-          menuItem(3, "Location", Icons.map,
-              currentPage == DrawerSections.location ? true : false),
-          menuItem(4, "Laporan", Icons.description,
-              currentPage == DrawerSections.laporan ? true : false),
+              currentPage == DrawerSectionsPemilik.asset ? true : false),
           menuItem(
-              5,
-              "Monitoring Produksi Ennergi",
+              3,
+              "Monitoring Produksi Energi",
               Icons.stacked_line_chart_outlined,
-              currentPage == DrawerSections.monitoring ? true : false),
+              currentPage == DrawerSectionsPemilik.monitoring ? true : false),
+          menuItem(4, "Laporan", Icons.description,
+              currentPage == DrawerSectionsPemilik.laporan ? true : false),
+          menuItem(5, "Rekomendasi Perbaikan Aset", Icons.error,
+              currentPage == DrawerSectionsPemilik.rekomendasi ? true : false),
           const Divider(),
           menuItem(6, "Logout", Icons.logout,
-              currentPage == DrawerSections.logout ? true : false),
+              currentPage == DrawerSectionsPemilik.logout ? true : false),
         ],
       ),
     );
@@ -90,17 +96,17 @@ class _MyDrawerState extends State<MyDrawer> {
           Navigator.pop(context);
           setState(() {
             if (id == 1) {
-              currentPage = DrawerSections.home;
+              currentPage = DrawerSectionsPemilik.home;
             } else if (id == 2) {
-              currentPage = DrawerSections.asset;
+              currentPage = DrawerSectionsPemilik.asset;
             } else if (id == 3) {
-              currentPage = DrawerSections.location;
+              currentPage = DrawerSectionsPemilik.monitoring;
             } else if (id == 4) {
-              currentPage = DrawerSections.laporan;
+              currentPage = DrawerSectionsPemilik.laporan;
             } else if (id == 5) {
-              currentPage = DrawerSections.monitoring;
+              currentPage = DrawerSectionsPemilik.rekomendasi;
             } else if (id == 6) {
-              currentPage = DrawerSections.logout;
+              currentPage = DrawerSectionsPemilik.logout;
             }
           });
         },
@@ -111,7 +117,7 @@ class _MyDrawerState extends State<MyDrawer> {
               Expanded(
                 child: Icon(
                   icon,
-                  size: 20,
+                  // size: 20,
                   color: Colors.black,
                 ),
               ),
@@ -120,6 +126,7 @@ class _MyDrawerState extends State<MyDrawer> {
                 child: Text(
                   title,
                   style: const TextStyle(
+                    fontWeight: FontWeight.w600,
                     color: Colors.black,
                     fontSize: 16,
                   ),
@@ -133,12 +140,12 @@ class _MyDrawerState extends State<MyDrawer> {
   }
 }
 
-enum DrawerSections {
+enum DrawerSectionsPemilik {
   home,
   asset,
-  location,
-  laporan,
   monitoring,
+  laporan,
+  rekomendasi,
   logout,
 }
 

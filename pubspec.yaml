@@ -38,6 +38,7 @@ dependencies:
   firebase_core: ^2.4.1
   firebase_auth: ^4.2.5
   cloud_firestore: ^4.3.1
+  faker: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -72,6 +73,7 @@ flutter:
     - img/partly-cloudy.png
     - img/Logo.png
     - img/Wind turbine-pana.png
+    - img/no-image.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

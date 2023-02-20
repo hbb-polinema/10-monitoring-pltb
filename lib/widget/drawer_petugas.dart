@@ -1,24 +1,22 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
-import 'package:manajemen_aset/pages/cluster/cluster_list_page.dart';
 import 'package:manajemen_aset/pages/home/home_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
 import 'package:manajemen_aset/pages/pengecekan/pengecekan_list_page.dart';
-import 'package:manajemen_aset/pages/perangkat/perangkat_list_page.dart';
 import 'package:manajemen_aset/pages/perawatan/perawatan_list_page.dart';
 import 'package:manajemen_aset/pages/perbaikan/perbaikan_list_page.dart';
-import 'package:manajemen_aset/pages/user/user_list_page.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
-class DrawerAdmin extends StatefulWidget {
-  const DrawerAdmin({Key? key}) : super(key: key);
+class DrawerPetugas extends StatefulWidget {
+  const DrawerPetugas({Key? key}) : super(key: key);
 
   @override
-  State<DrawerAdmin> createState() => _DrawerAdminState();
+  State<DrawerPetugas> createState() => _DrawerPetugasState();
 }
 
-class _DrawerAdminState extends State<DrawerAdmin> {
-  var currentPage = DrawerSectionsAdmin.home;
+class _DrawerPetugasState extends State<DrawerPetugas> {
+  var currentPage = DrawerSectionsPetugas.home;
   var container;
   var title;
 
@@ -26,30 +24,24 @@ class _DrawerAdminState extends State<DrawerAdmin> {
   Widget build(BuildContext context) {
     title;
     container;
-    if (currentPage == DrawerSectionsAdmin.home) {
+    if (currentPage == DrawerSectionsPetugas.home) {
       container = const HomeScreen();
-    } else if (currentPage == DrawerSectionsAdmin.users) {
-      container = const UserList();
-      title = const Text("User");
-    } else if (currentPage == DrawerSectionsAdmin.cluster) {
-      container = const ClusterList();
-      title = const Text("Cluster");
-    } else if (currentPage == DrawerSectionsAdmin.perangkat) {
-      container = const ListPerangkat();
-      title = const Text("Data Perangkat");
-    } else if (currentPage == DrawerSectionsAdmin.aset) {
+    } else if (currentPage == DrawerSectionsPetugas.aset) {
       container = const AssetList();
       title = const Text("Aset");
-    } else if (currentPage == DrawerSectionsAdmin.pengecekan) {
+    } else if (currentPage == DrawerSectionsPetugas.monitoring) {
+      container = const MonitoringScreen();
+      title = const Text("Monitoring");
+    } else if (currentPage == DrawerSectionsPetugas.pengecekan) {
       container = const ListPengecekan();
       title = const Text("History Pengecekan Aset");
-    } else if (currentPage == DrawerSectionsAdmin.perawatan) {
+    } else if (currentPage == DrawerSectionsPetugas.perawatan) {
       container = const ListPerawatan();
       title = const Text("History Perawatan Aset");
-    } else if (currentPage == DrawerSectionsAdmin.perbaikan) {
+    } else if (currentPage == DrawerSectionsPetugas.perbaikan) {
       container = const ListPerbaikan();
       title = const Text("History Perbaikan Aset");
-    } else if (currentPage == DrawerSectionsAdmin.logout) {
+    } else if (currentPage == DrawerSectionsPetugas.logout) {
       _logOut();
     }
     return Scaffold(
@@ -64,7 +56,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
           child: Column(
             children: [
               const MyHeaderDrawer(),
-              drawerAdminListAdmin(),
+              drawerPetugasListAdmin(),
             ],
           ),
         ),
@@ -72,7 +64,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
     );
   }
 
-  Widget drawerAdminListAdmin() {
+  Widget drawerPetugasListAdmin() {
     return Container(
       padding: const EdgeInsets.only(
         top: 15,
@@ -81,23 +73,19 @@ class _DrawerAdminState extends State<DrawerAdmin> {
         // shows the list of menu drawer
         children: [
           menuItem(1, "Home", Icons.home,
-              currentPage == DrawerSectionsAdmin.home ? true : false),
-          menuItem(2, "User", Icons.people,
-              currentPage == DrawerSectionsAdmin.users ? true : false),
-          menuItem(3, "Cluster", Icons.map,
-              currentPage == DrawerSectionsAdmin.cluster ? true : false),
-          menuItem(4, "Data Perangkat", Icons.grid_view_rounded,
-              currentPage == DrawerSectionsAdmin.perangkat ? true : false),
-          menuItem(5, "Aset", Icons.inventory,
-              currentPage == DrawerSectionsAdmin.aset ? true : false),
-          menuItem(6, "Pengecekan Aset", Icons.check_box,
-              currentPage == DrawerSectionsAdmin.pengecekan ? true : false),
-          menuItem(7, "Perawatan Aset", Icons.settings,
-              currentPage == DrawerSectionsAdmin.perawatan ? true : false),
-          menuItem(8, "Perbaikan Aset", Icons.error,
-              currentPage == DrawerSectionsAdmin.perbaikan ? true : false),
-          menuItem(9, "Logout", Icons.exit_to_app,
-              currentPage == DrawerSectionsAdmin.logout ? true : false),
+              currentPage == DrawerSectionsPetugas.home ? true : false),
+          menuItem(2, "Aset", Icons.inventory,
+              currentPage == DrawerSectionsPetugas.aset ? true : false),
+          menuItem(3, "Monitoring", Icons.stacked_line_chart_outlined,
+              currentPage == DrawerSectionsPetugas.monitoring ? true : false),
+          menuItem(4, "Pengecekan Aset", Icons.check_box,
+              currentPage == DrawerSectionsPetugas.pengecekan ? true : false),
+          menuItem(5, "Perawatan Aset", Icons.settings,
+              currentPage == DrawerSectionsPetugas.perawatan ? true : false),
+          menuItem(6, "Perbaikan Aset", Icons.error,
+              currentPage == DrawerSectionsPetugas.perbaikan ? true : false),
+          menuItem(7, "Logout", Icons.exit_to_app,
+              currentPage == DrawerSectionsPetugas.logout ? true : false),
         ],
       ),
     );
@@ -111,23 +99,19 @@ class _DrawerAdminState extends State<DrawerAdmin> {
           Navigator.pop(context);
           setState(() {
             if (id == 1) {
-              currentPage = DrawerSectionsAdmin.home;
+              currentPage = DrawerSectionsPetugas.home;
             } else if (id == 2) {
-              currentPage = DrawerSectionsAdmin.users;
+              currentPage = DrawerSectionsPetugas.aset;
             } else if (id == 3) {
-              currentPage = DrawerSectionsAdmin.cluster;
+              currentPage = DrawerSectionsPetugas.monitoring;
             } else if (id == 4) {
-              currentPage = DrawerSectionsAdmin.perangkat;
+              currentPage = DrawerSectionsPetugas.pengecekan;
             } else if (id == 5) {
-              currentPage = DrawerSectionsAdmin.aset;
+              currentPage = DrawerSectionsPetugas.perawatan;
             } else if (id == 6) {
-              currentPage = DrawerSectionsAdmin.pengecekan;
+              currentPage = DrawerSectionsPetugas.perbaikan;
             } else if (id == 7) {
-              currentPage = DrawerSectionsAdmin.perawatan;
-            } else if (id == 8) {
-              currentPage = DrawerSectionsAdmin.perbaikan;
-            } else if (id == 9) {
-              currentPage = DrawerSectionsAdmin.logout;
+              currentPage = DrawerSectionsPetugas.logout;
             }
           });
         },
@@ -161,12 +145,10 @@ class _DrawerAdminState extends State<DrawerAdmin> {
   }
 }
 
-enum DrawerSectionsAdmin {
+enum DrawerSectionsPetugas {
   home,
-  users,
-  cluster,
-  perangkat,
   aset,
+  monitoring,
   pengecekan,
   perawatan,
   perbaikan,

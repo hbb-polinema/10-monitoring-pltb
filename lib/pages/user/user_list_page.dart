@@ -23,86 +23,108 @@ class _UserListState extends State<UserList> {
           } else if (snapshot.hasData || snapshot.data != null) {
             return Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+                Container(
+                  padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+                  decoration: const BoxDecoration(
+                    color: Color.fromARGB(225, 0, 74, 173),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(20),
+                      bottomRight: Radius.circular(20),
+                    ),
+                  ),
+                  // search
                   child: TextField(
                     onChanged: (value) {},
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
                       hintText: "Cari...",
-                      prefixIcon: Icon(Icons.search),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        size: 26.0,
+                      ),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(8.0),
-                        ),
+                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular((10.0)),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(color: Colors.transparent),
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
                     ),
                   ),
                 ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    final documentSnapshot = snapshot.data!.docs[index];
-                    final String docId = snapshot.data!.docs[index].id;
-                    String nama = documentSnapshot['nama'];
-                    String email = documentSnapshot['email'];
-                    String role = documentSnapshot['role'];
-                    return GestureDetector(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-                        child: Card(
-                          child: ListTile(
-                            title: Text(nama),
-                            subtitle: Text(email),
-                            trailing: PopupMenuButton<int>(
-                              itemBuilder: (context) => [
-                                // PopupMenuItem 1
-                                PopupMenuItem(
-                                  value: 1,
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.edit),
-                                      SizedBox(width: 10),
-                                      Text("Edit User")
-                                    ],
-                                  ),
-                                ),
-                                // PopupMenuItem 2
-                                PopupMenuItem(
-                                  value: 2,
-                                  child: Row(
-                                    children: const [
-                                      Icon(Icons.delete),
-                                      SizedBox(width: 10),
-                                      Text("Hapus User")
-                                    ],
-                                  ),
-                                ),
-                              ],
-                              onSelected: (value) {
-                                if (value == 1) {
-                                  // edit user
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EditUser(
-                                        currentEmail: email,
-                                        currentNama: nama,
-                                        currentRole: role,
-                                      ),
+                Expanded(
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      final documentSnapshot = snapshot.data!.docs[index];
+                      final String docId = snapshot.data!.docs[index].id;
+                      String nama = documentSnapshot['nama'];
+                      String email = documentSnapshot['email'];
+                      String role = documentSnapshot['role'];
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+                          child: Card(
+                            child: ListTile(
+                              title: Text(nama),
+                              subtitle: Text(email),
+                              trailing: PopupMenuButton<int>(
+                                itemBuilder: (context) => [
+                                  // PopupMenuItem 1
+                                  PopupMenuItem(
+                                    value: 1,
+                                    child: Row(
+                                      children: const [
+                                        Icon(Icons.edit),
+                                        SizedBox(width: 10),
+                                        Text("Edit User")
+                                      ],
                                     ),
-                                  );
-                                } else if (value == 2) {
-                                  // hapus user
-                                }
-                              },
+                                  ),
+                                  // PopupMenuItem 2
+                                  PopupMenuItem(
+                                    value: 2,
+                                    child: Row(
+                                      children: const [
+                                        Icon(Icons.delete),
+                                        SizedBox(width: 10),
+                                        Text("Hapus User")
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                                onSelected: (value) {
+                                  if (value == 1) {
+                                    // edit user
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => EditUser(
+                                          currentEmail: email,
+                                          currentNama: nama,
+                                          currentRole: role,
+                                        ),
+                                      ),
+                                    );
+                                  } else if (value == 2) {
+                                    // hapus user
+                                  }
+                                },
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    );
-                  },
+                      );
+                    },
+                  ),
                 ),
               ],
             );

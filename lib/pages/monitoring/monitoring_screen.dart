@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/monitoring/today_chart.dart';
+import 'package:manajemen_aset/pages/monitoring/chart.dart';
 
-class TodayScreen extends StatefulWidget {
-  const TodayScreen({Key? key}) : super(key: key);
+class MonitoringScreen extends StatefulWidget {
+  const MonitoringScreen({Key? key}) : super(key: key);
 
   @override
-  State<TodayScreen> createState() => _TodayScreenState();
+  State<MonitoringScreen> createState() => _MonitoringScreenState();
 }
 
-class _TodayScreenState extends State<TodayScreen> {
+class _MonitoringScreenState extends State<MonitoringScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 15),
+            padding: const EdgeInsets.all(16),
             child: Container(
               width: double.infinity,
               height: 500,
@@ -31,7 +31,7 @@ class _TodayScreenState extends State<TodayScreen> {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: const [
                     Text(
@@ -45,7 +45,7 @@ class _TodayScreenState extends State<TodayScreen> {
                     SizedBox(
                       height: 8,
                     ),
-                    TodayChart(),
+                    Chart(),
                   ],
                 ),
               ),
