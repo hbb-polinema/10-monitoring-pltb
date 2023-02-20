@@ -70,10 +70,13 @@ class _ChartState extends State<Chart> {
         _data.clear();
         for (var data in jsonData) {
           _data.add(WeatherData(
-              DateFormat('HH:mm').format(DateTime.parse(data['date_utc'])),
-              data['wind_speed'].toDouble(),
-              data['wind_dir'].toDouble(),
-              data['temp'].toDouble()));
+            DateFormat('HH:mm').format(DateTime.parse(data['date_utc'])),
+            data['wind_speed'].toDouble(),
+            data['wind_dir'].toDouble(),
+            data['temp'].toDouble(),
+            data['uv_index'].toDouble(),
+            data['solar_rad'].toDouble(),
+          ));
         }
       });
     }
@@ -85,35 +88,7 @@ class _ChartState extends State<Chart> {
         ? Column(
             children: [
               //date
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      const Icon(Icons.place),
-                      const Text('Tuban'),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.expand_more),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      const Icon(Icons.calendar_month_rounded),
-                      Text(_dateTime == null
-                          ? DateFormat('dd MM yyyy').format(DateTime.now())
-                          : DateFormat('dd MMM yyyy').format(_dateTime!)),
-                      IconButton(
-                        onPressed: () async {
-                          _showDatePicker();
-                        },
-                        icon: const Icon(Icons.expand_more),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              datePicker(),
               const Divider(thickness: 1),
               const SizedBox(
                 height: 8,
@@ -125,24 +100,24 @@ class _ChartState extends State<Chart> {
                     isVisible: true,
                     position: LegendPosition.bottom,
                     overflowMode: LegendItemOverflowMode.wrap),
-                axes: <ChartAxis>[
-                  NumericAxis(
-                    name: 'yAxis',
-                    // title: AxisTitle(
-                    //   text: 'm/s',
-                    //   textStyle: const TextStyle(fontSize: 12),
-                    // ),
-                    opposedPosition: true,
-                    interval: 5,
-                  )
-                ],
+                // axes: <ChartAxis>[
+                //   NumericAxis(
+                //     name: 'yAxis',
+                //     // title: AxisTitle(
+                //     //   text: 'm/s',
+                //     //   textStyle: const TextStyle(fontSize: 12),
+                //     // ),
+                //     opposedPosition: true,
+                //     interval: 5,
+                //   )
+                // ],
                 primaryXAxis: CategoryAxis(
                   edgeLabelPlacement: EdgeLabelPlacement.shift,
                   interval: 3,
                 ),
                 series: <ChartSeries<WeatherData, dynamic>>[
                   SplineSeries<WeatherData, dynamic>(
-                    name: 'Ukur',
+                    name: 'Wind Speed',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(255, 253, 223, 56),
@@ -155,7 +130,7 @@ class _ChartState extends State<Chart> {
                     ),
                   ),
                   SplineSeries<WeatherData, dynamic>(
-                    name: 'Hitung',
+                    name: 'Wind Dir',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(255, 248, 56, 56),
@@ -168,13 +143,41 @@ class _ChartState extends State<Chart> {
                     ),
                   ),
                   SplineSeries<WeatherData, dynamic>(
-                    name: 'Angin',
+                    name: 'Temp',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(225, 0, 74, 173),
                     xValueMapper: (WeatherData data, _) => data.dateUtc,
                     yValueMapper: (WeatherData data, _) => data.temp,
-                    yAxisName: 'yAxis',
+                    // yAxisName: 'yAxis',
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      height: 5,
+                      width: 5,
+                    ),
+                  ),
+                  SplineSeries<WeatherData, dynamic>(
+                    name: 'Uv Index',
+                    dataSource: _data,
+                    enableTooltip: true,
+                    color: const Color.fromARGB(224, 255, 152, 34),
+                    xValueMapper: (WeatherData data, _) => data.dateUtc,
+                    yValueMapper: (WeatherData data, _) => data.uvIndex,
+                    // yAxisName: 'yAxis',
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      height: 5,
+                      width: 5,
+                    ),
+                  ),
+                  SplineSeries<WeatherData, dynamic>(
+                    name: 'Solar Rad',
+                    dataSource: _data,
+                    enableTooltip: true,
+                    color: const Color.fromARGB(224, 190, 27, 223),
+                    xValueMapper: (WeatherData data, _) => data.dateUtc,
+                    yValueMapper: (WeatherData data, _) => data.solarRad,
+                    // yAxisName: 'yAxis',
                     markerSettings: const MarkerSettings(
                       isVisible: true,
                       height: 5,
@@ -185,7 +188,39 @@ class _ChartState extends State<Chart> {
               ),
             ],
           )
-        : const Center(child: CircularProgressIndicator());
+        : datePicker();
+  }
+
+  Row datePicker() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            const Icon(Icons.place),
+            const Text('Tuban'),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.expand_more),
+            ),
+          ],
+        ),
+        Row(
+          children: [
+            const Icon(Icons.calendar_month_rounded),
+            Text(_dateTime == null
+                ? DateFormat('dd MM yyyy').format(DateTime.now())
+                : DateFormat('dd MMM yyyy').format(_dateTime!)),
+            IconButton(
+              onPressed: () async {
+                _showDatePicker();
+              },
+              icon: const Icon(Icons.expand_more),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
 
@@ -195,15 +230,15 @@ class WeatherData {
   double windSpeed;
   double windDir;
   double temp;
-  // double uvIndex;
-  // double solarRad;
+  double uvIndex;
+  double solarRad;
 
   WeatherData(
     this.dateUtc,
     this.windSpeed,
     this.windDir,
     this.temp,
-    // this.uvIndex,
-    // this.solarRad,
+    this.uvIndex,
+    this.solarRad,
   );
 }
