@@ -3,7 +3,7 @@
     <!-- Required to fetch data from the internet. -->
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="manajemen_aset"
+        android:label="Manajemen Aset"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
