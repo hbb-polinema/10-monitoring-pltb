@@ -4,7 +4,8 @@ import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
 import 'package:manajemen_aset/pages/home/home_screen.dart';
 import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/pages/location/location_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_wt_screen.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class DrawerPemilik extends StatefulWidget {
@@ -27,9 +28,12 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
     } else if (currentPage == DrawerSectionsPemilik.asset) {
       container = const AssetList();
       title = const Text('Aset');
-    } else if (currentPage == DrawerSectionsPemilik.monitoring) {
-      container = const MonitoringScreen();
-      title = const Text('Monitoring');
+    } else if (currentPage == DrawerSectionsPemilik.monitoringEnergy) {
+      container = const MonitoringWtScreen();
+      title = const Text("Monitoring");
+    } else if (currentPage == DrawerSectionsPemilik.monitoringWs) {
+      container = const MonitoringWsScreen();
+      title = const Text("Monitoring");
     } else if (currentPage == DrawerSectionsPemilik.laporan) {
       container = const LaporanScreen();
       title = const Text('Laporan');
@@ -73,15 +77,19 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
               currentPage == DrawerSectionsPemilik.asset ? true : false),
           menuItem(
               3,
-              "Monitoring Produksi Energi",
+              "Monitoring Energy",
               Icons.stacked_line_chart_outlined,
-              currentPage == DrawerSectionsPemilik.monitoring ? true : false),
-          menuItem(4, "Laporan", Icons.description,
+              currentPage == DrawerSectionsPemilik.monitoringEnergy
+                  ? true
+                  : false),
+          menuItem(4, "Monitoring WS", Icons.stacked_line_chart_outlined,
+              currentPage == DrawerSectionsPemilik.monitoringWs ? true : false),
+          menuItem(5, "Laporan", Icons.description,
               currentPage == DrawerSectionsPemilik.laporan ? true : false),
-          menuItem(5, "Rekomendasi Perbaikan Aset", Icons.error,
+          menuItem(6, "Rekomendasi Perbaikan Aset", Icons.error,
               currentPage == DrawerSectionsPemilik.rekomendasi ? true : false),
           const Divider(),
-          menuItem(6, "Logout", Icons.logout,
+          menuItem(7, "Logout", Icons.logout,
               currentPage == DrawerSectionsPemilik.logout ? true : false),
         ],
       ),
@@ -100,12 +108,14 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
             } else if (id == 2) {
               currentPage = DrawerSectionsPemilik.asset;
             } else if (id == 3) {
-              currentPage = DrawerSectionsPemilik.monitoring;
+              currentPage = DrawerSectionsPemilik.monitoringEnergy;
             } else if (id == 4) {
-              currentPage = DrawerSectionsPemilik.laporan;
+              currentPage = DrawerSectionsPemilik.monitoringWs;
             } else if (id == 5) {
-              currentPage = DrawerSectionsPemilik.rekomendasi;
+              currentPage = DrawerSectionsPemilik.laporan;
             } else if (id == 6) {
+              currentPage = DrawerSectionsPemilik.rekomendasi;
+            } else if (id == 7) {
               currentPage = DrawerSectionsPemilik.logout;
             }
           });
@@ -143,7 +153,8 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
 enum DrawerSectionsPemilik {
   home,
   asset,
-  monitoring,
+  monitoringEnergy,
+  monitoringWs,
   laporan,
   rekomendasi,
   logout,

@@ -2,7 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
 import 'package:manajemen_aset/pages/home/home_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_wt_screen.dart';
 import 'package:manajemen_aset/pages/pengecekan/pengecekan_list_page.dart';
 import 'package:manajemen_aset/pages/perawatan/perawatan_list_page.dart';
 import 'package:manajemen_aset/pages/perbaikan/perbaikan_list_page.dart';
@@ -29,8 +30,11 @@ class _DrawerPetugasState extends State<DrawerPetugas> {
     } else if (currentPage == DrawerSectionsPetugas.aset) {
       container = const AssetList();
       title = const Text("Aset");
-    } else if (currentPage == DrawerSectionsPetugas.monitoring) {
-      container = const MonitoringScreen();
+    } else if (currentPage == DrawerSectionsPetugas.monitoringEnergy) {
+      container = const MonitoringWtScreen();
+      title = const Text("Monitoring");
+    } else if (currentPage == DrawerSectionsPetugas.monitoringWs) {
+      container = const MonitoringWsScreen();
       title = const Text("Monitoring");
     } else if (currentPage == DrawerSectionsPetugas.pengecekan) {
       container = const ListPengecekan();
@@ -76,15 +80,17 @@ class _DrawerPetugasState extends State<DrawerPetugas> {
               currentPage == DrawerSectionsPetugas.home ? true : false),
           menuItem(2, "Aset", Icons.inventory,
               currentPage == DrawerSectionsPetugas.aset ? true : false),
-          menuItem(3, "Monitoring", Icons.stacked_line_chart_outlined,
-              currentPage == DrawerSectionsPetugas.monitoring ? true : false),
-          menuItem(4, "Pengecekan Aset", Icons.check_box,
+          menuItem(3, "Monitoring Energy", Icons.stacked_line_chart_outlined,
+              currentPage == DrawerSectionsPetugas.monitoringEnergy ? true : false),
+          menuItem(4, "Monitoring WS", Icons.stacked_line_chart_outlined,
+              currentPage == DrawerSectionsPetugas.monitoringWs ? true : false),
+          menuItem(5, "Pengecekan Aset", Icons.check_box,
               currentPage == DrawerSectionsPetugas.pengecekan ? true : false),
-          menuItem(5, "Perawatan Aset", Icons.settings,
+          menuItem(6, "Perawatan Aset", Icons.settings,
               currentPage == DrawerSectionsPetugas.perawatan ? true : false),
-          menuItem(6, "Perbaikan Aset", Icons.error,
+          menuItem(7, "Perbaikan Aset", Icons.error,
               currentPage == DrawerSectionsPetugas.perbaikan ? true : false),
-          menuItem(7, "Logout", Icons.exit_to_app,
+          menuItem(8, "Logout", Icons.exit_to_app,
               currentPage == DrawerSectionsPetugas.logout ? true : false),
         ],
       ),
@@ -103,14 +109,16 @@ class _DrawerPetugasState extends State<DrawerPetugas> {
             } else if (id == 2) {
               currentPage = DrawerSectionsPetugas.aset;
             } else if (id == 3) {
-              currentPage = DrawerSectionsPetugas.monitoring;
+              currentPage = DrawerSectionsPetugas.monitoringEnergy;
             } else if (id == 4) {
-              currentPage = DrawerSectionsPetugas.pengecekan;
+              currentPage = DrawerSectionsPetugas.monitoringWs;
             } else if (id == 5) {
-              currentPage = DrawerSectionsPetugas.perawatan;
+              currentPage = DrawerSectionsPetugas.pengecekan;
             } else if (id == 6) {
-              currentPage = DrawerSectionsPetugas.perbaikan;
+              currentPage = DrawerSectionsPetugas.perawatan;
             } else if (id == 7) {
+              currentPage = DrawerSectionsPetugas.perbaikan;
+            } else if (id == 8) {
               currentPage = DrawerSectionsPetugas.logout;
             }
           });
@@ -148,7 +156,8 @@ class _DrawerPetugasState extends State<DrawerPetugas> {
 enum DrawerSectionsPetugas {
   home,
   aset,
-  monitoring,
+  monitoringEnergy,
+  monitoringWs,
   pengecekan,
   perawatan,
   perbaikan,

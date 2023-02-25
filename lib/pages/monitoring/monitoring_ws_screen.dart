@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/monitoring/chart.dart';
+import 'package:manajemen_aset/pages/monitoring/ws_chart.dart';
 
-class MonitoringScreen extends StatefulWidget {
-  const MonitoringScreen({Key? key}) : super(key: key);
+class MonitoringWsScreen extends StatefulWidget {
+  const MonitoringWsScreen({Key? key}) : super(key: key);
 
   @override
-  State<MonitoringScreen> createState() => _MonitoringScreenState();
+  State<MonitoringWsScreen> createState() => _MonitoringWsScreenState();
 }
 
-class _MonitoringScreenState extends State<MonitoringScreen> {
+class _MonitoringWsScreenState extends State<MonitoringWsScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,7 +35,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                 child: Column(
                   children: const [
                     Text(
-                      'Produksi Realtime \nkW Electrical Energy',
+                      'Weather Station',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -45,7 +45,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                     SizedBox(
                       height: 8,
                     ),
-                    Chart(),
+                    WsChart(),
                   ],
                 ),
               ),

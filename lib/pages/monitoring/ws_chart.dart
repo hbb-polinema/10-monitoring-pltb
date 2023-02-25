@@ -2,18 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:manajemen_aset/models/weather_station.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
-class Chart extends StatefulWidget {
-  const Chart({Key? key}) : super(key: key);
+class WsChart extends StatefulWidget {
+  const WsChart({Key? key}) : super(key: key);
 
   @override
-  _ChartState createState() => _ChartState();
+  _WsChartState createState() => _WsChartState();
 }
 
-class _ChartState extends State<Chart> {
-  final List<WeatherData> _data = [];
+class _WsChartState extends State<WsChart> {
+  final List<WsData> _data = [];
   TooltipBehavior? _tooltipBehavior;
   late ZoomPanBehavior _zoomPanBehavior;
 
@@ -69,7 +70,7 @@ class _ChartState extends State<Chart> {
       setState(() {
         _data.clear();
         for (var data in jsonData) {
-          _data.add(WeatherData(
+          _data.add(WsData(
             DateFormat('HH:mm').format(DateTime.parse(data['date_utc'])),
             data['wind_speed'].toDouble(),
             data['wind_dir'].toDouble(),
@@ -115,40 +116,40 @@ class _ChartState extends State<Chart> {
                   edgeLabelPlacement: EdgeLabelPlacement.shift,
                   interval: 3,
                 ),
-                series: <ChartSeries<WeatherData, dynamic>>[
-                  SplineSeries<WeatherData, dynamic>(
+                series: <ChartSeries<WsData, dynamic>>[
+                  SplineSeries<WsData, dynamic>(
                     name: 'Wind Speed',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(255, 253, 223, 56),
-                    xValueMapper: (WeatherData data, _) => data.dateUtc,
-                    yValueMapper: (WeatherData data, _) => data.windSpeed,
+                    xValueMapper: (WsData data, _) => data.dateUtc,
+                    yValueMapper: (WsData data, _) => data.windSpeed,
                     markerSettings: const MarkerSettings(
                       isVisible: true,
                       height: 3,
                       width: 3,
                     ),
                   ),
-                  SplineSeries<WeatherData, dynamic>(
+                  SplineSeries<WsData, dynamic>(
                     name: 'Wind Dir',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(255, 248, 56, 56),
-                    xValueMapper: (WeatherData data, _) => data.dateUtc,
-                    yValueMapper: (WeatherData data, _) => data.windDir,
+                    xValueMapper: (WsData data, _) => data.dateUtc,
+                    yValueMapper: (WsData data, _) => data.windDir,
                     markerSettings: const MarkerSettings(
                       isVisible: true,
                       height: 5,
                       width: 5,
                     ),
                   ),
-                  SplineSeries<WeatherData, dynamic>(
+                  SplineSeries<WsData, dynamic>(
                     name: 'Temp',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(225, 0, 74, 173),
-                    xValueMapper: (WeatherData data, _) => data.dateUtc,
-                    yValueMapper: (WeatherData data, _) => data.temp,
+                    xValueMapper: (WsData data, _) => data.dateUtc,
+                    yValueMapper: (WsData data, _) => data.temp,
                     // yAxisName: 'yAxis',
                     markerSettings: const MarkerSettings(
                       isVisible: true,
@@ -156,13 +157,13 @@ class _ChartState extends State<Chart> {
                       width: 5,
                     ),
                   ),
-                  SplineSeries<WeatherData, dynamic>(
+                  SplineSeries<WsData, dynamic>(
                     name: 'Uv Index',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(224, 255, 152, 34),
-                    xValueMapper: (WeatherData data, _) => data.dateUtc,
-                    yValueMapper: (WeatherData data, _) => data.uvIndex,
+                    xValueMapper: (WsData data, _) => data.dateUtc,
+                    yValueMapper: (WsData data, _) => data.uvIndex,
                     // yAxisName: 'yAxis',
                     markerSettings: const MarkerSettings(
                       isVisible: true,
@@ -170,13 +171,13 @@ class _ChartState extends State<Chart> {
                       width: 5,
                     ),
                   ),
-                  SplineSeries<WeatherData, dynamic>(
+                  SplineSeries<WsData, dynamic>(
                     name: 'Solar Rad',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(224, 190, 27, 223),
-                    xValueMapper: (WeatherData data, _) => data.dateUtc,
-                    yValueMapper: (WeatherData data, _) => data.solarRad,
+                    xValueMapper: (WsData data, _) => data.dateUtc,
+                    yValueMapper: (WsData data, _) => data.solarRad,
                     // yAxisName: 'yAxis',
                     markerSettings: const MarkerSettings(
                       isVisible: true,
@@ -222,23 +223,4 @@ class _ChartState extends State<Chart> {
       ],
     );
   }
-}
-
-// model
-class WeatherData {
-  String dateUtc;
-  double windSpeed;
-  double windDir;
-  double temp;
-  double uvIndex;
-  double solarRad;
-
-  WeatherData(
-    this.dateUtc,
-    this.windSpeed,
-    this.windDir,
-    this.temp,
-    this.uvIndex,
-    this.solarRad,
-  );
 }
