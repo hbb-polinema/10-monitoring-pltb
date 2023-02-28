@@ -21,6 +21,7 @@ class _WtChartState extends State<WtChart> {
   final List<RealtimeEnergy> _dataReal = [];
   TooltipBehavior? _tooltipBehavior;
   late ZoomPanBehavior _zoomPanBehavior;
+  late TrackballBehavior _trackballBehavior;
 
   DateTime? _dateTime = DateTime.now();
   // menampilkan date picker
@@ -46,6 +47,11 @@ class _WtChartState extends State<WtChart> {
     fetchData(DateFormat('yyyy-MM-dd').format(_dateTime!));
     // fetchDataSp();
     _tooltipBehavior = TooltipBehavior(enable: true);
+    _trackballBehavior = TrackballBehavior(
+      enable: true,
+      activationMode: ActivationMode.singleTap,
+      tooltipDisplayMode: TrackballDisplayMode.groupAllPoints,
+    );
     _zoomPanBehavior = ZoomPanBehavior(
       enablePinching: true,
       enableDoubleTapZooming: true,
@@ -78,15 +84,20 @@ class _WtChartState extends State<WtChart> {
         for (var dataReal in jsonData) {
           _dataReal.add(
             RealtimeEnergy(
-                dataReal['date_utc'] != null
-                    ? DateFormat('HH:mm')
-                        .format(DateTime.parse(dataReal['date_utc']))
-                    : '',
-                (dataReal['voltAc']?.toDouble() ?? 0.0) *
-                    (dataReal['AmpereAc']?.toDouble() ?? 0.0),
-                0,
-                dataReal['wind_speed']?.toDouble() ?? 0.0,
-                0),
+              dataReal['date_utc'] != null
+                  ? DateFormat('HH:mm')
+                      .format(DateTime.parse(dataReal['date_utc']))
+                  : '',
+              (dataReal['volt_dc']?.toDouble() ?? 0.0) *
+                  (dataReal['ampere_dc']?.toDouble() ?? 0.0),
+              0,
+              dataReal['wind_speed']?.toDouble() ?? 0.0,
+              double.parse(dataReal['rpm_1']),
+              double.parse(dataReal['rpm_2']),
+              dataReal['volt_dc']?.toDouble() ?? 0.0,
+              dataReal['ampere_dc']?.toDouble() ?? 0.0,
+              0,
+            ),
           );
           // _data.add(
           //   WtData(
@@ -162,10 +173,14 @@ class _WtChartState extends State<WtChart> {
               SfCartesianChart(
                 tooltipBehavior: _tooltipBehavior,
                 zoomPanBehavior: _zoomPanBehavior,
+                trackballBehavior: _trackballBehavior,
                 legend: Legend(
-                    isVisible: true,
-                    position: LegendPosition.bottom,
-                    overflowMode: LegendItemOverflowMode.wrap),
+                  isVisible: true,
+                  height: '50%',
+                  width: '100%',
+                  position: LegendPosition.bottom,
+                  overflowMode: LegendItemOverflowMode.wrap,
+                ),
                 axes: <ChartAxis>[
                   NumericAxis(
                     name: 'yAxis',
@@ -183,12 +198,81 @@ class _WtChartState extends State<WtChart> {
                 ),
                 series: <ChartSeries<dynamic, dynamic>>[
                   SplineSeries<RealtimeEnergy, dynamic>(
+                    name: 'Volt Dc',
+                    dataSource: _dataReal,
+                    enableTooltip: true,
+                    color: const Color.fromARGB(223, 78, 250, 207),
+                    xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
+                    yValueMapper: (RealtimeEnergy data, _) => data.voltDc,
+                    yAxisName: 'yAxis',
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      height: 5,
+                      width: 5,
+                    ),
+                  ),
+                  SplineSeries<RealtimeEnergy, dynamic>(
+                    name: 'Ampere Dc',
+                    dataSource: _dataReal,
+                    enableTooltip: true,
+                    color: const Color.fromARGB(223, 78, 250, 87),
+                    xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
+                    yValueMapper: (RealtimeEnergy data, _) => data.ampereDc,
+                    yAxisName: 'yAxis',
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      height: 5,
+                      width: 5,
+                    ),
+                  ),
+                  SplineSeries<RealtimeEnergy, dynamic>(
                     name: 'Power PLTB',
                     dataSource: _dataReal,
                     enableTooltip: true,
                     color: const Color.fromARGB(255, 248, 56, 56),
                     xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
                     yValueMapper: (RealtimeEnergy data, _) => data.powerWt,
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      height: 5,
+                      width: 5,
+                    ),
+                  ),
+                  SplineSeries<RealtimeEnergy, dynamic>(
+                    name: 'Wind Speed',
+                    dataSource: _dataReal,
+                    enableTooltip: true,
+                    color: const Color.fromARGB(225, 0, 74, 173),
+                    xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
+                    yValueMapper: (RealtimeEnergy data, _) => data.windSpeed,
+                    yAxisName: 'yAxis',
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      shape: DataMarkerType.triangle,
+                      height: 5,
+                      width: 5,
+                    ),
+                  ),
+                  SplineSeries<RealtimeEnergy, dynamic>(
+                    name: 'RPM Generator',
+                    dataSource: _dataReal,
+                    enableTooltip: true,
+                    color: const Color.fromARGB(223, 250, 78, 227),
+                    xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
+                    yValueMapper: (RealtimeEnergy data, _) => data.rpm1,
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      height: 5,
+                      width: 5,
+                    ),
+                  ),
+                  SplineSeries<RealtimeEnergy, dynamic>(
+                    name: 'RPM Bilah',
+                    dataSource: _dataReal,
+                    enableTooltip: true,
+                    color: const Color.fromARGB(223, 247, 250, 78),
+                    xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
+                    yValueMapper: (RealtimeEnergy data, _) => data.rpm2,
                     markerSettings: const MarkerSettings(
                       isVisible: true,
                       height: 5,
@@ -209,20 +293,6 @@ class _WtChartState extends State<WtChart> {
                     ),
                   ),
                   SplineSeries<RealtimeEnergy, dynamic>(
-                    name: 'Wind Speed',
-                    dataSource: _dataReal,
-                    enableTooltip: true,
-                    color: const Color.fromARGB(225, 0, 74, 173),
-                    xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
-                    yValueMapper: (RealtimeEnergy data, _) => data.windSpeed,
-                    yAxisName: 'yAxis',
-                    markerSettings: const MarkerSettings(
-                      isVisible: true,
-                      height: 5,
-                      width: 5,
-                    ),
-                  ),
-                  SplineSeries<RealtimeEnergy, dynamic>(
                     name: 'Solar Radiation',
                     dataSource: _dataReal,
                     enableTooltip: true,
@@ -232,6 +302,7 @@ class _WtChartState extends State<WtChart> {
                     yAxisName: 'yAxis',
                     markerSettings: const MarkerSettings(
                       isVisible: true,
+                      shape: DataMarkerType.triangle,
                       height: 5,
                       width: 5,
                     ),

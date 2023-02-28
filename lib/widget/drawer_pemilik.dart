@@ -6,6 +6,7 @@ import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/pages/location/location_screen.dart';
 import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
 import 'package:manajemen_aset/pages/monitoring/monitoring_wt_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/wt_realtime.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class DrawerPemilik extends StatefulWidget {
@@ -34,6 +35,9 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
     } else if (currentPage == DrawerSectionsPemilik.monitoringWs) {
       container = const MonitoringWsScreen();
       title = const Text("Monitoring");
+    } else if (currentPage == DrawerSectionsPemilik.realtimeWt) {
+      container = const WtRealtime();
+      title = const Text("Realtime Wind Turbine");
     } else if (currentPage == DrawerSectionsPemilik.laporan) {
       container = const LaporanScreen();
       title = const Text('Laporan');
@@ -84,12 +88,14 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
                   : false),
           menuItem(4, "Monitoring WS", Icons.stacked_line_chart_outlined,
               currentPage == DrawerSectionsPemilik.monitoringWs ? true : false),
-          menuItem(5, "Laporan", Icons.description,
+          menuItem(5, "Realtime WT", Icons.check_box,
+              currentPage == DrawerSectionsPemilik.realtimeWt ? true : false),
+          menuItem(6, "Laporan", Icons.description,
               currentPage == DrawerSectionsPemilik.laporan ? true : false),
-          menuItem(6, "Rekomendasi Perbaikan Aset", Icons.error,
+          menuItem(7, "Rekomendasi Perbaikan Aset", Icons.error,
               currentPage == DrawerSectionsPemilik.rekomendasi ? true : false),
           const Divider(),
-          menuItem(7, "Logout", Icons.logout,
+          menuItem(8, "Logout", Icons.logout,
               currentPage == DrawerSectionsPemilik.logout ? true : false),
         ],
       ),
@@ -112,10 +118,12 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
             } else if (id == 4) {
               currentPage = DrawerSectionsPemilik.monitoringWs;
             } else if (id == 5) {
-              currentPage = DrawerSectionsPemilik.laporan;
+              currentPage = DrawerSectionsPemilik.realtimeWt;
             } else if (id == 6) {
-              currentPage = DrawerSectionsPemilik.rekomendasi;
+              currentPage = DrawerSectionsPemilik.laporan;
             } else if (id == 7) {
+              currentPage = DrawerSectionsPemilik.rekomendasi;
+            } else if (id == 8) {
               currentPage = DrawerSectionsPemilik.logout;
             }
           });
@@ -155,6 +163,7 @@ enum DrawerSectionsPemilik {
   asset,
   monitoringEnergy,
   monitoringWs,
+  realtimeWt,
   laporan,
   rekomendasi,
   logout,
