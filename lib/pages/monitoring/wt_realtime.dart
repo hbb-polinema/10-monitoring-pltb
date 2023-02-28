@@ -27,7 +27,7 @@ class _WtRealtimeState extends State<WtRealtime> {
   final DateTime? _dateTime = DateTime.now();
   // mangambil data
   Future<void> fetchData(String date) async {
-    Uri url = Uri.parse("https://ebt-polinema.id/api/wind-turbine/history");
+    Uri url = Uri.parse("https://ebt-polinema.id/api/wind-turbine/status");
     // Uri url=Uri.parse("127.0.0.1:1880/w/history");
     var response = await http.post(
       url,
@@ -39,7 +39,7 @@ class _WtRealtimeState extends State<WtRealtime> {
 
     if (mounted) {
       setState(() {
-        wtdata = json.decode(response.body);
+        wtdata = json.decode(response.body)['real_data'];
       });
     }
   }
@@ -61,13 +61,13 @@ class _WtRealtimeState extends State<WtRealtime> {
                     children: [
                       RealtimeCard(
                         img: 'img/turbine.png',
-                        title: "RPM 1",
-                        subTitle: "${wtdata.last['rpm_1']}",
+                        title: "RPM Bilah",
+                        subTitle: "${wtdata.last['rpm_bilah']}",
                       ),
                       RealtimeCard(
                         img: 'img/turbine.png',
-                        title: "RPM 2",
-                        subTitle: "${wtdata.last['rpm_2']}",
+                        title: "RPM Generator",
+                        subTitle: "${wtdata.last['rpm_generator']}",
                       ),
                       RealtimeCard(
                         img: 'img/turbine.png',
@@ -92,7 +92,7 @@ class _WtRealtimeState extends State<WtRealtime> {
                       RealtimeCard(
                         img: 'img/power.png',
                         title: "Power",
-                        subTitle: "${wtdata.last['volt_dc'] * wtdata.last['ampere_dc']}",
+                        subTitle: "${wtdata.last['value']}",
                       ),
                     ],
                   ),
