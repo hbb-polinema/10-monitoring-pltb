@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
-import 'package:manajemen_aset/pages/home/home_screen.dart';
+import 'package:manajemen_aset/pages/home/maps.dart';
 import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/pages/location/location_screen.dart';
 import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
@@ -25,7 +25,7 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
   Widget build(BuildContext context) {
     container;
     if (currentPage == DrawerSectionsPemilik.home) {
-      container = const HomeScreen();
+      container = const Maps();
     } else if (currentPage == DrawerSectionsPemilik.asset) {
       container = const AssetList();
       title = const Text('Aset');
@@ -49,7 +49,7 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(225, 0, 74, 173),
+        backgroundColor: const Color.fromARGB(225, 12, 144, 125),
         elevation: 0,
         title: title,
       ),

@@ -16,12 +16,12 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: const Color.fromARGB(225, 0, 74, 173),
+        primaryColor: const Color.fromARGB(225, 12, 144, 125),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
-          backgroundColor: Color.fromARGB(225, 0, 74, 173),
+          backgroundColor: Color.fromARGB(225, 12, 144, 125),
         ),
         appBarTheme: const AppBarTheme(
-            backgroundColor: Color.fromARGB(225, 0, 74, 173), elevation: 0),
+            backgroundColor: Color.fromARGB(225, 12, 144, 125), elevation: 0),
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),

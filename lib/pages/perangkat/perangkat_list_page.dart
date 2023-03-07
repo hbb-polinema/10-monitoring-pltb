@@ -21,12 +21,17 @@ class _ListPerangkatState extends State<ListPerangkat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(225, 12, 144, 125),
+        elevation: 0,
+        title: const Text('Data Perangkat'),
+      ),
       body: Column(
         children: [
           Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
             decoration: const BoxDecoration(
-              color: Color.fromARGB(225, 0, 74, 173),
+              color: Color.fromARGB(225, 12, 144, 125),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -96,7 +101,7 @@ class _ListPerangkatState extends State<ListPerangkat> {
                 labelStyle: TextStyle(
                   color: idSelected == item.id ? Colors.white : Colors.black,
                 ),
-                selectedColor: const Color.fromARGB(225, 0, 74, 173),
+                selectedColor: const Color.fromARGB(225, 12, 144, 125),
                 onSelected: (_) => setState(() => idSelected = item.id),
               ),
             ),

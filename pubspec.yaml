@@ -39,6 +39,8 @@ dependencies:
   firebase_auth: ^4.2.5
   cloud_firestore: ^4.3.1
   faker: ^2.0.0
+  flutter_map: ^2.2.0
+  latlong2: ^0.8.1
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +77,11 @@ flutter:
     - img/Wind turbine-pana.png
     - img/no-image.png
     - img/power.png
+    - img/windmill.png
+    - img/pltb.png
+    - img/plts.png
+    - img/pltd.png
+    - img/energy.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
