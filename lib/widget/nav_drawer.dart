@@ -82,11 +82,11 @@ class _NavigationDrawerState extends State<NavigationDrawer> {
           leading: const Icon(Icons.people),
           title: const Text('Users'),
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => LaporanScreen(),
-              ),
-            );
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     // builder: (context) => LaporanScreen(),
+            //   ),
+            // );
           },
         ),
         const Divider(

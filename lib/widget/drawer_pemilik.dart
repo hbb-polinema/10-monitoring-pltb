@@ -5,8 +5,9 @@ import 'package:manajemen_aset/pages/home/maps.dart';
 import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/pages/location/location_screen.dart';
 import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_wt_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/wt_screen_total.dart';
 import 'package:manajemen_aset/pages/monitoring/wt_realtime.dart';
+import 'package:manajemen_aset/pages/perangkat/perangkat_list_page.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class DrawerPemilik extends StatefulWidget {
@@ -30,7 +31,8 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
       container = const AssetList();
       title = const Text('Aset');
     } else if (currentPage == DrawerSectionsPemilik.monitoringEnergy) {
-      container = const MonitoringWtScreen();
+      // container = const MonitoringWtScreen();
+      container = const AssetList();
       title = const Text("Monitoring");
     } else if (currentPage == DrawerSectionsPemilik.monitoringWs) {
       container = const MonitoringWsScreen();
@@ -39,13 +41,16 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
       container = const WtRealtime();
       title = const Text("Realtime Wind Turbine");
     } else if (currentPage == DrawerSectionsPemilik.laporan) {
-      container = const LaporanScreen();
+      // container = const LaporanScreen();
       title = const Text('Laporan');
     } else if (currentPage == DrawerSectionsPemilik.rekomendasi) {
       container = const LocationScreen();
       title = const Text('Rekomendasi Perbaikan Aset');
     } else if (currentPage == DrawerSectionsPemilik.logout) {
       _logOut();
+    } else if (currentPage == DrawerSectionsPemilik.perangkat) {
+      container = const ListPerangkat();
+      title = const Text('Rekomendasi Perbaikan Aset');
     }
     return Scaffold(
       appBar: AppBar(
@@ -97,6 +102,8 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
           const Divider(),
           menuItem(8, "Logout", Icons.logout,
               currentPage == DrawerSectionsPemilik.logout ? true : false),
+          menuItem(9, "Perangkat", Icons.logout,
+              currentPage == DrawerSectionsPemilik.perangkat ? true : false),
         ],
       ),
     );
@@ -125,6 +132,8 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
               currentPage = DrawerSectionsPemilik.rekomendasi;
             } else if (id == 8) {
               currentPage = DrawerSectionsPemilik.logout;
+            } else if (id == 9) {
+              currentPage = DrawerSectionsPemilik.perangkat;
             }
           });
         },
@@ -167,6 +176,7 @@ enum DrawerSectionsPemilik {
   laporan,
   rekomendasi,
   logout,
+  perangkat,
 }
 
 Future<void> _logOut() async {

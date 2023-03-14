@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
 import 'package:manajemen_aset/pages/home/home_screen.dart';
 import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_wt_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/wt_screen_total.dart';
 import 'package:manajemen_aset/pages/pengecekan/pengecekan_list_page.dart';
 import 'package:manajemen_aset/pages/perawatan/perawatan_list_page.dart';
 import 'package:manajemen_aset/pages/perbaikan/perbaikan_list_page.dart';
@@ -31,7 +31,8 @@ class _DrawerPetugasState extends State<DrawerPetugas> {
       container = const AssetList();
       title = const Text("Aset");
     } else if (currentPage == DrawerSectionsPetugas.monitoringEnergy) {
-      container = const MonitoringWtScreen();
+      // container = const MonitoringWtScreen();
+      container = const AssetList();
       title = const Text("Monitoring");
     } else if (currentPage == DrawerSectionsPetugas.monitoringWs) {
       container = const MonitoringWsScreen();

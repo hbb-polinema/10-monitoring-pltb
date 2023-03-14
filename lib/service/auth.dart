@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:manajemen_aset/pages/home/maps.dart';
 import 'package:manajemen_aset/pages/login/login_screen.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/drawer_admin.dart';
 import 'package:manajemen_aset/widget/drawer_petugas.dart';
+import 'package:manajemen_aset/widget/drawer_pimpinan.dart';
 
 import '../widget/drawer_pemilik.dart';
 
@@ -31,6 +32,8 @@ class _AuthState extends State<Auth> {
             String? role = snap.data?.data()?['role'];
             if (role == 'Admin') {
               return const DrawerAdmin();
+            } else if (role == 'Pimpinan') {
+              return const DrawerPimpinan();
             } else if (role == 'Pemilik Proyek') {
               return const DrawerPemilik();
             } else if (role == 'Petugas Lapangan') {

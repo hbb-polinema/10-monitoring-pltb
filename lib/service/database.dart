@@ -175,6 +175,13 @@ class DatabaseService {
         .snapshots();
   }
 
+  // menampilkan list perangkat rumah energi
+  Stream<QuerySnapshot> listPerangkatRE() {
+    return perangkatCollection
+        .where('jenisPerangkat', isEqualTo: 'Rumah Energi')
+        .snapshots();
+  }
+
 // ASET
   // menampilkan list aset
   Stream<QuerySnapshot> listAset() {

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/asset/addAset/add_elektrik.dart';
 import 'package:manajemen_aset/pages/asset/jenis_asset.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/aset_card.dart';
@@ -22,12 +21,17 @@ class _AssetListState extends State<AssetList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromARGB(225, 12, 144, 125),
+        elevation: 0,
+        title: const Text('Data Asset'),
+      ),
       body: Column(
         children: [
           Container(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
             decoration: const BoxDecoration(
-              color: Color.fromARGB(225, 0, 74, 173),
+              color: Color.fromARGB(225, 12, 144, 125),
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(20),
                 bottomRight: Radius.circular(20),
@@ -119,7 +123,7 @@ class _AssetListState extends State<AssetList> {
                 labelStyle: TextStyle(
                   color: idSelected == item.id ? Colors.white : Colors.black,
                 ),
-                selectedColor: const Color.fromARGB(225, 0, 74, 173),
+                selectedColor: const Color.fromARGB(225, 12, 144, 125),
                 onSelected: (_) => setState(() => idSelected = item.id),
               ),
             ),
@@ -175,12 +179,23 @@ class BuilderAset extends StatelessWidget {
                         String tglBeroperasi =
                             documentSnapshot['tglBeroperasi'];
                         String tglDipasang = documentSnapshot['tglDipasang'];
-
+                        String img = '';
+                        if (jenisAset == 'sensor') {
+                          img = 'img/sensor.png';
+                        } else if (jenisAset == 'elektrikal') {
+                          img = 'img/mekanik.png';
+                        } else if (jenisAset == 'jaringan') {
+                          img = 'img/jaringan.png';
+                        } else if (jenisAset == 'mekanik') {
+                          img = 'img/mekanik.png';
+                        } else if (jenisAset == 'sipil') {
+                          img = 'img/mekanik.png';
+                        }
                         return AsetCard(
                           kode: kodeAset,
-                          cluster: cluster,
-                          statusKonfirmasi: statusKonfirmasi,
                           namaAset: namaAset,
+                          img: img,
+                          status: kondisiAset,
                         );
                       },
                     ),

@@ -82,6 +82,10 @@ flutter:
     - img/plts.png
     - img/pltd.png
     - img/energy.png
+    - img/elektrik.png
+    - img/jaringan.png
+    - img/mekanik.png
+    - img/sensor.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

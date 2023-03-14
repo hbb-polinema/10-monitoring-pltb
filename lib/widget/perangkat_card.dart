@@ -1,85 +1,97 @@
 import 'package:flutter/material.dart';
+import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
+import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
+import 'package:manajemen_aset/pages/perangkat/list.dart';
 
 class PerangkatCard extends StatelessWidget {
   const PerangkatCard({
     Key? key,
     required this.kode,
-    required this.cluster,
+    required this.status,
+    required this.img,
   }) : super(key: key);
 
   final String kode;
-  final String cluster;
+  final String status;
+  final String img;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const ListP(),
+          ),
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
-        child: Column(
-          children: [
-            Card(
-              child: ListTile(
-                title: Text(
-                  kode,
-                  style: const TextStyle(
-                    color: Color.fromARGB(225, 0, 74, 173),
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                subtitle: Text(
-                  cluster,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-                trailing: PopupMenuButton<int>(
-                  iconSize: 20,
-                  itemBuilder: (context) => [
-                    // PopupMenuItem 1
-                    PopupMenuItem(
-                      value: 1,
-                      child: Row(
-                        children: const [
-                          Icon(Icons.edit),
-                          SizedBox(width: 10),
-                          Text("Edit Cluster")
-                        ],
-                      ),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+            boxShadow: [
+              BoxShadow(
+                offset: const Offset(0, 5),
+                blurRadius: 6,
+                color: const Color(0xff000000).withOpacity(0.06),
+              ),
+            ],
+          ),
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Image(
+                image: AssetImage(img),
+                width: 50,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                flex: 5,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        // kode aset
+                        Text(
+                          kode,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Color.fromARGB(225, 12, 144, 125),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        // icon status
+                        Icon(
+                          status == "Aktif"
+                              ? Icons.task_alt
+                              : Icons.highlight_off,
+                          color: status == "Aktif" ? Colors.green : Colors.red,
+                        )
+                      ],
                     ),
-                    // PopupMenuItem 2
-                    PopupMenuItem(
-                      value: 2,
-                      child: Row(
-                        children: const [
-                          Icon(Icons.delete),
-                          SizedBox(width: 10),
-                          Text("Hapus Cluster")
-                        ],
+                    const SizedBox(height: 8),
+                    SizedBox(
+                      // width: 100,
+                      child: Text(
+                        status,
+                        maxLines: 1,
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
                       ),
                     ),
                   ],
-                  onSelected: (value) {
-                    if (value == 1) {
-                      // edit cluster
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => EditUser(
-                      //       currentEmail: email,
-                      //       currentNama: nama,
-                      //       currentRole: role,
-                      //     ),
-                      //   ),
-                      // );
-                    } else if (value == 2) {
-                      // hapus cluster
-                    }
-                  },
                 ),
               ),
-            ),
-          ],
+              const SizedBox(width: 8),
+            ],
+          ),
         ),
       ),
     );

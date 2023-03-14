@@ -4,15 +4,19 @@ import 'package:manajemen_aset/pages/asset/detail_asset.dart';
 class AsetCard extends StatelessWidget {
   final String kode;
   final String namaAset;
-  final String cluster;
-  final String statusKonfirmasi;
+  final String status;
+  final String img;
+  // final String cluster;
+  // final String statusKonfirmasi;
 
   const AsetCard({
     Key? key,
     required this.kode,
-    required this.statusKonfirmasi,
+    // required this.statusKonfirmasi,
     required this.namaAset,
-    required this.cluster,
+    required this.status,
+    required this.img,
+    // required this.cluster,
   }) : super(key: key);
 
   @override
@@ -45,6 +49,11 @@ class AsetCard extends StatelessWidget {
           padding: const EdgeInsets.all(20),
           child: Row(
             children: [
+              Image(
+                image: AssetImage(img),
+                width: 50,
+              ),
+              const SizedBox(width: 16),
               Expanded(
                 flex: 5,
                 child: Column(
@@ -59,57 +68,34 @@ class AsetCard extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(225, 0, 74, 173),
+                            color: Color.fromARGB(225, 12, 144, 125),
                           ),
                         ),
                         const SizedBox(width: 8),
-                        // nama aset
-                        Text(
-                          namaAset,
-                          maxLines: 1,
-                          style: const TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        // icon status
+                        Icon(
+                          status == "Aktif"
+                              ? Icons.task_alt
+                              : Icons.highlight_off,
+                          color: status == "Aktif" ? Colors.green : Colors.red,
+                        )
                       ],
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        const Icon(
-                          Icons.location_on,
-                          size: 16,
-                        ),
-                        const SizedBox(width: 4),
-                        // cluster
-                        Text(
-                          cluster,
-                          maxLines: 1,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
+                    const SizedBox(height: 8),
                     SizedBox(
                       // width: 100,
                       child: Text(
-                        statusKonfirmasi,
+                        status,
                         maxLines: 1,
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 16,
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
+              const SizedBox(width: 8),
             ],
           ),
         ),

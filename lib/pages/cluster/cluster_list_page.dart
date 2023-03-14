@@ -169,11 +169,33 @@ class _ClusterListState extends State<ClusterList> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddCluster()));
+      floatingActionButton:
+          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+        stream: DatabaseService().userRole(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container();
+          }
+          if (snapshot.hasData) {
+            String role = snapshot.data!.data()!['role'];
+            // cek user untuk menampilkan tombol tambah data aset
+            if (role == 'Pemilik Proyek') {
+              return FloatingActionButton(
+                child: const Icon(Icons.add),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddCluster(),
+                    ),
+                  );
+                },
+              );
+            } else {
+              null;
+            }
+          }
+          return const SizedBox();
         },
       ),
     );

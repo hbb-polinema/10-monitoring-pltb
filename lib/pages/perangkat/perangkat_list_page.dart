@@ -26,64 +26,89 @@ class _ListPerangkatState extends State<ListPerangkat> {
         elevation: 0,
         title: const Text('Data Perangkat'),
       ),
-      body: Column(
-        children: [
-          Container(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
-            decoration: const BoxDecoration(
-              color: Color.fromARGB(225, 12, 144, 125),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(20),
-                bottomRight: Radius.circular(20),
-              ),
-            ),
-            // search
-            child: TextField(
-              onChanged: (value) {},
-              decoration: InputDecoration(
-                filled: true,
-                fillColor: Colors.white,
-                hintText: "Cari...",
-                prefixIcon: const Icon(
-                  Icons.search,
-                  size: 26.0,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.circular((10.0)),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: Colors.transparent),
-                  borderRadius: BorderRadius.circular(10.0),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            Container(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(225, 12, 144, 125),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
                 ),
               ),
+              // search
+              child: TextField(
+                onChanged: (value) {},
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: "Cari...",
+                  prefixIcon: const Icon(
+                    Icons.search,
+                    size: 26.0,
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular((10.0)),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(color: Colors.transparent),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          // choice chip
-          SizedBox(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: listChip(),
+            const SizedBox(
+              height: 8,
             ),
-          ),
-          // content
-          Expanded(
-            child: Center(child: currentTab()),
-          ),
-        ],
+            // choice chip
+            SizedBox(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: listChip(),
+              ),
+            ),
+            // content
+            Center(
+              child: currentTab(),
+            ),
+          ],
+        ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => const AddPerangkat()));
+      floatingActionButton:
+          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+        stream: DatabaseService().userRole(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container();
+          }
+          if (snapshot.hasData) {
+            String role = snapshot.data!.data()!['role'];
+            // cek user untuk menampilkan tombol tambah data aset
+            if (role == 'Pemilik Proyek') {
+              return FloatingActionButton(
+                child: const Icon(Icons.add),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddPerangkat(),
+                    ),
+                  );
+                },
+              );
+            } else {
+              null;
+            }
+          }
+          return const SizedBox();
         },
       ),
     );
@@ -126,24 +151,44 @@ class BuilderPerangkat extends StatelessWidget {
         if (snapshot.hasError) {
           return const Text('Something went wrong');
         } else if (snapshot.hasData || snapshot.data != null) {
-          return Expanded(
-            child: Column(
-              children: [
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    final documentSnapshot = snapshot.data!.docs[index];
-                    final String docId = snapshot.data!.docs[index].id;
-                    String kode = documentSnapshot['kodePerangkat'];
-                    String jenis = documentSnapshot['jenisPerangkat'];
-                    String cluster = documentSnapshot['cluster'];
-
-                    return PerangkatCard(kode: kode, cluster: cluster);
-                  },
-                ),
-              ],
-            ),
+          return Column(
+            children: [
+              Column(
+                children: [
+                  ListView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.docs.length,
+                    itemBuilder: (context, index) {
+                      final documentSnapshot = snapshot.data!.docs[index];
+                      final String docId = snapshot.data!.docs[index].id;
+                      String kode = documentSnapshot['kodePerangkat'];
+                      String jenis = documentSnapshot['jenisPerangkat'];
+                      String status = documentSnapshot['status'];
+                      String img = '';
+                      if (jenis == 'Wind Turbine') {
+                        img = 'img/pltb.png';
+                      } else if (jenis == 'Solar Panel') {
+                        img = 'img/plts.png';
+                      } else if (jenis == 'Diesel') {
+                        img = 'img/pltd.png';
+                      } else if (jenis == 'Batery') {
+                        img = 'img/pltd.png';
+                      } else if (jenis == 'Weather Station') {
+                        img = 'img/pltd.png';
+                      } else if (jenis == 'Rumah Energi') {
+                        img = 'img/pltd.png';
+                      }
+                      return PerangkatCard(
+                        kode: kode,
+                        status: status,
+                        img: img,
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ],
           );
         }
         return const Center(
@@ -169,21 +214,21 @@ final _chipBarList = <ItemChipBar>[
   ),
   ItemChipBar(
     1,
-    'Wind Turbine',
+    'PLTB',
     BuilderPerangkat(
       stream: DatabaseService().listPerangkatWT(),
     ),
   ),
   ItemChipBar(
     2,
-    'Solar Panel',
+    'PLTS',
     BuilderPerangkat(
       stream: DatabaseService().listPerangkatSP(),
     ),
   ),
   ItemChipBar(
     3,
-    'Diesel',
+    'PLTD',
     BuilderPerangkat(
       stream: DatabaseService().listPerangkatDS(),
     ),
@@ -200,6 +245,13 @@ final _chipBarList = <ItemChipBar>[
     'Weather Station',
     BuilderPerangkat(
       stream: DatabaseService().listPerangkatWS(),
+    ),
+  ),
+  ItemChipBar(
+    6,
+    'Rumah Energi',
+    BuilderPerangkat(
+      stream: DatabaseService().listPerangkatRE(),
     ),
   ),
 ];
