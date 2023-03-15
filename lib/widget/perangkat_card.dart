@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
-import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/pages/perangkat/list.dart';
 
 class PerangkatCard extends StatelessWidget {
   const PerangkatCard({
     Key? key,
+    required this.docClusterId,
+    required this.docPerangkatId,
+    required this.id,
     required this.kode,
     required this.status,
     required this.img,
+    required this.jenis,
   }) : super(key: key);
 
+  final String docClusterId;
+  final String docPerangkatId;
+  final String id;
   final String kode;
   final String status;
   final String img;
+  final String jenis;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,12 @@ class PerangkatCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const ListP(),
+            builder: (context) => ListP(
+              docClusterId: docClusterId,
+              docPerangkatId: docPerangkatId,
+              perangkatId: id,
+              jenisPerangkat: jenis,
+            ),
           ),
         );
       },

@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
 import 'package:manajemen_aset/pages/home/home_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/wt_screen_total.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/power_screen_total.dart';
 import 'package:manajemen_aset/pages/pengecekan/pengecekan_list_page.dart';
 import 'package:manajemen_aset/pages/perawatan/perawatan_list_page.dart';
 import 'package:manajemen_aset/pages/perbaikan/perbaikan_list_page.dart';
@@ -28,14 +28,14 @@ class _DrawerPetugasState extends State<DrawerPetugas> {
     if (currentPage == DrawerSectionsPetugas.home) {
       container = const HomeScreen();
     } else if (currentPage == DrawerSectionsPetugas.aset) {
-      container = const AssetList();
+      // container = const AssetList();
       title = const Text("Aset");
     } else if (currentPage == DrawerSectionsPetugas.monitoringEnergy) {
       // container = const MonitoringWtScreen();
-      container = const AssetList();
+      // container = const AssetList();
       title = const Text("Monitoring");
     } else if (currentPage == DrawerSectionsPetugas.monitoringWs) {
-      container = const MonitoringWsScreen();
+      // container = const MonitoringScreen();
       title = const Text("Monitoring");
     } else if (currentPage == DrawerSectionsPetugas.pengecekan) {
       container = const ListPengecekan();
@@ -81,8 +81,13 @@ class _DrawerPetugasState extends State<DrawerPetugas> {
               currentPage == DrawerSectionsPetugas.home ? true : false),
           menuItem(2, "Aset", Icons.inventory,
               currentPage == DrawerSectionsPetugas.aset ? true : false),
-          menuItem(3, "Monitoring Energy", Icons.stacked_line_chart_outlined,
-              currentPage == DrawerSectionsPetugas.monitoringEnergy ? true : false),
+          menuItem(
+              3,
+              "Monitoring Energy",
+              Icons.stacked_line_chart_outlined,
+              currentPage == DrawerSectionsPetugas.monitoringEnergy
+                  ? true
+                  : false),
           menuItem(4, "Monitoring WS", Icons.stacked_line_chart_outlined,
               currentPage == DrawerSectionsPetugas.monitoringWs ? true : false),
           menuItem(5, "Pengecekan Aset", Icons.check_box,

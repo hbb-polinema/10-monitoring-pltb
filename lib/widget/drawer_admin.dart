@@ -35,10 +35,10 @@ class _DrawerAdminState extends State<DrawerAdmin> {
       container = const ClusterList();
       title = const Text("Cluster");
     } else if (currentPage == DrawerSectionsAdmin.perangkat) {
-      container = const ListPerangkat();
+      // container = const ListPerangkat();
       title = const Text("Data Perangkat");
     } else if (currentPage == DrawerSectionsAdmin.aset) {
-      container = const AssetList();
+      // container = const AssetList();
       title = const Text("Aset");
     } else if (currentPage == DrawerSectionsAdmin.pengecekan) {
       container = const ListPengecekan();

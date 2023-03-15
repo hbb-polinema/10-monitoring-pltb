@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/monitoring/wt_chart_total.dart';
+import 'package:manajemen_aset/pages/monitoring/power_chart_total.dart';
 
-class WtScreenTotal extends StatefulWidget {
+class PowerScreenTotal extends StatefulWidget {
   final String idCluster;
-  const WtScreenTotal({Key? key, required this.idCluster})
+  const PowerScreenTotal({Key? key, required this.idCluster})
       : super(key: key);
 
   @override
-  State<WtScreenTotal> createState() => _WtScreenTotalState();
+  State<PowerScreenTotal> createState() => _PowerScreenTotalState();
 }
 
-class _WtScreenTotalState extends State<WtScreenTotal> {
+class _PowerScreenTotalState extends State<PowerScreenTotal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +54,7 @@ class _WtScreenTotalState extends State<WtScreenTotal> {
                         const SizedBox(
                           height: 8,
                         ),
-                        WtChartTotal(
+                        PowerChartTotal(
                           idCluster: widget.idCluster,
                         ),
                       ],

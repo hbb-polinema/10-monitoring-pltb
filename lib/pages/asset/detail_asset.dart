@@ -1,20 +1,57 @@
 import 'package:flutter/material.dart';
 
 class DetailAsset extends StatefulWidget {
-  // final String documentId;
-  // final String kodeAset;
-  // final String namaAset;
-  // final String namaPetugas;
-  // final String tanggal;
-  // final String status;
+  final String docAsetId;
+  // final String namaCluster;
+  // final String jenisPerangkat;
+  final String comisioning;
+  final String foto;
+  final String garansiAset;
+  final String jenisAset;
+  final String kodeAset;
+  final String kondisiAset;
+  final String lokasiAset;
+  final String merkAset;
+  final String namaAset;
+  final String spekDasar1;
+  final String spekDasar2;
+  final String spekDasar3;
+  final String spekUmum;
+  final String tglBeroperasi;
+  final String tglDipasang;
+  final int umurAset;
+  final String vendorPemasangan;
+  final String vendorPengadaan;
+  final String status;
+  final String img;
+  final String statusVerifikasi;
+
   const DetailAsset({
     Key? key,
-    // required this.documentId,
-    // required this.kodeAset,
-    // required this.namaAset,
-    // required this.namaPetugas,
-    // required this.tanggal,
-    // required this.status,
+    required this.docAsetId,
+    // required this.namaCluster,
+    // required this.jenisPerangkat,
+    required this.comisioning,
+    required this.foto,
+    required this.garansiAset,
+    required this.jenisAset,
+    required this.kodeAset,
+    required this.kondisiAset,
+    required this.lokasiAset,
+    required this.merkAset,
+    required this.namaAset,
+    required this.spekDasar1,
+    required this.spekDasar2,
+    required this.spekDasar3,
+    required this.spekUmum,
+    required this.tglBeroperasi,
+    required this.tglDipasang,
+    required this.umurAset,
+    required this.vendorPemasangan,
+    required this.vendorPengadaan,
+    required this.status,
+    required this.img,
+    required this.statusVerifikasi,
   }) : super(key: key);
 
   @override
@@ -38,7 +75,7 @@ class _DetailAssetState extends State<DetailAsset> {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 // Container(
                 //   margin: const EdgeInsets.only(
                 //     bottom: 30,
@@ -83,10 +120,11 @@ class _DetailAssetState extends State<DetailAsset> {
                 // ),
 
                 // nama Aset
-                SizedBox(
+                Padding(
+                  padding: const EdgeInsets.only(top: 8),
                   child: Text(
-                    "Nama Aset",
-                    style: TextStyle(
+                    widget.namaAset,
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
                     ),
@@ -94,50 +132,68 @@ class _DetailAssetState extends State<DetailAsset> {
                 ),
 
                 // kode aset
-                SizedBox(
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    "Kode Aset",
-                    style: TextStyle(
+                    widget.kodeAset,
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: Color.fromARGB(225, 0, 74, 173),
+                      color: Color.fromARGB(225, 12, 144, 125),
                     ),
                   ),
                 ),
 
-                // status konfirmasi
-                Padding(
+                // merk
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
-                    'Status Konfirmasi',
+                    'Merk Aset',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    'Menunggu Konfirmasi',
-                    style: TextStyle(fontSize: 16),
+                    widget.merkAset,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
 
-                // lokasi aset
-                Padding(
+                // cluster
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
-                    'Lokasi Aset',
+                    'Cluster',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                   ),
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 4),
                   child: Text(
-                    'Detail lokasi',
+                    'Cluster Tuban',
                     style: TextStyle(fontSize: 16),
                   ),
                 ),
 
-                Padding(
+                // jenis perangkat
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Jenis Perangkat',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                const Padding(
+                  padding: EdgeInsets.only(top: 4),
+                  child: Text(
+                    'PLTB',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // jenis aset
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
                     'Jenis Aset',
@@ -145,31 +201,47 @@ class _DetailAssetState extends State<DetailAsset> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    'Jenis aset',
-                    style: TextStyle(fontSize: 16),
+                    widget.jenisAset,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
 
-                // merek
-                Padding(
+                // lokasi
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
-                    'Merek Aset',
+                    'Lokasi',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    'Merek Aset',
-                    style: TextStyle(fontSize: 16),
+                    widget.lokasiAset,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // status verifikasi
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Status Verifikasi',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.statusVerifikasi,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
 
                 // tanggal dipasang
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
                     'Tanggal Dipasang',
@@ -177,15 +249,15 @@ class _DetailAssetState extends State<DetailAsset> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    '02 Feb 2022',
-                    style: TextStyle(fontSize: 16),
+                    widget.tglDipasang,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
 
                 // tanggal beroperasi
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
                     'Tanggal Mulai Beroperasi',
@@ -193,15 +265,15 @@ class _DetailAssetState extends State<DetailAsset> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    '03 Feb 2022',
-                    style: TextStyle(fontSize: 16),
+                    widget.tglBeroperasi,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
 
                 // umur aset
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
                     'Umur Aset',
@@ -209,15 +281,31 @@ class _DetailAssetState extends State<DetailAsset> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    '5 Tahun',
-                    style: TextStyle(fontSize: 16),
+                    widget.umurAset.toString(),
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // garansi aset
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Garansi Aset',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.garansiAset,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
 
                 // kondisi aset
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(top: 16),
                   child: Text(
                     'Kondisi Aset',
@@ -225,10 +313,122 @@ class _DetailAssetState extends State<DetailAsset> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 4),
+                  padding: const EdgeInsets.only(top: 4),
                   child: Text(
-                    'Ok',
-                    style: TextStyle(fontSize: 16),
+                    widget.kodeAset,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // vendor pengadaan
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Vendor Pengadaan',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.vendorPengadaan,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // vendor pemasangan
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Vendor Pemasangan',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.vendorPemasangan,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // Comisioning
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Comisioning',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.comisioning,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // Spek dasar 1
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Spek Dasar 1',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.spekDasar1,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // Spek dasar 2
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Spek Dasar 2',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.spekDasar2,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // Spek dasar 3
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Spek Dasar 3',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.spekDasar3,
+                    style: const TextStyle(fontSize: 16),
+                  ),
+                ),
+
+                // Spek umum
+                const Padding(
+                  padding: EdgeInsets.only(top: 16),
+                  child: Text(
+                    'Spek Umum',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 4),
+                  child: Text(
+                    widget.spekUmum,
+                    style: const TextStyle(fontSize: 16),
                   ),
                 ),
               ],

@@ -2,20 +2,20 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:manajemen_aset/models/weather_station.dart';
+import 'package:manajemen_aset/models/wind_turbine.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
-class WsChart extends StatefulWidget {
+class WtChart extends StatefulWidget {
   final String idWs;
-  const WsChart({Key? key, required this.idWs}) : super(key: key);
+  const WtChart({Key? key, required this.idWs}) : super(key: key);
 
   @override
-  _WsChartState createState() => _WsChartState();
+  _WtChartState createState() => _WtChartState();
 }
 
-class _WsChartState extends State<WsChart> {
-  final List<WsData> _data = [];
+class _WtChartState extends State<WtChart> {
+  final List<WtData> _data = [];
   TooltipBehavior? _tooltipBehavior;
   late ZoomPanBehavior _zoomPanBehavior;
   late TrackballBehavior _trackballBehavior;
@@ -62,8 +62,7 @@ class _WsChartState extends State<WsChart> {
 
   // mangambil data
   Future<void> fetchData(String date, String id) async {
-    Uri url = Uri.parse("https://ebt-polinema.id/api/weather-station/history");
-    // Uri url=Uri.parse("127.0.0.1:1880/w/history");
+    Uri url = Uri.parse("https://ebt-polinema.id/api/wind-turbine/history");
     var response = await http.post(
       url,
       body: {
@@ -77,13 +76,37 @@ class _WsChartState extends State<WsChart> {
       setState(() {
         _data.clear();
         for (var data in jsonData) {
-          _data.add(WsData(
-            DateFormat('HH:mm').format(DateTime.parse(data['date_utc'])),
-            data['wind_speed'].toDouble(),
-            data['wind_dir'].toDouble(),
-            data['temp'].toDouble(),
-            data['uv_index'].toDouble(),
-            data['solar_rad'].toDouble(),
+          _data.add(WtData(
+            data['date_utc'] != null
+                ? DateFormat('HH:mm').format(DateTime.parse(data['date_utc']))
+                : '',
+            data['wind_speed']?.toDouble() ?? 0.0,
+            data['wind_dir'] ?? '',
+            double.parse(data['rpm_1']),
+            double.parse(data['rpm_2']),
+            data['voltAc']?.toDouble() ?? 0.0,
+            data['voltDc']?.toDouble() ?? 0.0,
+            data['AmpereAc']?.toDouble() ?? 0.0,
+            data['AmpereDc']?.toDouble() ?? 0.0,
+            data['temp_1']?.toDouble() ?? 0.0,
+            data['temp_2']?.toDouble() ?? 0.0,
+            data['vibraVolt1']?.toDouble() ?? 0.0,
+            data['vibraFreq1'] ?? '',
+            data['vibraVolt2']?.toDouble() ?? 0.0,
+            data['vibraFreq2'] ?? '',
+            data['vibraVolt3']?.toDouble() ?? 0.0,
+            data['vibraFreq3'] ?? '',
+            data['vibraVolt4']?.toDouble() ?? 0.0,
+            data['vibraFreq4'] ?? '',
+            data['noiseVolt']?.toDouble() ?? 0.0,
+            data['noiseFreq'] ?? '',
+            data['velo1'] ?? '',
+            data['velo2'] ?? '',
+            data['gyroX']?.toDouble() ?? 0.0,
+            data['gyroY']?.toDouble() ?? 0.0,
+            data['gyroZ']?.toDouble() ?? 0.0,
+            (data['voltAc']?.toDouble() ?? 0.0) *
+                (data['AmpereAc']?.toDouble() ?? 0.0),
           ));
         }
       });
@@ -124,44 +147,27 @@ class _WsChartState extends State<WsChart> {
                   edgeLabelPlacement: EdgeLabelPlacement.shift,
                   interval: 3,
                 ),
-                series: <ChartSeries<WsData, dynamic>>[
-                  SplineSeries<WsData, dynamic>(
-                    name: 'Wind Speed',
-                    dataSource: _data,
-                    enableTooltip: true,
-                    color: const Color.fromARGB(255, 253, 223, 56),
-                    xValueMapper: (WsData data, _) => data.dateUtc,
-                    yValueMapper: (WsData data, _) => data.windSpeed,
-                    yAxisName: 'yAxis',
-                    markerSettings: const MarkerSettings(
-                      isVisible: true,
-                      shape: DataMarkerType.triangle,
-                      height: 5,
-                      width: 5,
-                    ),
-                  ),
-                  SplineSeries<WsData, dynamic>(
-                    name: 'Temp',
+                series: <ChartSeries<WtData, dynamic>>[
+                  SplineSeries<WtData, dynamic>(
+                    name: 'Power PLTB',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(225, 0, 74, 173),
-                    xValueMapper: (WsData data, _) => data.dateUtc,
-                    yValueMapper: (WsData data, _) => data.temp,
-                    yAxisName: 'yAxis',
+                    xValueMapper: (WtData data, _) => data.dateUtc,
+                    yValueMapper: (WtData data, _) => data.power,
                     markerSettings: const MarkerSettings(
                       isVisible: true,
-                      shape: DataMarkerType.triangle,
                       height: 5,
                       width: 5,
                     ),
                   ),
-                  SplineSeries<WsData, dynamic>(
-                    name: 'Uv Index',
+                  SplineSeries<WtData, dynamic>(
+                    name: 'Wind Speed',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(224, 255, 152, 34),
-                    xValueMapper: (WsData data, _) => data.dateUtc,
-                    yValueMapper: (WsData data, _) => data.uvIndex,
+                    xValueMapper: (WtData data, _) => data.dateUtc,
+                    yValueMapper: (WtData data, _) => data.windSpeed,
                     yAxisName: 'yAxis',
                     markerSettings: const MarkerSettings(
                       isVisible: true,
@@ -170,13 +176,27 @@ class _WsChartState extends State<WsChart> {
                       width: 5,
                     ),
                   ),
-                  SplineSeries<WsData, dynamic>(
-                    name: 'Solar Rad',
+                  SplineSeries<WtData, dynamic>(
+                    name: 'Rpm Bilah',
                     dataSource: _data,
                     enableTooltip: true,
                     color: const Color.fromARGB(224, 190, 27, 223),
-                    xValueMapper: (WsData data, _) => data.dateUtc,
-                    yValueMapper: (WsData data, _) => data.solarRad,
+                    xValueMapper: (WtData data, _) => data.dateUtc,
+                    yValueMapper: (WtData data, _) => data.rpm_1,
+                    // yAxisName: 'yAxis',
+                    markerSettings: const MarkerSettings(
+                      isVisible: true,
+                      height: 5,
+                      width: 5,
+                    ),
+                  ),
+                  SplineSeries<WtData, dynamic>(
+                    name: 'Rpm Generator',
+                    dataSource: _data,
+                    enableTooltip: true,
+                    color: const Color.fromARGB(255, 27, 223, 102),
+                    xValueMapper: (WtData data, _) => data.dateUtc,
+                    yValueMapper: (WtData data, _) => data.rpm_2,
                     // yAxisName: 'yAxis',
                     markerSettings: const MarkerSettings(
                       isVisible: true,

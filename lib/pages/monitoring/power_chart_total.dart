@@ -6,15 +6,15 @@ import 'package:manajemen_aset/models/realtime_energy.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
-class WtChartTotal extends StatefulWidget {
+class PowerChartTotal extends StatefulWidget {
   final String idCluster;
-  const WtChartTotal({Key? key, required this.idCluster}) : super(key: key);
+  const PowerChartTotal({Key? key, required this.idCluster}) : super(key: key);
 
   @override
-  _WtChartTotalState createState() => _WtChartTotalState();
+  _PowerChartTotalState createState() => _PowerChartTotalState();
 }
 
-class _WtChartTotalState extends State<WtChartTotal> {
+class _PowerChartTotalState extends State<PowerChartTotal> {
   // final List<WtData> _data = [];
   // final List<SpData> _chartSpData = [];
   List<RealtimeEnergy> _dataReal = [];

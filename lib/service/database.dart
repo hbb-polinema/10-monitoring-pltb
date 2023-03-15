@@ -136,55 +136,66 @@ class DatabaseService {
   }
 
   // menampilkan list perangkat
-  Stream<QuerySnapshot> listPerangkat() {
+  Stream<QuerySnapshot> listPerangkat(String idCluster) {
+    CollectionReference perangkatCollection =
+        clusterCollection.doc(idCluster).collection('perangkat');
     return perangkatCollection.snapshots();
   }
 
   // menampilkan list perangkat pltb
-  Stream<QuerySnapshot> listPerangkatWT() {
-    return perangkatCollection
-        .where('jenisPerangkat', isEqualTo: 'Wind Turbine')
-        .snapshots();
+  Stream<QuerySnapshot> listPerangkatWT(String idCluster) {
+    CollectionReference perangkatCollection =
+        clusterCollection.doc(idCluster).collection('perangkat');
+    return perangkatCollection.where('jenis', isEqualTo: 'PLTB').snapshots();
   }
 
   // menampilkan list perangkat plts
-  Stream<QuerySnapshot> listPerangkatSP() {
-    return perangkatCollection
-        .where('jenisPerangkat', isEqualTo: 'Solar Panel')
-        .snapshots();
+  Stream<QuerySnapshot> listPerangkatSP(String idCluster) {
+    CollectionReference perangkatCollection =
+        clusterCollection.doc(idCluster).collection('perangkat');
+    return perangkatCollection.where('jenis', isEqualTo: 'PLTS').snapshots();
   }
 
   // menampilkan list perangkat diesel
-  Stream<QuerySnapshot> listPerangkatDS() {
-    return perangkatCollection
-        .where('jenisPerangkat', isEqualTo: 'Diesel')
-        .snapshots();
+  Stream<QuerySnapshot> listPerangkatDS(String idCluster) {
+    CollectionReference perangkatCollection =
+        clusterCollection.doc(idCluster).collection('perangkat');
+    return perangkatCollection.where('jenis', isEqualTo: 'Diesel').snapshots();
   }
 
   // menampilkan list perangkat batery
-  Stream<QuerySnapshot> listPerangkatBT() {
-    return perangkatCollection
-        .where('jenisPerangkat', isEqualTo: 'Batery')
-        .snapshots();
+  Stream<QuerySnapshot> listPerangkatBT(String idCluster) {
+    CollectionReference perangkatCollection =
+        clusterCollection.doc(idCluster).collection('perangkat');
+    return perangkatCollection.where('jenis', isEqualTo: 'Batery').snapshots();
   }
 
   // menampilkan list perangkat weather station
-  Stream<QuerySnapshot> listPerangkatWS() {
+  Stream<QuerySnapshot> listPerangkatWS(String idCluster) {
+    CollectionReference perangkatCollection =
+        clusterCollection.doc(idCluster).collection('perangkat');
     return perangkatCollection
-        .where('jenisPerangkat', isEqualTo: 'Weather Station')
+        .where('jenis', isEqualTo: 'Weather Station')
         .snapshots();
   }
 
   // menampilkan list perangkat rumah energi
-  Stream<QuerySnapshot> listPerangkatRE() {
+  Stream<QuerySnapshot> listPerangkatRE(String idCluster) {
+    CollectionReference perangkatCollection =
+        clusterCollection.doc(idCluster).collection('perangkat');
     return perangkatCollection
-        .where('jenisPerangkat', isEqualTo: 'Rumah Energi')
+        .where('jenis', isEqualTo: 'Rumah Energi')
         .snapshots();
   }
 
 // ASET
   // menampilkan list aset
-  Stream<QuerySnapshot> listAset() {
+  Stream<QuerySnapshot> listAset(String idCluster, String idPerangkat) {
+    CollectionReference asetCollection = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat)
+        .collection('aset');
     return asetCollection.snapshots();
   }
 

@@ -6,16 +6,89 @@ import 'package:manajemen_aset/widget/chipBar.dart';
 import 'package:manajemen_aset/widget/perangkat_card.dart';
 
 class ListPerangkat extends StatefulWidget {
-  const ListPerangkat({Key? key}) : super(key: key);
+  final String docClusterId;
+  const ListPerangkat({
+    Key? key,
+    required this.docClusterId,
+  }) : super(key: key);
 
   @override
   State<ListPerangkat> createState() => _ListPerangkatState();
 }
 
 class _ListPerangkatState extends State<ListPerangkat> {
+  late String _docClusterId;
   var idSelected = 0;
+  late List<ItemChipBar> _chipBarList;
   Widget currentTab() {
     return _chipBarList[idSelected].bodyWidget;
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _docClusterId = widget.docClusterId;
+
+    // list untuk choice chip
+    _chipBarList = [
+      ItemChipBar(
+        0,
+        'Semua',
+        BuilderPerangkat(
+          stream: DatabaseService().listPerangkat(_docClusterId),
+          docClusterId: _docClusterId,
+        ),
+      ),
+      ItemChipBar(
+        1,
+        'PLTB',
+        BuilderPerangkat(
+          stream: DatabaseService().listPerangkatWT(_docClusterId),
+          docClusterId: _docClusterId,
+        ),
+      ),
+      ItemChipBar(
+        2,
+        'PLTS',
+        BuilderPerangkat(
+          stream: DatabaseService().listPerangkatSP(_docClusterId),
+          docClusterId: _docClusterId,
+        ),
+      ),
+      ItemChipBar(
+        3,
+        'PLTD',
+        BuilderPerangkat(
+          stream: DatabaseService().listPerangkatDS(_docClusterId),
+          docClusterId: _docClusterId,
+        ),
+      ),
+      ItemChipBar(
+        4,
+        'Batery',
+        BuilderPerangkat(
+          stream: DatabaseService().listPerangkatBT(_docClusterId),
+          docClusterId: _docClusterId,
+        ),
+      ),
+      ItemChipBar(
+        5,
+        'Weather Station',
+        BuilderPerangkat(
+          stream: DatabaseService().listPerangkatWS(_docClusterId),
+          docClusterId: _docClusterId,
+        ),
+      ),
+      ItemChipBar(
+        6,
+        'Rumah Energi',
+        BuilderPerangkat(
+          stream: DatabaseService().listPerangkatRE(_docClusterId),
+          docClusterId: _docClusterId,
+        ),
+      ),
+    ];
   }
 
   @override
@@ -137,10 +210,12 @@ class _ListPerangkatState extends State<ListPerangkat> {
 }
 
 class BuilderPerangkat extends StatelessWidget {
+  final String docClusterId;
   final stream;
   const BuilderPerangkat({
     Key? key,
     required this.stream,
+    required this.docClusterId,
   }) : super(key: key);
 
   @override
@@ -162,13 +237,14 @@ class BuilderPerangkat extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final documentSnapshot = snapshot.data!.docs[index];
                       final String docId = snapshot.data!.docs[index].id;
-                      String kode = documentSnapshot['kodePerangkat'];
-                      String jenis = documentSnapshot['jenisPerangkat'];
+                      String id = documentSnapshot['id'];
+                      String kode = documentSnapshot['kode'];
+                      String jenis = documentSnapshot['jenis'];
                       String status = documentSnapshot['status'];
                       String img = '';
-                      if (jenis == 'Wind Turbine') {
+                      if (jenis == 'PLTB') {
                         img = 'img/pltb.png';
-                      } else if (jenis == 'Solar Panel') {
+                      } else if (jenis == 'PLTS') {
                         img = 'img/plts.png';
                       } else if (jenis == 'Diesel') {
                         img = 'img/pltd.png';
@@ -180,9 +256,13 @@ class BuilderPerangkat extends StatelessWidget {
                         img = 'img/pltd.png';
                       }
                       return PerangkatCard(
+                        docClusterId: docClusterId,
+                        docPerangkatId: docId,
+                        id: id,
                         kode: kode,
                         status: status,
                         img: img,
+                        jenis: jenis,
                       );
                     },
                   ),
@@ -202,56 +282,3 @@ class BuilderPerangkat extends StatelessWidget {
     );
   }
 }
-
-// // list untuk choice chip
-final _chipBarList = <ItemChipBar>[
-  ItemChipBar(
-    0,
-    'Semua',
-    BuilderPerangkat(
-      stream: DatabaseService().listPerangkat(),
-    ),
-  ),
-  ItemChipBar(
-    1,
-    'PLTB',
-    BuilderPerangkat(
-      stream: DatabaseService().listPerangkatWT(),
-    ),
-  ),
-  ItemChipBar(
-    2,
-    'PLTS',
-    BuilderPerangkat(
-      stream: DatabaseService().listPerangkatSP(),
-    ),
-  ),
-  ItemChipBar(
-    3,
-    'PLTD',
-    BuilderPerangkat(
-      stream: DatabaseService().listPerangkatDS(),
-    ),
-  ),
-  ItemChipBar(
-    4,
-    'Batery',
-    BuilderPerangkat(
-      stream: DatabaseService().listPerangkatBT(),
-    ),
-  ),
-  ItemChipBar(
-    5,
-    'Weather Station',
-    BuilderPerangkat(
-      stream: DatabaseService().listPerangkatWS(),
-    ),
-  ),
-  ItemChipBar(
-    6,
-    'Rumah Energi',
-    BuilderPerangkat(
-      stream: DatabaseService().listPerangkatRE(),
-    ),
-  ),
-];

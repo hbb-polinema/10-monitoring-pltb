@@ -4,8 +4,8 @@ import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
 import 'package:manajemen_aset/pages/home/maps.dart';
 import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/pages/location/location_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/wt_screen_total.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/power_screen_total.dart';
 import 'package:manajemen_aset/pages/monitoring/wt_realtime.dart';
 import 'package:manajemen_aset/pages/perangkat/perangkat_list_page.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
@@ -28,14 +28,14 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
     if (currentPage == DrawerSectionsPemilik.home) {
       container = const Maps();
     } else if (currentPage == DrawerSectionsPemilik.asset) {
-      container = const AssetList();
+      // container = const AssetList();
       title = const Text('Aset');
     } else if (currentPage == DrawerSectionsPemilik.monitoringEnergy) {
       // container = const MonitoringWtScreen();
-      container = const AssetList();
+      // container = const AssetList();
       title = const Text("Monitoring");
     } else if (currentPage == DrawerSectionsPemilik.monitoringWs) {
-      container = const MonitoringWsScreen();
+      // container = const MonitoringScreen();
       title = const Text("Monitoring");
     } else if (currentPage == DrawerSectionsPemilik.realtimeWt) {
       container = const WtRealtime();
@@ -49,7 +49,7 @@ class _DrawerPemilikState extends State<DrawerPemilik> {
     } else if (currentPage == DrawerSectionsPemilik.logout) {
       _logOut();
     } else if (currentPage == DrawerSectionsPemilik.perangkat) {
-      container = const ListPerangkat();
+      // container = const ListPerangkat();
       title = const Text('Rekomendasi Perbaikan Aset');
     }
     return Scaffold(

@@ -3,8 +3,8 @@ class WtData {
   String dateUtc;
   double windSpeed;
   String windDir;
-  String rpm1;
-  String rpm2;
+  double rpm_1;
+  double rpm_2;
   double voltAc;
   double voltDc;
   double ampereAc;
@@ -27,13 +27,13 @@ class WtData {
   double gyroY;
   double gyroZ;
   double power;
-
+ 
   WtData(
     this.dateUtc,
     this.windSpeed,
     this.windDir,
-    this.rpm1,
-    this.rpm2,
+    this.rpm_1,
+    this.rpm_2,
     this.voltAc,
     this.voltDc,
     this.ampereAc,

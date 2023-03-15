@@ -2,21 +2,57 @@ import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/asset/detail_asset.dart';
 
 class AsetCard extends StatelessWidget {
-  final String kode;
+  final String docAsetId;
+  // final String namaCluster;
+  // final String jenisPerangkat;
+  final String comisioning;
+  final String foto;
+  final String garansiAset;
+  final String jenisAset;
+  final String kodeAset;
+  final String kondisiAset;
+  final String lokasiAset;
+  final String merkAset;
   final String namaAset;
+  final String spekDasar1;
+  final String spekDasar2;
+  final String spekDasar3;
+  final String spekUmum;
+  final String tglBeroperasi;
+  final String tglDipasang;
+  final int umurAset;
+  final String vendorPemasangan;
+  final String vendorPengadaan;
   final String status;
   final String img;
-  // final String cluster;
-  // final String statusKonfirmasi;
+  final String statusVerifikasi;
 
   const AsetCard({
     Key? key,
-    required this.kode,
-    // required this.statusKonfirmasi,
+    required this.docAsetId,
+    // required this.namaCluster,
+    // required this.jenisPerangkat,
+    required this.comisioning,
+    required this.foto,
+    required this.garansiAset,
+    required this.jenisAset,
+    required this.kodeAset,
+    required this.kondisiAset,
+    required this.lokasiAset,
+    required this.merkAset,
     required this.namaAset,
+    required this.spekDasar1,
+    required this.spekDasar2,
+    required this.spekDasar3,
+    required this.spekUmum,
+    required this.tglBeroperasi,
+    required this.tglDipasang,
+    required this.umurAset,
+    required this.vendorPemasangan,
+    required this.vendorPengadaan,
     required this.status,
     required this.img,
-    // required this.cluster,
+    required this.statusVerifikasi,
   }) : super(key: key);
 
   @override
@@ -25,10 +61,30 @@ class AsetCard extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => const DetailAsset(
-                // docID: docID,
-                // product: product,
-                ),
+            builder: (context) => DetailAsset(
+              comisioning: comisioning,
+              docAsetId: docAsetId,
+              foto: foto,
+              garansiAset: garansiAset,
+              img: img,
+              jenisAset: jenisAset,
+              kodeAset: kodeAset,
+              kondisiAset: kondisiAset,
+              lokasiAset: lokasiAset,
+              merkAset: merkAset,
+              namaAset: namaAset,
+              spekDasar1: spekDasar1,
+              spekDasar2: spekDasar2,
+              spekDasar3: spekDasar3,
+              spekUmum: spekUmum,
+              status: kondisiAset,
+              statusVerifikasi: statusVerifikasi,
+              tglBeroperasi: tglBeroperasi,
+              tglDipasang: tglDipasang,
+              umurAset: umurAset,
+              vendorPengadaan: vendorPengadaan,
+              vendorPemasangan: vendorPemasangan,
+            ),
           ),
         );
       },
@@ -63,12 +119,21 @@ class AsetCard extends StatelessWidget {
                       children: [
                         // kode aset
                         Text(
-                          kode,
+                          kodeAset,
                           maxLines: 1,
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
                             color: Color.fromARGB(225, 12, 144, 125),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          namaAset,
+                          maxLines: 1,
+                          style: const TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
                           ),
                         ),
                         const SizedBox(width: 8),

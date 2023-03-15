@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_ws_screen.dart';
+import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
 import 'package:manajemen_aset/service/database.dart';
 
 class ListP extends StatefulWidget {
-  const ListP({Key? key}) : super(key: key);
+  final String docClusterId;
+  final String docPerangkatId;
+  final String perangkatId;
+  final String jenisPerangkat;
+  const ListP({
+    Key? key,
+    required this.docClusterId,
+    required this.docPerangkatId,
+    required this.perangkatId,
+    required this.jenisPerangkat,
+  }) : super(key: key);
 
   @override
   State<ListP> createState() => _ListPState();
@@ -30,12 +40,12 @@ class _ListPState extends State<ListP> with SingleTickerProviderStateMixin {
           elevation: 0,
           title: const Text('Data Asset'),
         ),
-        body: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: ListView(
-            children: [
-              // Tab Bar
-              TabBar(
+        body: ListView(
+          children: [
+            // Tab Bar
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+              child: TabBar(
                 controller: _tabController,
                 isScrollable: true,
                 unselectedLabelColor: Colors.black54,
@@ -62,22 +72,36 @@ class _ListPState extends State<ListP> with SingleTickerProviderStateMixin {
                   ),
                 ],
               ),
+            ),
 
-              // Tab View
-              SizedBox(
-                width: double.infinity,
-                height: 600,
-                child: TabBarView(
-                  controller: _tabController,
-                  children: [
-                    BuilderAset(stream: DatabaseService().listAset()),
-                    MonitoringWsScreen(),
-                    MonitoringWsScreen(),
-                  ],
-                ),
+            // Tab View
+            SizedBox(
+              width: double.infinity,
+              height: 600,
+              child: TabBarView(
+                controller: _tabController,
+                children: [
+                  // list aset
+                  BuilderAset(
+                    stream: DatabaseService().listAset(
+                      widget.docClusterId,
+                      widget.docPerangkatId,
+                    ),
+                  ),
+                  // pindah ke halaman untuk cek jenis aset
+                  MonitoringScreen(
+                    jenisPerangkat: widget.jenisPerangkat,
+                    idPerangkat: widget.perangkatId,
+                  ),
+                  // halaman report
+                  MonitoringScreen(
+                    jenisPerangkat: widget.jenisPerangkat,
+                    idPerangkat: widget.perangkatId,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
