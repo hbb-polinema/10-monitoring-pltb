@@ -26,7 +26,7 @@ class _ClusterListState extends State<ClusterList> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(225, 0, 74, 173),
+                    color: Color.fromARGB(225, 12, 144, 125),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20),
@@ -179,7 +179,7 @@ class _ClusterListState extends State<ClusterList> {
           if (snapshot.hasData) {
             String role = snapshot.data!.data()!['role'];
             // cek user untuk menampilkan tombol tambah data aset
-            if (role == 'Pemilik Proyek') {
+            if (role == 'Admin IT') {
               return FloatingActionButton(
                 child: const Icon(Icons.add),
                 onPressed: () {

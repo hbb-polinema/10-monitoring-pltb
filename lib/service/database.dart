@@ -74,11 +74,16 @@ class DatabaseService {
 // CLUSTER
   // menambahkan cluster
   Future<void> addCluster({
+    String? id,
     String? nama,
+    required double lat,
+    required double lng,
   }) async {
     DocumentReference docReferencer = clusterCollection.doc();
     Map<String, dynamic> data = <String, dynamic>{
+      "id": id,
       "nama": nama,
+      "lokasi": GeoPoint(lat, lng)
     };
     await docReferencer
         .set(data)

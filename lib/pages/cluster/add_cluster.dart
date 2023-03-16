@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
@@ -15,7 +13,10 @@ class _AddClusterState extends State<AddCluster> {
   final _addClusterKey = GlobalKey<FormState>();
 
   // text field controller
+  TextEditingController idC = TextEditingController();
   TextEditingController clusterC = TextEditingController();
+  TextEditingController latC = TextEditingController();
+  TextEditingController lngC = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +29,21 @@ class _AddClusterState extends State<AddCluster> {
           child: SingleChildScrollView(
             child: Column(
               children: [
+                // id Cluster
+                InputForm(
+                  title: "id",
+                  controller: idC,
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Wajib diisi';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+
                 // nama Cluster
                 InputForm(
                   title: "Nama Cluster",
@@ -43,6 +59,36 @@ class _AddClusterState extends State<AddCluster> {
                   height: 16,
                 ),
 
+                // lokasi Cluster
+                InputForm(
+                  title: "Latitude",
+                  controller: latC,
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Wajib diisi';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+
+                InputForm(
+                  title: "Longitude",
+                  controller: lngC,
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Wajib diisi';
+                    }
+                    return null;
+                  },
+                ),
+
+                const SizedBox(
+                  height: 16,
+                ),
+
                 //submit button
                 SizedBox(
                   width: double.infinity,
@@ -50,8 +96,12 @@ class _AddClusterState extends State<AddCluster> {
                   child: ElevatedButton(
                     onPressed: () async {
                       if (_addClusterKey.currentState!.validate()) {
-                        await DatabaseService().addCluster(nama: clusterC.text);
-
+                        await DatabaseService().addCluster(
+                          id: idC.text,
+                          nama: clusterC.text,
+                          lat: double.parse(latC.text),
+                          lng: double.parse(lngC.text),
+                        );
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
@@ -68,7 +118,7 @@ class _AddClusterState extends State<AddCluster> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      primary: const Color.fromARGB(225, 0, 74, 173),
+                      primary: const Color.fromARGB(225, 12, 144, 125),
                     ),
                   ),
                 )
