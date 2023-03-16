@@ -5,12 +5,14 @@ class EditUser extends StatefulWidget {
   final String currentEmail;
   final String currentNama;
   final String currentRole;
+  final String currentNoHp;
 
   const EditUser({
     Key? key,
     required this.currentEmail,
     required this.currentNama,
     required this.currentRole,
+    required this.currentNoHp,
   }) : super(key: key);
 
   @override
@@ -23,11 +25,18 @@ class _EditUserState extends State<EditUser> {
   // text field controller
   TextEditingController emailC = TextEditingController();
   TextEditingController namaC = TextEditingController();
+  TextEditingController noHpC = TextEditingController();
 
   final roleList = [
-    'Admin',
-    'Pemilik Proyek',
-    'Petugas Lapangan',
+    'Admin IT',
+    'PLN (Pusat)',
+    'PLN (Wilayah)',
+    'PLN (Area)',
+    'Admin PLN',
+    'Kontraktor',
+    'Vendor',
+    'Admin Vendor',
+    'Operator Vendor',
   ];
   late String selectedRole = widget.currentRole;
 
@@ -35,6 +44,7 @@ class _EditUserState extends State<EditUser> {
   void initState() {
     emailC = TextEditingController(text: widget.currentEmail);
     namaC = TextEditingController(text: widget.currentNama);
+    noHpC = TextEditingController(text: widget.currentNoHp);
 
     super.initState();
   }
@@ -80,6 +90,21 @@ class _EditUserState extends State<EditUser> {
                   height: 16,
                 ),
 
+                //noHp
+                InputForm(
+                  title: "noHp",
+                  controller: noHpC,
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Wajib diisi';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+
                 // role
                 DropdownButtonFormField(
                   items: roleList
@@ -114,7 +139,7 @@ class _EditUserState extends State<EditUser> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
-                      // if (editUserKey.currentState!.validate() &&
+                      // if (_editUserKey.currentState!.validate() &&
                       //     selectedRole != null) {
                       //   await createUser(
                       //     email: emailC.text,
@@ -138,11 +163,10 @@ class _EditUserState extends State<EditUser> {
                       style: TextStyle(fontSize: 16),
                     ),
                     style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      primary: const Color.fromARGB(225, 0, 74, 173),
-                    ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: const Color.fromARGB(225, 12, 144, 125)),
                   ),
                 )
               ],

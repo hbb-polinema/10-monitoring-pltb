@@ -27,6 +27,7 @@ class DatabaseService {
     String? email,
     String? nama,
     String? role,
+    String? noHp,
   }) async {
     if (email!.isNotEmpty && nama!.isNotEmpty) {
       try {
@@ -38,6 +39,7 @@ class DatabaseService {
             "nama": nama,
             "email": email,
             "uid": uid,
+            "noHp": noHp,
             "role": role,
             "createdAt": DateTime.now().toIso8601String()
           });

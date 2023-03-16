@@ -54,7 +54,7 @@ class _DrawerAdminState extends State<DrawerAdmin> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(225, 0, 74, 173),
+        backgroundColor: const Color.fromARGB(225, 12, 144, 125),
         elevation: 0,
         title: title,
       ),

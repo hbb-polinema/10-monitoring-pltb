@@ -41,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             "Selamat Datang",
                             style: TextStyle(
                                 color: Colors.white,
-                                fontSize: 26,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600),
                           ),
                         ],
@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       height: 150,
       decoration: const BoxDecoration(
-        color: Color.fromARGB(225, 0, 74, 173),
+        color: Color.fromARGB(225, 12, 144, 125),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(30),
           bottomRight: Radius.circular(30),

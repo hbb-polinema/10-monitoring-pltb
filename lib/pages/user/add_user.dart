@@ -17,11 +17,18 @@ class _AddUserState extends State<AddUser> {
   // text field controller
   TextEditingController emailC = TextEditingController();
   TextEditingController namaC = TextEditingController();
+  TextEditingController noHpC = TextEditingController();
 
   final roleList = [
-    'Admin',
-    'Pemilik Proyek',
-    'Petugas Lapangan',
+    'Admin IT',
+    'PLN (Pusat)',
+    'PLN (Wilayah)',
+    'PLN (Area)',
+    'Admin PLN',
+    'Kontraktor',
+    'Vendor',
+    'Admin Vendor',
+    'Operator Vendor',
   ];
   String? selectedVal = '';
 
@@ -55,6 +62,21 @@ class _AddUserState extends State<AddUser> {
                 InputForm(
                   title: "Email",
                   controller: emailC,
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Wajib diisi';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+
+                //noHp
+                InputForm(
+                  title: "noHp",
+                  controller: noHpC,
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -104,6 +126,7 @@ class _AddUserState extends State<AddUser> {
                         await DatabaseService().addUser(
                           email: emailC.text,
                           nama: namaC.text,
+                          noHp: noHpC.text,
                           role: selectedVal,
                         );
                         Navigator.of(context).pop();
@@ -123,11 +146,10 @@ class _AddUserState extends State<AddUser> {
                       style: TextStyle(fontSize: 16),
                     ),
                     style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      primary: const Color.fromARGB(225, 0, 74, 173),
-                    ),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: const Color.fromARGB(225, 12, 144, 125)),
                   ),
                 )
               ],

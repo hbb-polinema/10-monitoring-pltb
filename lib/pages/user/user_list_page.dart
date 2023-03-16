@@ -26,7 +26,7 @@ class _UserListState extends State<UserList> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(225, 0, 74, 173),
+                    color: Color.fromARGB(225, 12, 144, 125),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20),
@@ -67,6 +67,7 @@ class _UserListState extends State<UserList> {
                       final String docId = snapshot.data!.docs[index].id;
                       String nama = documentSnapshot['nama'];
                       String email = documentSnapshot['email'];
+                      String noHp = documentSnapshot['noHp'];
                       String role = documentSnapshot['role'];
                       return GestureDetector(
                         onTap: () {},
@@ -111,6 +112,7 @@ class _UserListState extends State<UserList> {
                                           currentEmail: email,
                                           currentNama: nama,
                                           currentRole: role,
+                                          currentNoHp: noHp,
                                         ),
                                       ),
                                     );

@@ -30,14 +30,24 @@ class _AuthState extends State<Auth> {
           }
           if (snap.hasData) {
             String? role = snap.data?.data()?['role'];
-            if (role == 'Admin') {
+            if (role == 'Admin IT') {
               return const DrawerAdmin();
-            } else if (role == 'Pimpinan') {
+            } else if (role == 'PLN (Pusat)') {
               return const DrawerPimpinan();
-            } else if (role == 'Pemilik Proyek') {
-              return const DrawerPemilik();
-            } else if (role == 'Petugas Lapangan') {
-              return const DrawerPetugas();
+            } else if (role == 'PLN (Wilayah)') {
+              return const DrawerPimpinan();
+            } else if (role == 'PLN (Area)') {
+              return const DrawerPimpinan();
+            } else if (role == 'Admin PLN') {
+              return const DrawerPimpinan();
+            } else if (role == 'Kontraktor') {
+              return const DrawerPimpinan();
+            } else if (role == 'Vendor') {
+              return const DrawerPimpinan();
+            } else if (role == 'Admin Vendor') {
+              return const DrawerPimpinan();
+            } else if (role == 'Operator Vendor') {
+              return const DrawerPimpinan();
             } else {
               return const LoginScreen();
             }

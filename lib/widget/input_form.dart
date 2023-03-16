@@ -60,18 +60,19 @@ class InputNumberForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-        keyboardType: TextInputType.number,
-        autofocus: true,
-        controller: controller,
-        decoration: InputDecoration(
-          labelText: title,
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
+      keyboardType: TextInputType.number,
+      autofocus: true,
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: title,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
         ),
-        validator: validator,);
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+      ),
+      validator: validator,
+    );
   }
 }
