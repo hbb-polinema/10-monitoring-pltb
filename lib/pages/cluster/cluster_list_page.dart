@@ -65,14 +65,25 @@ class _ClusterListState extends State<ClusterList> {
                     itemBuilder: (context, index) {
                       final documentSnapshot = snapshot.data!.docs[index];
                       final String docId = snapshot.data!.docs[index].id;
-                      String cluster = documentSnapshot['nama'];
+                      String idCluster = documentSnapshot['id'];
+                      String namaCluster = documentSnapshot['nama'];
+                      GeoPoint geoPoint = documentSnapshot['lokasi'];
+                      double lat = geoPoint.latitude;
+                      double lng = geoPoint.longitude;
                       return GestureDetector(
                         onTap: () {},
                         child: Padding(
                           padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
                           child: Card(
                             child: ListTile(
-                              title: Text(cluster),
+                              horizontalTitleGap: 0.1,
+                              contentPadding: const EdgeInsets.all(4),
+                              leading: const Icon(
+                                Icons.location_on,
+                                size: 30,
+                                color: Color.fromARGB(225, 12, 144, 125),
+                              ),
+                              title: Text(namaCluster),
                               trailing: PopupMenuButton<int>(
                                 iconSize: 20,
                                 itemBuilder: (context) => [
@@ -106,8 +117,11 @@ class _ClusterListState extends State<ClusterList> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => EditCluster(
-                                          clusterId: docId,
-                                          currentCluster: cluster,
+                                          documentId: docId,
+                                          currentId: idCluster,
+                                          currentCluster: namaCluster,
+                                          currentLat: lat,
+                                          currentLng: lng,
                                         ),
                                       ),
                                     );
@@ -117,8 +131,8 @@ class _ClusterListState extends State<ClusterList> {
                                       context: context,
                                       builder: (context) => AlertDialog(
                                         title: const Text("Hapus"),
-                                        content: const Text(
-                                          "Apakah anda yakin untuk hapus cluster ini? ",
+                                        content: Text(
+                                          "Apakah anda yakin akan menghapus $namaCluster? ",
                                         ),
                                         actions: <Widget>[
                                           TextButton(
@@ -137,8 +151,7 @@ class _ClusterListState extends State<ClusterList> {
                                             onPressed: () async {
                                               await DatabaseService()
                                                   .deleteCluster(
-                                                docId: docId,
-                                                nama: cluster,
+                                                documentId: docId,
                                               );
                                               Navigator.pop(context);
                                             },

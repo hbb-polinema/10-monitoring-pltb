@@ -98,12 +98,17 @@ class DatabaseService {
 
   // edit cluster
   Future<void> updateCluster({
-    String? clusterId,
+    String? documentId,
+    String? id,
     String? nama,
+    required double lat,
+    required double lng,
   }) async {
-    DocumentReference docReferencer = clusterCollection.doc(clusterId);
+    DocumentReference docReferencer = clusterCollection.doc(documentId);
     Map<String, dynamic> data = <String, dynamic>{
+      "id": id,
       "nama": nama,
+      "lokasi": GeoPoint(lat, lng)
     };
     await docReferencer
         .update(data)
@@ -113,10 +118,9 @@ class DatabaseService {
 
   // hapus cluster
   Future<void> deleteCluster({
-    String? docId,
-    String? nama,
+    String? documentId,
   }) async {
-    DocumentReference docReferencer = clusterCollection.doc(docId);
+    DocumentReference docReferencer = clusterCollection.doc(documentId);
     await docReferencer
         .delete()
         .whenComplete(() => print('Data cluster berhasil dihapus'))

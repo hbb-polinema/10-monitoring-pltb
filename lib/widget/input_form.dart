@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 class InputForm extends StatelessWidget {
   final String? title;
   final TextEditingController? controller;
+  final TextInputType? inputType;
   final String? Function(String?)? validator;
-  const InputForm({Key? key, this.title, this.controller, this.validator})
+  const InputForm({Key? key, this.title, this.controller, this.validator, this.inputType})
       : super(key: key);
 
   @override
@@ -12,6 +13,7 @@ class InputForm extends StatelessWidget {
     return TextFormField(
         autofocus: true,
         controller: controller,
+        keyboardType: inputType,
         decoration: InputDecoration(
           labelText: title,
           enabledBorder: OutlineInputBorder(

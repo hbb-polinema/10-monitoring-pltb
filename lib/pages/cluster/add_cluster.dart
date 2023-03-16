@@ -33,6 +33,7 @@ class _AddClusterState extends State<AddCluster> {
                 InputForm(
                   title: "id",
                   controller: idC,
+                  inputType: TextInputType.number,
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -63,6 +64,7 @@ class _AddClusterState extends State<AddCluster> {
                 InputForm(
                   title: "Latitude",
                   controller: latC,
+                  inputType: TextInputType.number,
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -77,6 +79,7 @@ class _AddClusterState extends State<AddCluster> {
                 InputForm(
                   title: "Longitude",
                   controller: lngC,
+                  inputType: TextInputType.number,
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
