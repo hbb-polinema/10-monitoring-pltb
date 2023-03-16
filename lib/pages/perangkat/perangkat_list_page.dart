@@ -66,7 +66,7 @@ class _ListPerangkatState extends State<ListPerangkat> {
       ),
       ItemChipBar(
         4,
-        'Batery',
+        'Baterai',
         BuilderPerangkat(
           stream: DatabaseService().listPerangkatBT(_docClusterId),
           docClusterId: _docClusterId,
@@ -165,14 +165,16 @@ class _ListPerangkatState extends State<ListPerangkat> {
           if (snapshot.hasData) {
             String role = snapshot.data!.data()!['role'];
             // cek user untuk menampilkan tombol tambah data aset
-            if (role == 'Pemilik Proyek') {
+            if (role == 'Kontraktor') {
               return FloatingActionButton(
                 child: const Icon(Icons.add),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const AddPerangkat(),
+                      builder: (context) => AddPerangkat(
+                        docId: _docClusterId,
+                      ),
                     ),
                   );
                 },
@@ -220,65 +222,68 @@ class BuilderPerangkat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: stream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return const Text('Something went wrong');
-        } else if (snapshot.hasData || snapshot.data != null) {
-          return Column(
-            children: [
-              Column(
-                children: [
-                  ListView.builder(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: snapshot.data!.docs.length,
-                    itemBuilder: (context, index) {
-                      final documentSnapshot = snapshot.data!.docs[index];
-                      final String docId = snapshot.data!.docs[index].id;
-                      String id = documentSnapshot['id'];
-                      String kode = documentSnapshot['kode'];
-                      String jenis = documentSnapshot['jenis'];
-                      String status = documentSnapshot['status'];
-                      String img = '';
-                      if (jenis == 'PLTB') {
-                        img = 'img/pltb.png';
-                      } else if (jenis == 'PLTS') {
-                        img = 'img/plts.png';
-                      } else if (jenis == 'Diesel') {
-                        img = 'img/pltd.png';
-                      } else if (jenis == 'Batery') {
-                        img = 'img/pltd.png';
-                      } else if (jenis == 'Weather Station') {
-                        img = 'img/pltd.png';
-                      } else if (jenis == 'Rumah Energi') {
-                        img = 'img/pltd.png';
-                      }
-                      return PerangkatCard(
-                        docClusterId: docClusterId,
-                        docPerangkatId: docId,
-                        id: id,
-                        kode: kode,
-                        status: status,
-                        img: img,
-                        jenis: jenis,
-                      );
-                    },
-                  ),
-                ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 16, top: 8),
+      child: StreamBuilder(
+        stream: stream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          } else if (snapshot.hasData || snapshot.data != null) {
+            return Column(
+              children: [
+                Column(
+                  children: [
+                    ListView.builder(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.docs.length,
+                      itemBuilder: (context, index) {
+                        final documentSnapshot = snapshot.data!.docs[index];
+                        final String docId = snapshot.data!.docs[index].id;
+                        String id = documentSnapshot['id'];
+                        String kode = documentSnapshot['kode'];
+                        String jenis = documentSnapshot['jenis'];
+                        String status = documentSnapshot['status'];
+                        String img = '';
+                        if (jenis == 'PLTB') {
+                          img = 'img/pltb.png';
+                        } else if (jenis == 'PLTS') {
+                          img = 'img/plts.png';
+                        } else if (jenis == 'Diesel') {
+                          img = 'img/pltd.png';
+                        } else if (jenis == 'Baterai') {
+                          img = 'img/battery.png';
+                        } else if (jenis == 'Weather Station') {
+                          img = 'img/ws.png';
+                        } else if (jenis == 'Rumah Energi') {
+                          img = 'img/rumah-energi.png';
+                        }
+                        return PerangkatCard(
+                          docClusterId: docClusterId,
+                          docPerangkatId: docId,
+                          id: id,
+                          kode: kode,
+                          status: status,
+                          img: img,
+                          jenis: jenis,
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Colors.black,
               ),
-            ],
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(
-              Colors.black,
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 }

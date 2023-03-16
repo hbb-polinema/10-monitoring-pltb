@@ -81,6 +81,9 @@ flutter:
     - img/pltb.png
     - img/plts.png
     - img/pltd.png
+    - img/battery.png
+    - img/ws.png
+    - img/rumah-energi.png
     - img/energy.png
     - img/elektrik.png
     - img/jaringan.png

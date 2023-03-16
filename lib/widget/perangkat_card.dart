@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:manajemen_aset/pages/perangkat/edit_perangkat.dart';
 import 'package:manajemen_aset/pages/perangkat/list.dart';
+import 'package:manajemen_aset/service/database.dart';
 
 class PerangkatCard extends StatelessWidget {
   const PerangkatCard({
@@ -53,6 +55,7 @@ class PerangkatCard extends StatelessWidget {
           ),
           padding: const EdgeInsets.all(20),
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               Image(
                 image: AssetImage(img),
@@ -83,7 +86,7 @@ class PerangkatCard extends StatelessWidget {
                               ? Icons.task_alt
                               : Icons.highlight_off,
                           color: status == "Aktif" ? Colors.green : Colors.red,
-                        )
+                        ),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -100,7 +103,85 @@ class PerangkatCard extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
+              PopupMenuButton<int>(
+                iconSize: 20,
+                itemBuilder: (context) => [
+                  // PopupMenuItem 1
+                  PopupMenuItem(
+                    value: 1,
+                    child: Row(
+                      children: const [
+                        Icon(Icons.edit),
+                        SizedBox(width: 10),
+                        Text("Edit Perangkat")
+                      ],
+                    ),
+                  ),
+                  // PopupMenuItem 2
+                  PopupMenuItem(
+                    value: 2,
+                    child: Row(
+                      children: const [
+                        Icon(Icons.delete),
+                        SizedBox(width: 10),
+                        Text("Hapus Perangkat")
+                      ],
+                    ),
+                  ),
+                ],
+                onSelected: (value) {
+                  if (value == 1) {
+                    // edit perangkat
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditPerangkat(
+                          docClusterId: docClusterId,
+                          docPerangkatId: docPerangkatId,
+                          currentId: id,
+                          currentJenis: jenis,
+                          currentKode: kode,
+                          currentStatus: status,
+                        ),
+                      ),
+                    );
+                  } else if (value == 2) {
+                    // hapus perangkat
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text("Hapus"),
+                        content: Text(
+                          "Apakah anda yakin akan menghapus perangkat $kode? ",
+                        ),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            child: const Text(
+                              "Batal",
+                              style: TextStyle(
+                                color: Color.fromARGB(225, 125, 122, 116),
+                              ),
+                            ),
+                          ),
+                          TextButton(
+                            onPressed: () async {
+                              await DatabaseService().deletePerangkat(
+                                docClusterId: docClusterId,
+                                docPerangkatId: docPerangkatId,
+                              );
+                              Navigator.pop(context);
+                            },
+                            child: const Text("Hapus"),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                },
+              ),
             ],
           ),
         ),

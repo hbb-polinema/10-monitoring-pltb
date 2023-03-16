@@ -130,15 +130,19 @@ class DatabaseService {
 // PERANGKAT
   // menambahkan perangkat
   Future<void> addPerangkat({
+    String? documentId,
+    String? idPerangkat,
     String? kodePerangkat,
     String? jenisPerangkat,
-    String? cluster,
+    String? statusPerangkat,
   }) async {
-    DocumentReference docReferencer = perangkatCollection.doc();
+    DocumentReference docReferencer =
+        clusterCollection.doc(documentId).collection('perangkat').doc();
     Map<String, dynamic> data = <String, dynamic>{
-      "kodePerangkat": kodePerangkat,
-      "jenisPerangkat": jenisPerangkat,
-      "cluster": cluster
+      "id": idPerangkat,
+      "kode": kodePerangkat,
+      "jenis": jenisPerangkat,
+      "status": statusPerangkat
     };
     await docReferencer
         .set(data)
@@ -178,7 +182,7 @@ class DatabaseService {
   Stream<QuerySnapshot> listPerangkatBT(String idCluster) {
     CollectionReference perangkatCollection =
         clusterCollection.doc(idCluster).collection('perangkat');
-    return perangkatCollection.where('jenis', isEqualTo: 'Batery').snapshots();
+    return perangkatCollection.where('jenis', isEqualTo: 'Baterai').snapshots();
   }
 
   // menampilkan list perangkat weather station
@@ -197,6 +201,46 @@ class DatabaseService {
     return perangkatCollection
         .where('jenis', isEqualTo: 'Rumah Energi')
         .snapshots();
+  }
+
+  // edit perangkat
+  Future<void> updatePerangkat({
+    String? docClusterId,
+    String? docPerangkatId,
+    String? idPerangkat,
+    String? kodePerangkat,
+    String? jenisPerangkat,
+    String? statusPerangkat,
+  }) async {
+    DocumentReference docReferencer = clusterCollection
+        .doc(docClusterId)
+        .collection('perangkat')
+        .doc(docPerangkatId);
+    Map<String, dynamic> data = <String, dynamic>{
+      "id": idPerangkat,
+      "kode": kodePerangkat,
+      "jenis": jenisPerangkat,
+      "status": statusPerangkat
+    };
+    await docReferencer
+        .update(data)
+        .whenComplete(() => print("Data cluster berhasil diupdate"))
+        .catchError((e) => print(e));
+  }
+
+  // hapus perangkat
+  Future<void> deletePerangkat({
+    String? docPerangkatId,
+    String? docClusterId,
+  }) async {
+    DocumentReference docReferencer = clusterCollection
+        .doc(docClusterId)
+        .collection('perangkat')
+        .doc(docPerangkatId);
+    await docReferencer
+        .delete()
+        .whenComplete(() => print('Data perangkat berhasil dihapus'))
+        .catchError((e) => print(e));
   }
 
 // ASET

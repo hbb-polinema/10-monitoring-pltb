@@ -2,20 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
 
-class AddPerangkat extends StatefulWidget {
-  final String docId;
-  const AddPerangkat({Key? key, required this.docId}) : super(key: key);
+class EditPerangkat extends StatefulWidget {
+  final docClusterId;
+  final docPerangkatId;
+  final String currentId;
+  final String currentKode;
+  final String currentJenis;
+  final String currentStatus;
+  const EditPerangkat({
+    Key? key,
+    this.docClusterId,
+    this.docPerangkatId,
+    required this.currentId,
+    required this.currentKode,
+    required this.currentJenis,
+    required this.currentStatus,
+  }) : super(key: key);
 
   @override
-  State<AddPerangkat> createState() => _AddPerangkatState();
+  State<EditPerangkat> createState() => _EditPerangkatState();
 }
 
-class _AddPerangkatState extends State<AddPerangkat> {
-  final _addPerangkatKey = GlobalKey<FormState>();
+class _EditPerangkatState extends State<EditPerangkat> {
+  final _editPerangkatKey = GlobalKey<FormState>();
 
   // text field controller
-  final TextEditingController idC = TextEditingController();
-  final TextEditingController kodeC = TextEditingController();
+  TextEditingController idC = TextEditingController();
+  TextEditingController kodeC = TextEditingController();
 
   final jenisList = [
     'PLTB',
@@ -30,15 +43,23 @@ class _AddPerangkatState extends State<AddPerangkat> {
     'Aktif',
     'Tidak Aktif',
   ];
-  String? selectedJenis = '';
-  String? selectedStatus = '';
+
+  late String selectedJenis = widget.currentJenis;
+  late String selectedStatus = widget.currentStatus;
+
+  @override
+  void initState() {
+    idC = TextEditingController(text: widget.currentId);
+    kodeC = TextEditingController(text: widget.currentKode);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tambah Perangkat")),
+      appBar: AppBar(title: const Text("Edit User")),
       body: Form(
-        key: _addPerangkatKey,
+        key: _editPerangkatKey,
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: SingleChildScrollView(
@@ -76,6 +97,7 @@ class _AddPerangkatState extends State<AddPerangkat> {
 
                 // jenis
                 DropdownButtonFormField(
+                  value: selectedJenis,
                   items: jenisList
                       .map((e) => DropdownMenuItem(child: Text(e), value: e))
                       .toList(),
@@ -103,6 +125,7 @@ class _AddPerangkatState extends State<AddPerangkat> {
 
                 // status
                 DropdownButtonFormField(
+                  value: selectedStatus,
                   items: statusList
                       .map((e) => DropdownMenuItem(child: Text(e), value: e))
                       .toList(),
@@ -134,21 +157,24 @@ class _AddPerangkatState extends State<AddPerangkat> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
-                      if (_addPerangkatKey.currentState!.validate()) {
-                        await DatabaseService().addPerangkat(
-                          documentId: widget.docId,
+                      if (_editPerangkatKey.currentState!.validate()) {
+                        await DatabaseService().updatePerangkat(
+                          docClusterId: widget.docClusterId,
+                          docPerangkatId: widget.docPerangkatId,
                           idPerangkat: idC.text,
                           kodePerangkat: kodeC.text,
                           jenisPerangkat: selectedJenis,
                           statusPerangkat: selectedStatus,
                         );
-
-                        Navigator.pop(context);
+                        Navigator.of(context).pop();
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                            content:
-                                Text('Data Perangkat Berhasil ditambahkan'),
+                            content: Text('Perangkat Berhasil Diupdate'),
                           ),
+                        );
+                      } else {
+                        const SnackBar(
+                          content: Text('Gagal '),
                         );
                       }
                     },

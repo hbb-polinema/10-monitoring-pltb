@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/login/login_screen.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/drawer_admin_it.dart';
+import 'package:manajemen_aset/widget/drawer_kontraktor.dart';
 import 'package:manajemen_aset/widget/drawer_pimpinan.dart';
 
 class Auth extends StatefulWidget {
@@ -37,7 +38,7 @@ class _AuthState extends State<Auth> {
             } else if (role == 'Admin PLN') {
               return const DrawerPimpinan();
             } else if (role == 'Kontraktor') {
-              return const DrawerPimpinan();
+              return const DrawerKontraktor();
             } else if (role == 'Vendor') {
               return const DrawerPimpinan();
             } else if (role == 'Admin Vendor') {
