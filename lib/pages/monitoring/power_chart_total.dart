@@ -82,18 +82,19 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
     for (var i = 0; i < realData.length; i++) {
       var realDataDate =
           DateFormat('HH:mm').format(DateTime.parse(realData[i]['date']));
-      var realDataValue = realData[i]['value'].toDouble();
-      var realDataWindSpeed = realData[i]['wind_speed'].toDouble();
-      var realDataRpmBilah = realData[i]['rpm_bilah'].toDouble();
-      var realDataRpmGenerator = realData[i]['rpm_generator'].toDouble();
-      var realDataVoltDc = realData[i]['volt_dc'].toDouble();
-      var realDataVoltAc = realData[i]['volt_ac'].toDouble();
-      var realDataAmpereDc = realData[i]['ampere_dc'].toDouble();
-      var realDataAmpereAc = realData[i]['ampere_ac'].toDouble();
+      var realDataValue = realData[i]['value']?.toDouble() ?? 0.0;
+      var realDataWindSpeed = realData[i]['wind_speed']?.toDouble() ?? 0.0;
+      var realDataRpmBilah = realData[i]['rpm_bilah']?.toDouble() ?? 0.0;
+      var realDataRpmGenerator =
+          realData[i]['rpm_generator']?.toDouble() ?? 0.0;
+      var realDataVoltDc = realData[i]['volt_dc']?.toDouble() ?? 0.0;
+      var realDataVoltAc = realData[i]['volt_ac']?.toDouble() ?? 0.0;
+      var realDataAmpereDc = realData[i]['ampere_dc']?.toDouble() ?? 0.0;
+      var realDataAmpereAc = realData[i]['ampere_ac']?.toDouble() ?? 0.0;
 
       var calcDataDate =
           DateFormat('HH:mm').format(DateTime.parse(calcData[i]['date']));
-      var calcDataValue = calcData[i]['value'].toDouble();
+      var calcDataValue = calcData[i]['value']?.toDouble() ?? 0.0;
 
       dataReal.add(RealtimeEnergy(
         realDataDate,

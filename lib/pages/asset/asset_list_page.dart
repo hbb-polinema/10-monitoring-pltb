@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:manajemen_aset/pages/asset/add_aset.dart';
 import 'package:manajemen_aset/pages/asset/jenis_asset.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/aset_card.dart';
@@ -150,103 +151,133 @@ class BuilderAset extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: stream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return const Text('Something went wrong');
-        } else if (snapshot.hasData || snapshot.data != null) {
-          return Column(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data!.docs.length,
-                      itemBuilder: (context, index) {
-                        final documentSnapshot = snapshot.data!.docs[index];
-                        final String docAsetId = snapshot.data!.docs[index].id;
-                        // String cluster = documentSnapshot['cluster'];
-                        // String jenisPerangkat = documentSnapshot['cluster'];
-                        String comisioningAset =
-                            documentSnapshot['comisioning'];
-                        String fotoAset = documentSnapshot['foto'];
-                        String garansiAset = documentSnapshot['garansi'];
-                        String jenisAset = documentSnapshot['jenis'];
-                        String kodeAset = documentSnapshot['kode'];
-                        String kondisiAset = documentSnapshot['kondisi'];
-                        String lokasiAset = documentSnapshot['lokasi'];
-                        String merekAsetAset = documentSnapshot['merk'];
-                        String namaAset = documentSnapshot['nama'];
-                        String spekDasar1 = documentSnapshot['spekDasar1'];
-                        String spekDasar2 = documentSnapshot['spekDasar2'];
-                        String spekDasar3 = documentSnapshot['spekDasar3'];
-                        String spekUmum = documentSnapshot['spekUmum'];
-                        String tglBeroperasi =
-                            documentSnapshot['tglBeroperasi'];
-                        String tglDipasang = documentSnapshot['tglDipasang'];
-                        int umurAset = documentSnapshot['umurAset'];
-                        String vendorPemasangan =
-                            documentSnapshot['vendorPemasangan'];
-                        String vendorPengadaan =
-                            documentSnapshot['vendorPengadaan'];
-
-                        String statusVerifikasi =
-                            documentSnapshot['statusVerifikasi'];
-
-                        String img = '';
-                        if (jenisAset == 'sensor') {
-                          img = 'img/sensor.png';
-                        } else if (jenisAset == 'elektrikal') {
-                          img = 'img/mekanik.png';
-                        } else if (jenisAset == 'jaringan') {
-                          img = 'img/jaringan.png';
-                        } else if (jenisAset == 'mekanik') {
-                          img = 'img/mekanik.png';
-                        } else if (jenisAset == 'sipil') {
-                          img = 'img/mekanik.png';
-                        }
-                        return AsetCard(
-                          comisioning: comisioningAset,
-                          docAsetId: docAsetId,
-                          foto: fotoAset,
-                          garansiAset: garansiAset,
-                          img: img,
-                          jenisAset: jenisAset,
-                          kodeAset: kodeAset,
-                          kondisiAset: kondisiAset,
-                          lokasiAset: lokasiAset,
-                          merkAset: merekAsetAset,
-                          namaAset: namaAset,
-                          spekDasar1: spekDasar1,
-                          spekDasar2: spekDasar2,
-                          spekDasar3: spekDasar3,
-                          spekUmum: spekUmum,
-                          status: kondisiAset,
-                          statusVerifikasi: statusVerifikasi,
-                          tglBeroperasi: tglBeroperasi,
-                          tglDipasang: tglDipasang,
-                          umurAset: umurAset,
-                          vendorPengadaan: vendorPengadaan,
-                          vendorPemasangan: vendorPemasangan,
-                        );
-                      },
-                    ),
-                  ],
+    return Scaffold(
+      body: StreamBuilder(
+        stream: stream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          } else if (snapshot.hasData || snapshot.data != null) {
+            return Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    children: [
+                      ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          final documentSnapshot = snapshot.data!.docs[index];
+                          final String docAsetId =
+                              snapshot.data!.docs[index].id;
+                          // String cluster = documentSnapshot['cluster'];
+                          // String jenisPerangkat = documentSnapshot['cluster'];
+                          String comisioningAset =
+                              documentSnapshot['comisioning'];
+                          String fotoAset = documentSnapshot['foto'];
+                          String garansiAset = documentSnapshot['garansi'];
+                          String jenisAset = documentSnapshot['jenis'];
+                          String kodeAset = documentSnapshot['kode'];
+                          String kondisiAset = documentSnapshot['kondisi'];
+                          String lokasiAset = documentSnapshot['lokasi'];
+                          String merekAsetAset = documentSnapshot['merk'];
+                          String namaAset = documentSnapshot['nama'];
+                          String spekDasar1 = documentSnapshot['spekDasar1'];
+                          String spekDasar2 = documentSnapshot['spekDasar2'];
+                          String spekDasar3 = documentSnapshot['spekDasar3'];
+                          String spekUmum = documentSnapshot['spekUmum'];
+                          String tglBeroperasi =
+                              documentSnapshot['tglBeroperasi'];
+                          String tglDipasang = documentSnapshot['tglDipasang'];
+                          int umurAset = documentSnapshot['umurAset'];
+                          String vendorPemasangan =
+                              documentSnapshot['vendorPemasangan'];
+                          String vendorPengadaan =
+                              documentSnapshot['vendorPengadaan'];
+                          String statusVerifikasi =
+                              documentSnapshot['statusVerifikasi'];
+                          String img = '';
+                          if (jenisAset == 'sensor') {
+                            img = 'img/sensor.png';
+                          } else if (jenisAset == 'elektrikal') {
+                            img = 'img/mekanik.png';
+                          } else if (jenisAset == 'jaringan') {
+                            img = 'img/jaringan.png';
+                          } else if (jenisAset == 'mekanik') {
+                            img = 'img/mekanik.png';
+                          } else if (jenisAset == 'sipil') {
+                            img = 'img/mekanik.png';
+                          }
+                          return AsetCard(
+                            comisioning: comisioningAset,
+                            docAsetId: docAsetId,
+                            foto: fotoAset,
+                            garansiAset: garansiAset,
+                            img: img,
+                            jenisAset: jenisAset,
+                            kodeAset: kodeAset,
+                            kondisiAset: kondisiAset,
+                            lokasiAset: lokasiAset,
+                            merkAset: merekAsetAset,
+                            namaAset: namaAset,
+                            spekDasar1: spekDasar1,
+                            spekDasar2: spekDasar2,
+                            spekDasar3: spekDasar3,
+                            spekUmum: spekUmum,
+                            status: kondisiAset,
+                            statusVerifikasi: statusVerifikasi,
+                            tglBeroperasi: tglBeroperasi,
+                            tglDipasang: tglDipasang,
+                            umurAset: umurAset,
+                            vendorPengadaan: vendorPengadaan,
+                            vendorPemasangan: vendorPemasangan,
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
+              ],
+            );
+          }
+          return const Center(
+            child: CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(
+                Colors.black,
               ),
-            ],
-          );
-        }
-        return const Center(
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(
-              Colors.black,
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
+      floatingActionButton:
+          StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+        stream: DatabaseService().userRole(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container();
+          }
+          if (snapshot.hasData) {
+            String role = snapshot.data!.data()!['role'];
+            // cek user untuk menampilkan tombol tambah data aset
+            if (role == 'Kontraktor') {
+              return FloatingActionButton(
+                child: const Icon(Icons.add),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => AddAset(),
+                    ),
+                  );
+                },
+              );
+            } else {
+              null;
+            }
+          }
+          return const SizedBox();
+        },
+      ),
     );
   }
 }
