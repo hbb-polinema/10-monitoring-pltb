@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
+import 'package:manajemen_aset/pages/asset/asset.dart';
 import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
-import 'package:manajemen_aset/service/database.dart';
 
 class ListP extends StatefulWidget {
   final String docClusterId;
@@ -82,12 +81,13 @@ class _ListPState extends State<ListP> with SingleTickerProviderStateMixin {
                 controller: _tabController,
                 children: [
                   // list aset
-                  BuilderAset(
-                    stream: DatabaseService().listAset(
-                      widget.docClusterId,
-                      widget.docPerangkatId,
-                    ),
-                  ),
+                  // BuilderAset(
+                  //   stream: DatabaseService().listAset(
+                  //     widget.docClusterId,
+                  //     widget.docPerangkatId,
+                  //   ),
+                  // ),
+                  ExpansionTileCardDemo(),
                   // pindah ke halaman untuk cek jenis aset
                   MonitoringScreen(
                     jenisPerangkat: widget.jenisPerangkat,

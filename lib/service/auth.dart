@@ -45,6 +45,8 @@ class _AuthState extends State<Auth> {
               return const DrawerPimpinan();
             } else if (role == 'Operator Vendor') {
               return const DrawerPimpinan();
+            } else if (role == 'Gudang') {
+              // return const DrawerGudang();
             } else {
               return const LoginScreen();
             }

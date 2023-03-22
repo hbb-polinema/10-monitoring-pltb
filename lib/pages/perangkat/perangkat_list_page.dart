@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/perangkat/add_perangkat.dart';
+import 'package:manajemen_aset/pages/asset/add_aset.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/chipBar.dart';
 import 'package:manajemen_aset/widget/perangkat_card.dart';
@@ -26,22 +26,21 @@ class _ListPerangkatState extends State<ListPerangkat> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _docClusterId = widget.docClusterId;
 
     // list untuk choice chip
     _chipBarList = [
+      // ItemChipBar(
+      //   0,
+      //   'Semua',
+      //   BuilderPerangkat(
+      //     stream: DatabaseService().listPerangkat(_docClusterId),
+      //     docClusterId: _docClusterId,
+      //   ),
+      // ),
       ItemChipBar(
         0,
-        'Semua',
-        BuilderPerangkat(
-          stream: DatabaseService().listPerangkat(_docClusterId),
-          docClusterId: _docClusterId,
-        ),
-      ),
-      ItemChipBar(
-        1,
         'PLTB',
         BuilderPerangkat(
           stream: DatabaseService().listPerangkatWT(_docClusterId),
@@ -49,7 +48,7 @@ class _ListPerangkatState extends State<ListPerangkat> {
         ),
       ),
       ItemChipBar(
-        2,
+        1,
         'PLTS',
         BuilderPerangkat(
           stream: DatabaseService().listPerangkatSP(_docClusterId),
@@ -57,7 +56,7 @@ class _ListPerangkatState extends State<ListPerangkat> {
         ),
       ),
       ItemChipBar(
-        3,
+        2,
         'PLTD',
         BuilderPerangkat(
           stream: DatabaseService().listPerangkatDS(_docClusterId),
@@ -65,7 +64,7 @@ class _ListPerangkatState extends State<ListPerangkat> {
         ),
       ),
       ItemChipBar(
-        4,
+        3,
         'Baterai',
         BuilderPerangkat(
           stream: DatabaseService().listPerangkatBT(_docClusterId),
@@ -73,7 +72,7 @@ class _ListPerangkatState extends State<ListPerangkat> {
         ),
       ),
       ItemChipBar(
-        5,
+        4,
         'Weather Station',
         BuilderPerangkat(
           stream: DatabaseService().listPerangkatWS(_docClusterId),
@@ -81,12 +80,21 @@ class _ListPerangkatState extends State<ListPerangkat> {
         ),
       ),
       ItemChipBar(
-        6,
+        5,
         'Rumah Energi',
         BuilderPerangkat(
           stream: DatabaseService().listPerangkatRE(_docClusterId),
           docClusterId: _docClusterId,
         ),
+      ),
+      ItemChipBar(
+        6,
+        'Warehouse',
+        BuilderPerangkat(
+          stream: DatabaseService().listPerangkatRE(_docClusterId),
+          docClusterId: _docClusterId,
+        ),
+        // DropdownButton(items: items, onChanged: onChanged)
       ),
     ];
   }
@@ -97,7 +105,7 @@ class _ListPerangkatState extends State<ListPerangkat> {
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(225, 12, 144, 125),
         elevation: 0,
-        title: const Text('Data Perangkat'),
+        title: const Text('Data Peralatan Pembangkit'),
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
@@ -165,16 +173,16 @@ class _ListPerangkatState extends State<ListPerangkat> {
           if (snapshot.hasData) {
             String role = snapshot.data!.data()!['role'];
             // cek user untuk menampilkan tombol tambah data aset
-            if (role == 'Kontraktor') {
+            if (role == 'Operator Vendor') {
               return FloatingActionButton(
                 child: const Icon(Icons.add),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddPerangkat(
-                        docId: _docClusterId,
-                      ),
+                      builder: (context) => AddAset(
+                          // docId: _docClusterId,
+                          ),
                     ),
                   );
                 },
@@ -257,6 +265,8 @@ class BuilderPerangkat extends StatelessWidget {
                         } else if (jenis == 'Weather Station') {
                           img = 'img/ws.png';
                         } else if (jenis == 'Rumah Energi') {
+                          img = 'img/rumah-energi.png';
+                        } else if (jenis == 'Warehouse') {
                           img = 'img/rumah-energi.png';
                         }
                         return PerangkatCard(

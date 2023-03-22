@@ -3,8 +3,7 @@ import 'package:manajemen_aset/pages/monitoring/power_chart_total.dart';
 
 class PowerScreenTotal extends StatefulWidget {
   final String idCluster;
-  const PowerScreenTotal({Key? key, required this.idCluster})
-      : super(key: key);
+  const PowerScreenTotal({Key? key, required this.idCluster}) : super(key: key);
 
   @override
   State<PowerScreenTotal> createState() => _PowerScreenTotalState();

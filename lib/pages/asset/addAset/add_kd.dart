@@ -2,29 +2,27 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
 
-class AddElektrik extends StatefulWidget {
-  const AddElektrik({Key? key}) : super(key: key);
+class AddKd extends StatefulWidget {
+  const AddKd({Key? key}) : super(key: key);
 
   @override
-  State<AddElektrik> createState() => _AddElektrikState();
+  State<AddKd> createState() => _AddKdState();
 }
 
-class _AddElektrikState extends State<AddElektrik> {
-  final _addElektrikKey = GlobalKey<FormState>();
+class _AddKdState extends State<AddKd> {
+  final _addKdKey = GlobalKey<FormState>();
 
   // SPD Wajib
-  TextEditingController spd21C = TextEditingController();
+  TextEditingController spd31C = TextEditingController();
 
   // SPD Opsional
-  TextEditingController spd22C = TextEditingController();
-  TextEditingController spd23C = TextEditingController();
-  TextEditingController spd24C = TextEditingController();
-  TextEditingController spd25C = TextEditingController();
+  TextEditingController spd32C = TextEditingController();
+  TextEditingController spd33C = TextEditingController();
+  TextEditingController spd34C = TextEditingController();
+  TextEditingController spd35C = TextEditingController();
 
   TextEditingController lokasiC = TextEditingController();
   TextEditingController tglPasangC = TextEditingController();
-
-  
 
   List allTextField = [];
 
@@ -50,10 +48,10 @@ class _AddElektrikState extends State<AddElektrik> {
     lokasiC.text = "Onsite"; //default text
     allTextField = [
       {
-        "value": spd22C,
+        "value": spd32C,
         "text_field": InputForm(
-          title: "SPD 2.2",
-          controller: spd22C,
+          title: "SPD 3.2",
+          controller: spd32C,
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -63,10 +61,10 @@ class _AddElektrikState extends State<AddElektrik> {
         ),
       },
       {
-        "value": spd23C,
+        "value": spd33C,
         "text_field": InputForm(
-          title: "SPD 2.3",
-          controller: spd23C,
+          title: "SPD 3.3",
+          controller: spd33C,
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -76,10 +74,10 @@ class _AddElektrikState extends State<AddElektrik> {
         ),
       },
       {
-        "value": spd24C,
+        "value": spd34C,
         "text_field": InputForm(
-          title: "SPD 2.4",
-          controller: spd24C,
+          title: "SPD 3.4",
+          controller: spd34C,
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -89,10 +87,10 @@ class _AddElektrikState extends State<AddElektrik> {
         ),
       },
       {
-        "value": spd25C,
+        "value": spd35C,
         "text_field": InputForm(
-          title: "SPD 2.5",
-          controller: spd25C,
+          title: "SPD 3.5",
+          controller: spd35C,
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -132,9 +130,9 @@ class _AddElektrikState extends State<AddElektrik> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("SPD 2 (Elektrik)")),
+      appBar: AppBar(title: const Text("SPD 3 (Komunikasi Data)")),
       body: Form(
-        key: _addElektrikKey,
+        key: _addKdKey,
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: SingleChildScrollView(
@@ -142,8 +140,8 @@ class _AddElektrikState extends State<AddElektrik> {
               children: [
                 // nama
                 InputForm(
-                  title: "SPD 2.1*",
-                  controller: spd21C,
+                  title: "SPD 3.1*",
+                  controller: spd31C,
                   prefixIcon: const Icon(Icons.description_outlined),
                   validator: (val) {
                     if (val!.isEmpty) {

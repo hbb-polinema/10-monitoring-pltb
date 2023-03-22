@@ -2,29 +2,26 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
 
-class AddElektrik extends StatefulWidget {
-  const AddElektrik({Key? key}) : super(key: key);
+class AddSipil extends StatefulWidget {
+  const AddSipil({Key? key}) : super(key: key);
 
   @override
-  State<AddElektrik> createState() => _AddElektrikState();
+  State<AddSipil> createState() => _AddSipilState();
 }
 
-class _AddElektrikState extends State<AddElektrik> {
-  final _addElektrikKey = GlobalKey<FormState>();
+class _AddSipilState extends State<AddSipil> {
+  final _addSipilKey = GlobalKey<FormState>();
 
   // SPD Wajib
-  TextEditingController spd21C = TextEditingController();
-
+  TextEditingController spd61C = TextEditingController();
+  TextEditingController spd62C = TextEditingController();
   // SPD Opsional
-  TextEditingController spd22C = TextEditingController();
-  TextEditingController spd23C = TextEditingController();
-  TextEditingController spd24C = TextEditingController();
-  TextEditingController spd25C = TextEditingController();
+  TextEditingController spd63C = TextEditingController();
+  TextEditingController spd64C = TextEditingController();
+  TextEditingController spd65C = TextEditingController();
 
   TextEditingController lokasiC = TextEditingController();
   TextEditingController tglPasangC = TextEditingController();
-
-  
 
   List allTextField = [];
 
@@ -50,10 +47,10 @@ class _AddElektrikState extends State<AddElektrik> {
     lokasiC.text = "Onsite"; //default text
     allTextField = [
       {
-        "value": spd22C,
+        "value": spd63C,
         "text_field": InputForm(
-          title: "SPD 2.2",
-          controller: spd22C,
+          title: "SPD 6.3",
+          controller: spd63C,
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -63,10 +60,10 @@ class _AddElektrikState extends State<AddElektrik> {
         ),
       },
       {
-        "value": spd23C,
+        "value": spd64C,
         "text_field": InputForm(
-          title: "SPD 2.3",
-          controller: spd23C,
+          title: "SPD 6.4",
+          controller: spd64C,
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -76,23 +73,10 @@ class _AddElektrikState extends State<AddElektrik> {
         ),
       },
       {
-        "value": spd24C,
+        "value": spd65C,
         "text_field": InputForm(
-          title: "SPD 2.4",
-          controller: spd24C,
-          validator: (val) {
-            if (val!.isEmpty) {
-              return 'Wajib diisi';
-            }
-            return null;
-          },
-        ),
-      },
-      {
-        "value": spd25C,
-        "text_field": InputForm(
-          title: "SPD 2.5",
-          controller: spd25C,
+          title: "SPD 6.5",
+          controller: spd65C,
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -132,9 +116,9 @@ class _AddElektrikState extends State<AddElektrik> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("SPD 2 (Elektrik)")),
+      appBar: AppBar(title: const Text("SPD 6 (Sipil)")),
       body: Form(
-        key: _addElektrikKey,
+        key: _addSipilKey,
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: SingleChildScrollView(
@@ -142,8 +126,24 @@ class _AddElektrikState extends State<AddElektrik> {
               children: [
                 // nama
                 InputForm(
-                  title: "SPD 2.1*",
-                  controller: spd21C,
+                  title: "SPD 6.1*",
+                  controller: spd61C,
+                  prefixIcon: const Icon(Icons.description_outlined),
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Wajib diisi';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+
+                // SPD 4.2
+                InputForm(
+                  title: "SPD 6.2*",
+                  controller: spd62C,
                   prefixIcon: const Icon(Icons.description_outlined),
                   validator: (val) {
                     if (val!.isEmpty) {

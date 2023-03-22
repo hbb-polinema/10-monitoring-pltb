@@ -2,40 +2,30 @@ import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
 
-class AddElektrik extends StatefulWidget {
-  const AddElektrik({Key? key}) : super(key: key);
+class AddMekanik extends StatefulWidget {
+  const AddMekanik({Key? key}) : super(key: key);
 
   @override
-  State<AddElektrik> createState() => _AddElektrikState();
+  State<AddMekanik> createState() => _AddMekanikState();
 }
 
-class _AddElektrikState extends State<AddElektrik> {
-  final _addElektrikKey = GlobalKey<FormState>();
-  final namaC = TextEditingController();
-  final merekC = TextEditingController();
-  final jenisC = TextEditingController();
-  final lokasiC = TextEditingController();
-  final panjangC = TextEditingController();
-  final lebarC = TextEditingController();
-  final tinggiC = TextEditingController();
-  final beratC = TextEditingController();
-  final warnaC = TextEditingController();
-  final umurC = TextEditingController();
-  final tglPasangC = TextEditingController();
-  final tglOperasiC = TextEditingController();
-  final kondisiAsetList = [
-    'Ok',
-    'Perlu Pengecekan',
-    'Perlu Perbaikan',
-    'Sedang Diperbaiki',
-    'Rusak'
-  ];
-  String? selectedValKondisi = '';
-  final statusAsetList = ['Aktif', 'Non-Aktif'];
-  String? selectedValStatus = '';
+class _AddMekanikState extends State<AddMekanik> {
+  final _addMekanikKey = GlobalKey<FormState>();
+
+  // SPD Wajib
+  TextEditingController spd11C = TextEditingController();
+  TextEditingController spd12C = TextEditingController();
+  TextEditingController spd13C = TextEditingController();
+  // SPD Opsional
+  TextEditingController spd14C = TextEditingController();
+  TextEditingController spd15C = TextEditingController();
+
+  TextEditingController lokasiC = TextEditingController();
+  TextEditingController tglPasangC = TextEditingController();
+
+  List allTextField = [];
 
   DateTime? _dateTimeP;
-  DateTime? _dateTimeO;
 
   void _showDatePickerP() {
     showDatePicker(
@@ -51,41 +41,83 @@ class _AddElektrikState extends State<AddElektrik> {
     });
   }
 
-  void _showDatePickerO() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2050),
-    ).then((value) {
-      setState(() {
-        _dateTimeO = value!;
-        tglOperasiC.text = DateFormat('dd MMM yyyy').format(_dateTimeO!);
-      });
+  @override
+  void initState() {
+    super.initState();
+    lokasiC.text = "Onsite"; //default text
+    allTextField = [
+      {
+        // "label": "SPD 1.4",
+        "value": spd14C,
+        "text_field": InputForm(
+          title: "SPD 1.4",
+          controller: spd14C,
+          validator: (val) {
+            if (val!.isEmpty) {
+              return 'Wajib diisi';
+            }
+            return null;
+          },
+        ),
+      },
+      {
+        // "label": "SPD 1.5",
+        "value": spd15C,
+        "text_field": InputForm(
+          title: "SPD 1.5",
+          controller: spd15C,
+          validator: (val) {
+            if (val!.isEmpty) {
+              return 'Wajib diisi';
+            }
+            return null;
+          },
+        ),
+      },
+    ];
+  }
+
+  List displayTextField = [];
+
+  addTextField() {
+    print("addTextField");
+
+    setState(() {
+      if (allTextField.length == displayTextField.length) {
+        print("Same");
+        return;
+      } else {
+        displayTextField.add(allTextField[displayTextField.length]);
+      }
     });
   }
 
-  @override
-  void initState() {
-    jenisC.text = "Elektrikal"; //default text
-    super.initState();
+  removeTextField() {
+    print("removeTextField");
+
+    setState(() {
+      if (displayTextField.isNotEmpty) {
+        displayTextField.removeLast();
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tambah Asset")),
+      appBar: AppBar(title: const Text("SPD 1 (Mekanik)")),
       body: Form(
-        key: _addElektrikKey,
+        key: _addMekanikKey,
         child: Padding(
           padding: const EdgeInsets.all(24),
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // nama Asset
+                // nama
                 InputForm(
-                  title: "Nama Asset",
-                  controller: namaC,
+                  title: "SPD 1.1*",
+                  controller: spd11C,
+                  prefixIcon: const Icon(Icons.description_outlined),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -97,10 +129,11 @@ class _AddElektrikState extends State<AddElektrik> {
                   height: 16,
                 ),
 
-                // nama merek
+                // SPD 1.2
                 InputForm(
-                  title: "Merek",
-                  controller: merekC,
+                  title: "SPD 1.2*",
+                  controller: spd12C,
+                  prefixIcon: const Icon(Icons.description_outlined),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -112,143 +145,70 @@ class _AddElektrikState extends State<AddElektrik> {
                   height: 16,
                 ),
 
-                // jenis Asset
-                NonEditableForm(
-                  title: "Jenis Asset",
-                  controller: jenisC,
+                // SPD 1.3
+                InputForm(
+                  title: "SPD 1.3*",
+                  controller: spd13C,
+                  prefixIcon: const Icon(Icons.description_outlined),
+                  validator: (val) {
+                    if (val!.isEmpty) {
+                      return 'Wajib diisi';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 16,
                 ),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text('SPD Tambahan :'),
+                    ElevatedButton(
+                      onPressed: addTextField,
+                      child: const Text('Tambah'),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: const Color.fromARGB(225, 12, 144, 125),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: removeTextField,
+                      child: const Text('Hapus'),
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        primary: const Color.fromARGB(255, 151, 158, 157),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+
+                ...displayTextField
+                    .map(
+                      (e) => Column(
+                        children: [
+                          e['text_field'],
+                          const SizedBox(
+                            height: 16,
+                          ),
+                        ],
+                      ),
+                    )
+                    .toList(),
 
                 // lokasi Asset
-                InputForm(
-                  title: "Lokasi Asset",
+                NonEditableForm(
+                  title: "Lokasi Asset*",
                   controller: lokasiC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // Dimensi Asset
-                InputNumberForm(
-                  title: "Panjang Asset",
-                  controller: panjangC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // lebar Asset
-                InputNumberForm(
-                  title: "Lebar Asset",
-                  controller: lebarC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // tinggi Asset
-                InputNumberForm(
-                  title: "Tinggi Asset",
-                  controller: tinggiC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // berat Asset
-                InputNumberForm(
-                  title: "Berat Asset",
-                  controller: beratC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // kondisi Asset (dropdown)
-                DropdownButtonFormField(
-                  items: kondisiAsetList
-                      .map(
-                        (e) => DropdownMenuItem(child: Text(e), value: e),
-                      )
-                      .toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      selectedValKondisi = val as String;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Kondisi Aset',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // status Asset (dropdown)
-                DropdownButtonFormField(
-                  items: statusAsetList
-                      .map(
-                        (e) => DropdownMenuItem(child: Text(e), value: e),
-                      )
-                      .toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      selectedValStatus = val as String;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Status Perangkat',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
+                  prefixIcon: const Icon(Icons.location_on_outlined),
                 ),
                 const SizedBox(
                   height: 16,
@@ -259,8 +219,8 @@ class _AddElektrikState extends State<AddElektrik> {
                   autofocus: true,
                   controller: tglPasangC,
                   decoration: InputDecoration(
-                    labelText: 'Tanggal Dipasang',
-                    suffixIcon: const Icon(Icons.event),
+                    labelText: 'Tanggal Dipasang*',
+                    prefixIcon: const Icon(Icons.event_outlined),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -279,55 +239,6 @@ class _AddElektrikState extends State<AddElektrik> {
                     // Below line stops keyboard from appearing
                     FocusScope.of(context).requestFocus(FocusNode());
                     _showDatePickerP();
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // tanggal mulai beroperasi
-                const SizedBox(
-                  height: 8,
-                ),
-                TextFormField(
-                  autofocus: true,
-                  controller: tglOperasiC,
-                  decoration: InputDecoration(
-                    labelText: 'Tanggal Mulai Beroperasi',
-                    suffixIcon: const Icon(Icons.event),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    hintText: 'Choose Date',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please fill this section';
-                    }
-                    return null;
-                  },
-                  onTap: () {
-                    // Below line stops keyboard from appearing
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    _showDatePickerO();
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // umur Asset
-                InputNumberForm(
-                  title: "Umur Asset",
-                  controller: umurC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
                   },
                 ),
                 const SizedBox(
@@ -359,7 +270,7 @@ class _AddElektrikState extends State<AddElektrik> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      primary: const Color.fromARGB(225, 0, 74, 173),
+                      primary: const Color.fromARGB(225, 12, 144, 125),
                     ),
                   ),
                 )

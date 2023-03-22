@@ -63,7 +63,6 @@ class _WsChartState extends State<WsChart> {
   // mangambil data
   Future<void> fetchData(String date, String id) async {
     Uri url = Uri.parse("https://ebt-polinema.id/api/weather-station/history");
-    // Uri url=Uri.parse("127.0.0.1:1880/w/history");
     var response = await http.post(
       url,
       body: {
@@ -78,7 +77,7 @@ class _WsChartState extends State<WsChart> {
         _data.clear();
         for (var data in jsonData) {
           _data.add(WsData(
-            DateFormat('HH:mm').format(DateTime.parse(data['date_utc'])),
+            DateFormat('HH:mm:ss').format(DateTime.parse(data['date_utc'])),
             data['wind_speed'].toDouble(),
             data['wind_dir'].toDouble(),
             data['temp'].toDouble(),

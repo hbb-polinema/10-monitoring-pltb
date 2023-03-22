@@ -4,8 +4,17 @@ class InputForm extends StatelessWidget {
   final String? title;
   final TextEditingController? controller;
   final TextInputType? inputType;
+  final Icon? prefixIcon;
+  final String? helperTxt;
   final String? Function(String?)? validator;
-  const InputForm({Key? key, this.title, this.controller, this.validator, this.inputType})
+  const InputForm(
+      {Key? key,
+      this.title,
+      this.controller,
+      this.validator,
+      this.inputType,
+      this.prefixIcon,
+      this.helperTxt})
       : super(key: key);
 
   @override
@@ -15,11 +24,24 @@ class InputForm extends StatelessWidget {
         controller: controller,
         keyboardType: inputType,
         decoration: InputDecoration(
+          helperText: helperTxt,
           labelText: title,
+          labelStyle: const TextStyle(
+            color: Color.fromARGB(225, 12, 144, 125),
+          ),
+          prefixIcon: prefixIcon,
+          prefixIconColor: const Color.fromARGB(225, 12, 144, 125),
+          // focusColor: const Color.fromARGB(225, 12, 144, 125),
+          // fillColor: const Color.fromARGB(225, 12, 144, 125),
+          // hoverColor: const Color.fromARGB(225, 12, 144, 125),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: Color.fromARGB(225, 12, 144, 125),
+              width: 2.0,
+            ),
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
@@ -30,7 +52,9 @@ class InputForm extends StatelessWidget {
 class NonEditableForm extends StatelessWidget {
   final String? title;
   final TextEditingController? controller;
-  const NonEditableForm({Key? key, this.title, this.controller})
+  final Icon? prefixIcon;
+  const NonEditableForm(
+      {Key? key, this.title, this.controller, this.prefixIcon})
       : super(key: key);
 
   @override
@@ -41,6 +65,7 @@ class NonEditableForm extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         labelText: title,
+        prefixIcon: prefixIcon,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),

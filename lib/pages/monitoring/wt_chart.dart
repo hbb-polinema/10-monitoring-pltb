@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:manajemen_aset/models/realtime_energy.dart';
-import 'package:manajemen_aset/models/wind_turbine.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
@@ -76,7 +75,7 @@ class _WtChartState extends State<WtChart> {
 
     for (var i = 0; i < realData.length; i++) {
       var realDataDate =
-          DateFormat('HH:mm').format(DateTime.parse(realData[i]['date']));
+          DateFormat('HH:mm:ss').format(DateTime.parse(realData[i]['date']));
       var realDataValue = realData[i]['value']?.toDouble() ?? 0.0;
       var realDataWindSpeed = realData[i]['wind_speed']?.toDouble() ?? 0.0;
       var realDataRpmBilah = realData[i]['rpm_bilah']?.toDouble() ?? 0.0;
@@ -88,7 +87,7 @@ class _WtChartState extends State<WtChart> {
       var realDataAmpereAc = realData[i]['ampere_ac']?.toDouble() ?? 0.0;
 
       var calcDataDate =
-          DateFormat('HH:mm').format(DateTime.parse(calcData[i]['date']));
+          DateFormat('HH:mm:ss').format(DateTime.parse(calcData[i]['date']));
       var calcDataValue = calcData[i]['value']?.toDouble() ?? 0.0;
 
       dataReal.add(RealtimeEnergy(

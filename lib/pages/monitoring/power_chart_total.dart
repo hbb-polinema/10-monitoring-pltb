@@ -68,7 +68,6 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
   // mangambil data
   Future<void> fetchData(String date, String id) async {
     Uri url = Uri.parse("https://ebt-polinema.id/api/wind-turbine/status");
-    // Uri url=Uri.parse("127.0.0.1:1880/w/history");
     var response = await http.post(
       url,
       body: {"id": id, "date": date, "draw": "1"},
@@ -81,7 +80,7 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
 
     for (var i = 0; i < realData.length; i++) {
       var realDataDate =
-          DateFormat('HH:mm').format(DateTime.parse(realData[i]['date']));
+          DateFormat('HH:mm:ss').format(DateTime.parse(realData[i]['date']));
       var realDataValue = realData[i]['value']?.toDouble() ?? 0.0;
       var realDataWindSpeed = realData[i]['wind_speed']?.toDouble() ?? 0.0;
       var realDataRpmBilah = realData[i]['rpm_bilah']?.toDouble() ?? 0.0;
@@ -93,7 +92,7 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
       var realDataAmpereAc = realData[i]['ampere_ac']?.toDouble() ?? 0.0;
 
       var calcDataDate =
-          DateFormat('HH:mm').format(DateTime.parse(calcData[i]['date']));
+          DateFormat('HH:mm:ss').format(DateTime.parse(calcData[i]['date']));
       var calcDataValue = calcData[i]['value']?.toDouble() ?? 0.0;
 
       dataReal.add(RealtimeEnergy(

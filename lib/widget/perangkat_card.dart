@@ -103,85 +103,85 @@ class PerangkatCard extends StatelessWidget {
                   ],
                 ),
               ),
-              PopupMenuButton<int>(
-                iconSize: 20,
-                itemBuilder: (context) => [
-                  // PopupMenuItem 1
-                  PopupMenuItem(
-                    value: 1,
-                    child: Row(
-                      children: const [
-                        Icon(Icons.edit),
-                        SizedBox(width: 10),
-                        Text("Edit Perangkat")
-                      ],
-                    ),
-                  ),
-                  // PopupMenuItem 2
-                  PopupMenuItem(
-                    value: 2,
-                    child: Row(
-                      children: const [
-                        Icon(Icons.delete),
-                        SizedBox(width: 10),
-                        Text("Hapus Perangkat")
-                      ],
-                    ),
-                  ),
-                ],
-                onSelected: (value) {
-                  if (value == 1) {
-                    // edit perangkat
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditPerangkat(
-                          docClusterId: docClusterId,
-                          docPerangkatId: docPerangkatId,
-                          currentId: id,
-                          currentJenis: jenis,
-                          currentKode: kode,
-                          currentStatus: status,
-                        ),
-                      ),
-                    );
-                  } else if (value == 2) {
-                    // hapus perangkat
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text("Hapus"),
-                        content: Text(
-                          "Apakah anda yakin akan menghapus perangkat $kode? ",
-                        ),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: const Text(
-                              "Batal",
-                              style: TextStyle(
-                                color: Color.fromARGB(225, 125, 122, 116),
-                              ),
-                            ),
-                          ),
-                          TextButton(
-                            onPressed: () async {
-                              await DatabaseService().deletePerangkat(
-                                docClusterId: docClusterId,
-                                docPerangkatId: docPerangkatId,
-                              );
-                              Navigator.pop(context);
-                            },
-                            child: const Text("Hapus"),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                },
-              ),
+              // PopupMenuButton<int>(
+              //   iconSize: 20,
+              //   itemBuilder: (context) => [
+              //     // PopupMenuItem 1
+              //     PopupMenuItem(
+              //       value: 1,
+              //       child: Row(
+              //         children: const [
+              //           Icon(Icons.edit),
+              //           SizedBox(width: 10),
+              //           Text("Edit Perangkat")
+              //         ],
+              //       ),
+              //     ),
+              //     // PopupMenuItem 2
+              //     PopupMenuItem(
+              //       value: 2,
+              //       child: Row(
+              //         children: const [
+              //           Icon(Icons.delete),
+              //           SizedBox(width: 10),
+              //           Text("Hapus Perangkat")
+              //         ],
+              //       ),
+              //     ),
+              //   ],
+              //   onSelected: (value) {
+              //     if (value == 1) {
+              //       // edit perangkat
+              //       Navigator.push(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => EditPerangkat(
+              //             docClusterId: docClusterId,
+              //             docPerangkatId: docPerangkatId,
+              //             currentId: id,
+              //             currentJenis: jenis,
+              //             currentKode: kode,
+              //             currentStatus: status,
+              //           ),
+              //         ),
+              //       );
+              //     } else if (value == 2) {
+              //       // hapus perangkat
+              //       showDialog(
+              //         context: context,
+              //         builder: (context) => AlertDialog(
+              //           title: const Text("Hapus"),
+              //           content: Text(
+              //             "Apakah anda yakin akan menghapus perangkat $kode? ",
+              //           ),
+              //           actions: <Widget>[
+              //             TextButton(
+              //               onPressed: () {
+              //                 Navigator.pop(context);
+              //               },
+              //               child: const Text(
+              //                 "Batal",
+              //                 style: TextStyle(
+              //                   color: Color.fromARGB(225, 125, 122, 116),
+              //                 ),
+              //               ),
+              //             ),
+              //             TextButton(
+              //               onPressed: () async {
+              //                 await DatabaseService().deletePerangkat(
+              //                   docClusterId: docClusterId,
+              //                   docPerangkatId: docPerangkatId,
+              //                 );
+              //                 Navigator.pop(context);
+              //               },
+              //               child: const Text("Hapus"),
+              //             ),
+              //           ],
+              //         ),
+              //       );
+              //     }
+              //   },
+              // ),
             ],
           ),
         ),

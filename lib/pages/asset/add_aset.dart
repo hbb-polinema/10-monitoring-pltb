@@ -1,9 +1,18 @@
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/widget/input_form.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:manajemen_aset/pages/asset/addAset/add_elektrik.dart';
+import 'package:manajemen_aset/pages/asset/addAset/add_kd.dart';
+import 'package:manajemen_aset/pages/asset/addAset/add_mekanik.dart';
+import 'package:manajemen_aset/pages/asset/addAset/add_sensor.dart';
+
+import 'addAset/add_It.dart';
+import 'addAset/add_sipil.dart';
 
 class AddAset extends StatefulWidget {
-  const AddAset({Key? key}) : super(key: key);
+  // final String docId;
+  const AddAset({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<AddAset> createState() => _AddAsetState();
@@ -11,70 +20,23 @@ class AddAset extends StatefulWidget {
 
 class _AddAsetState extends State<AddAset> {
   final _addAsetKey = GlobalKey<FormState>();
-  final namaC = TextEditingController();
-  final merekC = TextEditingController();
-  final jenisC = TextEditingController();
-  final lokasiC = TextEditingController();
-  final panjangC = TextEditingController();
-  final lebarC = TextEditingController();
-  final tinggiC = TextEditingController();
-  final beratC = TextEditingController();
-  final warnaC = TextEditingController();
-  final umurC = TextEditingController();
-  final tglPasangC = TextEditingController();
-  final tglOperasiC = TextEditingController();
-  final kondisiAsetList = [
-    'Ok',
-    'Perlu Pengecekan',
-    'Perlu Perbaikan',
-    'Sedang Diperbaiki',
-    'Rusak'
-  ];
-  String? selectedValKondisi = '';
-  final statusAsetList = ['Aktif', 'Non-Aktif'];
-  String? selectedValStatus = '';
-
-  DateTime? _dateTimeP;
-  DateTime? _dateTimeO;
-
-  void _showDatePickerP() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2050),
-    ).then((value) {
-      setState(() {
-        _dateTimeP = value!;
-        tglPasangC.text = DateFormat('dd MMM yyyy').format(_dateTimeP!);
-      });
-    });
-  }
-
-  void _showDatePickerO() {
-    showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2050),
-    ).then((value) {
-      setState(() {
-        _dateTimeO = value!;
-        tglOperasiC.text = DateFormat('dd MMM yyyy').format(_dateTimeO!);
-      });
-    });
-  }
 
   @override
   void initState() {
-    jenisC.text = "Elektrikal"; //default text
     super.initState();
   }
+
+  final GlobalKey<ExpansionTileCardState> cardMekanik = GlobalKey();
+  final GlobalKey<ExpansionTileCardState> cardElektrik = GlobalKey();
+  final GlobalKey<ExpansionTileCardState> cardKd = GlobalKey();
+  final GlobalKey<ExpansionTileCardState> cardSensor = GlobalKey();
+  final GlobalKey<ExpansionTileCardState> cardIt = GlobalKey();
+  final GlobalKey<ExpansionTileCardState> cardSipil = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Tambah Asset")),
+      appBar: AppBar(title: const Text("Tambah")),
       body: Form(
         key: _addAsetKey,
         child: Padding(
@@ -82,253 +44,379 @@ class _AddAsetState extends State<AddAset> {
           child: SingleChildScrollView(
             child: Column(
               children: [
-                // nama Asset
-                InputForm(
-                  title: "Nama Asset",
-                  controller: namaC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // nama merek
-                InputForm(
-                  title: "Merek",
-                  controller: merekC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // jenis Asset
-                NonEditableForm(
-                  title: "Jenis Asset",
-                  controller: jenisC,
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // lokasi Asset
-                InputForm(
-                  title: "Lokasi Asset",
-                  controller: lokasiC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // Dimensi Asset
-                InputNumberForm(
-                  title: "Panjang Asset",
-                  controller: panjangC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // lebar Asset
-                InputNumberForm(
-                  title: "Lebar Asset",
-                  controller: lebarC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // tinggi Asset
-                InputNumberForm(
-                  title: "Tinggi Asset",
-                  controller: tinggiC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // berat Asset
-                InputNumberForm(
-                  title: "Berat Asset",
-                  controller: beratC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-
-                // kondisi Asset (dropdown)
-                DropdownButtonFormField(
-                  items: kondisiAsetList
-                      .map(
-                        (e) => DropdownMenuItem(child: Text(e), value: e),
-                      )
-                      .toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      selectedValKondisi = val as String;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Kondisi Aset',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                // mekanik
+                ExpansionTileCard(
+                  baseColor: Colors.cyan[50],
+                  // expandedColor: Colors.red[50],
+                  key: cardMekanik,
+                  title: const Text('Mekanik'),
+                  subtitle: const Text('Deskripsi'),
+                  children: <Widget>[
+                    const Divider(
+                      thickness: 1.0,
+                      height: 1.0,
                     ),
-                  ),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: Text(
+                          "Data belum terisi",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            cardMekanik.currentState?.expand();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            primary: const Color.fromARGB(225, 12, 144, 125),
+                          ),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AddMekanik(),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.add),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 16,
                 ),
 
-                // status Asset (dropdown)
-                DropdownButtonFormField(
-                  items: statusAsetList
-                      .map(
-                        (e) => DropdownMenuItem(child: Text(e), value: e),
-                      )
-                      .toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      selectedValStatus = val as String;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Status Perangkat',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                // elektrik
+                ExpansionTileCard(
+                  baseColor: Colors.cyan[50],
+                  // expandedColor: Colors.red[50],
+                  key: cardElektrik,
+                  title: const Text('Elektrik'),
+                  subtitle: const Text('Deskripsi'),
+                  children: <Widget>[
+                    const Divider(
+                      thickness: 1.0,
+                      height: 1.0,
                     ),
-                  ),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: Text(
+                          "Data belum terisi",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            cardMekanik.currentState?.expand();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            primary: const Color.fromARGB(225, 12, 144, 125),
+                          ),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AddElektrik(),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.add),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 16,
                 ),
 
-                // Tanggal dipasang
-                TextFormField(
-                  autofocus: true,
-                  controller: tglPasangC,
-                  decoration: InputDecoration(
-                    labelText: 'Tanggal Dipasang',
-                    suffixIcon: const Icon(Icons.event),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                // komunikasi data
+                ExpansionTileCard(
+                  baseColor: Colors.cyan[50],
+                  // expandedColor: Colors.red[50],
+                  key: cardKd,
+                  title: const Text('Komunikasi Data'),
+                  subtitle: const Text('Deskripsi'),
+                  children: <Widget>[
+                    const Divider(
+                      thickness: 1.0,
+                      height: 1.0,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: Text(
+                          "Data belum terisi",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(fontSize: 16),
+                        ),
+                      ),
                     ),
-                    hintText: 'Pilih Tanggal',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Wajib Diisi';
-                    }
-                    return null;
-                  },
-                  onTap: () {
-                    // Below line stops keyboard from appearing
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    _showDatePickerP();
-                  },
+                    ButtonBar(
+                      alignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            cardMekanik.currentState?.expand();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            primary: const Color.fromARGB(225, 12, 144, 125),
+                          ),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AddKd(),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.add),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 16,
                 ),
 
-                // tanggal mulai beroperasi
-                const SizedBox(
-                  height: 8,
-                ),
-                TextFormField(
-                  autofocus: true,
-                  controller: tglOperasiC,
-                  decoration: InputDecoration(
-                    labelText: 'Tanggal Mulai Beroperasi',
-                    suffixIcon: const Icon(Icons.event),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                // Sensor
+                ExpansionTileCard(
+                  baseColor: Colors.cyan[50],
+                  // expandedColor: Colors.red[50],
+                  key: cardSensor,
+                  title: const Text('Sensor'),
+                  subtitle: const Text('Deskripsi'),
+                  children: <Widget>[
+                    const Divider(
+                      thickness: 1.0,
+                      height: 1.0,
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: Text(
+                          "Data belum terisi",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(fontSize: 16),
+                        ),
+                      ),
                     ),
-                    hintText: 'Choose Date',
-                  ),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please fill this section';
-                    }
-                    return null;
-                  },
-                  onTap: () {
-                    // Below line stops keyboard from appearing
-                    FocusScope.of(context).requestFocus(FocusNode());
-                    _showDatePickerO();
-                  },
+                    ButtonBar(
+                      alignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            cardMekanik.currentState?.expand();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            primary: const Color.fromARGB(225, 12, 144, 125),
+                          ),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AddSensor(),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.add),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 16,
                 ),
 
-                // umur Asset
-                InputNumberForm(
-                  title: "Umur Asset",
-                  controller: umurC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
+                // IT
+                ExpansionTileCard(
+                  baseColor: Colors.cyan[50],
+                  // expandedColor: Colors.red[50],
+                  key: cardIt,
+                  title: const Text('Information Technology'),
+                  subtitle: const Text('Deskripsi'),
+                  children: <Widget>[
+                    const Divider(
+                      thickness: 1.0,
+                      height: 1.0,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: Text(
+                          "Data belum terisi",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            cardMekanik.currentState?.expand();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            primary: const Color.fromARGB(225, 12, 144, 125),
+                          ),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AddIt(),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.add),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+
+                // Sipil
+                ExpansionTileCard(
+                  baseColor: Colors.cyan[50],
+                  // expandedColor: Colors.red[50],
+                  key: cardSipil,
+                  title: const Text('Sipil'),
+                  subtitle: const Text('Deskripsi'),
+                  children: <Widget>[
+                    const Divider(
+                      thickness: 1.0,
+                      height: 1.0,
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0,
+                          vertical: 8.0,
+                        ),
+                        child: Text(
+                          "Data belum terisi",
+                          style: Theme.of(context)
+                              .textTheme
+                              .bodyText2
+                              ?.copyWith(fontSize: 16),
+                        ),
+                      ),
+                    ),
+                    ButtonBar(
+                      alignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        ElevatedButton(
+                          onPressed: () {
+                            cardMekanik.currentState?.expand();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            shape: const CircleBorder(),
+                            primary: const Color.fromARGB(225, 12, 144, 125),
+                          ),
+                          child: Column(
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const AddSipil(),
+                                    ),
+                                  );
+                                },
+                                icon: const Icon(Icons.add),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 const SizedBox(
                   height: 16,
@@ -352,14 +440,14 @@ class _AddAsetState extends State<AddAset> {
                       // }
                     },
                     child: const Text(
-                      "Simpan",
+                      "Sinkronisasi Data",
                       style: TextStyle(fontSize: 16),
                     ),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      primary: const Color.fromARGB(225, 0, 74, 173),
+                      primary: const Color.fromARGB(225, 12, 144, 125),
                     ),
                   ),
                 )

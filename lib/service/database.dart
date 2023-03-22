@@ -243,6 +243,91 @@ class DatabaseService {
         .catchError((e) => print(e));
   }
 
+// ASSET GUDANG
+  // menambahkan asset gudang
+  Future<void> addAssetGudang({
+    String? documentId,
+    // String? kodeAssetGudang,
+    String? jenisAset,
+    String? spd11,
+    String? spd12,
+    String? spd13,
+    String? spd21,
+    String? spd31,
+    String? spd41,
+    String? spd42,
+    String? spd51,
+    String? lokasi,
+    String? kondisi,
+    String? tglDiterima,
+  }) async {
+    DocumentReference docReferencer =
+        clusterCollection.doc(documentId).collection('gudang').doc();
+    Map<String, dynamic> data = <String, dynamic>{
+      // "kode": kodeAssetGudang,
+      "jenis": jenisAset,
+      "spd11": spd11,
+      "spd12": spd12,
+      "spd13": spd13,
+      "spd21": spd21,
+      "spd31": spd31,
+      "spd41": spd41,
+      "spd42": spd42,
+      "spd51": spd51,
+      "lokasi": lokasi,
+      "kondisi": kondisi,
+      "tglDiterima": tglDiterima,
+    };
+    await docReferencer
+        .set(data)
+        .whenComplete(() => print("Data perangkat berhasil ditambahkan"))
+        .catchError((e) => print(e));
+  }
+
+  // menampilkan list perangkat mekanik
+  Stream<QuerySnapshot> listMekanik(String idCluster) {
+    CollectionReference gudangCollection =
+        clusterCollection.doc(idCluster).collection('gudang');
+    return gudangCollection.where('jenis', isEqualTo: 'Mekanik').snapshots();
+  }
+
+  // menampilkan list perangkat elektrik
+  Stream<QuerySnapshot> listElektrik(String idCluster) {
+    CollectionReference gudangCollection =
+        clusterCollection.doc(idCluster).collection('gudang');
+    return gudangCollection.where('jenis', isEqualTo: 'Elektrik').snapshots();
+  }
+
+  // menampilkan list perangkat komunikasi data
+  Stream<QuerySnapshot> listKd(String idCluster) {
+    CollectionReference gudangCollection =
+        clusterCollection.doc(idCluster).collection('gudang');
+    return gudangCollection
+        .where('jenis', isEqualTo: 'Komunikasi Data')
+        .snapshots();
+  }
+
+  // menampilkan list sensor
+  Stream<QuerySnapshot> listSensor(String idCluster) {
+    CollectionReference gudangCollection =
+        clusterCollection.doc(idCluster).collection('gudang');
+    return gudangCollection.where('jenis', isEqualTo: 'Sensor').snapshots();
+  }
+
+  // menampilkan list IT
+  Stream<QuerySnapshot> listIt(String idCluster) {
+    CollectionReference gudangCollection =
+        clusterCollection.doc(idCluster).collection('gudang');
+    return gudangCollection.where('jenis', isEqualTo: 'IT').snapshots();
+  }
+
+  // menampilkan list Sipil
+  Stream<QuerySnapshot> listSipil(String idCluster) {
+    CollectionReference gudangCollection =
+        clusterCollection.doc(idCluster).collection('sipil');
+    return gudangCollection.where('jenis', isEqualTo: 'Sipil').snapshots();
+  }
+
 // ASET
   // menampilkan list aset
   Stream<QuerySnapshot> listAset(String idCluster, String idPerangkat) {

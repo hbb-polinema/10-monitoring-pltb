@@ -29,6 +29,7 @@ class _AddUserState extends State<AddUser> {
     'Vendor',
     'Admin Vendor',
     'Operator Vendor',
+    'Gudang'
   ];
   String? selectedVal = '';
 

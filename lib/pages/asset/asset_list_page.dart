@@ -1,10 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/asset/add_aset.dart';
-import 'package:manajemen_aset/pages/asset/jenis_asset.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/aset_card.dart';
-import 'package:manajemen_aset/widget/chipBar.dart';
 
 // class AssetList extends StatefulWidget {
 //   const AssetList({Key? key}) : super(key: key);
@@ -259,16 +256,16 @@ class BuilderAset extends StatelessWidget {
           if (snapshot.hasData) {
             String role = snapshot.data!.data()!['role'];
             // cek user untuk menampilkan tombol tambah data aset
-            if (role == 'Kontraktor') {
+            if (role == 'Operator Vendor') {
               return FloatingActionButton(
                 child: const Icon(Icons.add),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddAset(),
-                    ),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) => AddAssetGudang(),
+                  //   ),
+                  // );
                 },
               );
             } else {

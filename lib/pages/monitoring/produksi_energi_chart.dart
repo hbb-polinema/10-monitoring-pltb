@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:manajemen_aset/models/realtime_energy.dart';
 import 'package:manajemen_aset/models/weather_station.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
@@ -76,7 +75,7 @@ class _ProduksiEnergiChartState extends State<ProduksiEnergiChart> {
         _data.clear();
         for (var data in jsonData) {
           _data.add(WsData(
-            DateFormat('HH:mm').format(DateTime.parse(data['date_utc'])),
+            DateFormat('HH:mm:ss').format(DateTime.parse(data['date_utc'])),
             data['wind_speed'].toDouble(),
             data['wind_dir'].toDouble(),
             data['temp'].toDouble(),
