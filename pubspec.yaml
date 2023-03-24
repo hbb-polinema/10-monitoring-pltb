@@ -44,7 +44,10 @@ dependencies:
   image_picker: ^0.8.7
   expansion_tile_card: ^2.0.0
   geolocator: ^9.0.2
-  geocoding: ^2.1.0
+  flutter_exif_rotation: ^0.5.1
+  location: ^4.4.0
+  stamp_image: ^0.0.2
+  # geocoding: ^2.1.0
 
 dev_dependencies:
   flutter_test:

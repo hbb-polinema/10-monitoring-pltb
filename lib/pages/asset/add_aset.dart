@@ -46,7 +46,12 @@ class _AddAsetState extends State<AddAset> {
               children: [
                 // mekanik
                 ExpansionTileCard(
-                  baseColor: Colors.cyan[50],
+                  leading: CircleAvatar(
+                    child: Image.asset("img/mekanik.png"),
+                    backgroundColor: Colors.blueGrey,
+                  ),
+                  baseColor: const Color.fromARGB(223, 212, 221, 218),
+                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
                   // expandedColor: Colors.red[50],
                   key: cardMekanik,
                   title: const Text('Mekanik'),
@@ -109,7 +114,12 @@ class _AddAsetState extends State<AddAset> {
 
                 // elektrik
                 ExpansionTileCard(
-                  baseColor: Colors.cyan[50],
+                  leading: CircleAvatar(
+                    child: Image.asset("img/elektrik.png"),
+                    backgroundColor: Colors.blueGrey,
+                  ),
+                  baseColor: const Color.fromARGB(223, 212, 221, 218),
+                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
                   // expandedColor: Colors.red[50],
                   key: cardElektrik,
                   title: const Text('Elektrik'),
@@ -172,7 +182,12 @@ class _AddAsetState extends State<AddAset> {
 
                 // komunikasi data
                 ExpansionTileCard(
-                  baseColor: Colors.cyan[50],
+                  leading: CircleAvatar(
+                    child: Image.asset("img/mekanik.png"),
+                    backgroundColor: Colors.blueGrey,
+                  ),
+                  baseColor: const Color.fromARGB(223, 212, 221, 218),
+                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
                   // expandedColor: Colors.red[50],
                   key: cardKd,
                   title: const Text('Komunikasi Data'),
@@ -235,7 +250,12 @@ class _AddAsetState extends State<AddAset> {
 
                 // Sensor
                 ExpansionTileCard(
-                  baseColor: Colors.cyan[50],
+                  leading: CircleAvatar(
+                    child: Image.asset("img/sensor.png"),
+                    backgroundColor: Colors.blueGrey,
+                  ),
+                  baseColor: const Color.fromARGB(223, 212, 221, 218),
+                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
                   // expandedColor: Colors.red[50],
                   key: cardSensor,
                   title: const Text('Sensor'),
@@ -298,7 +318,12 @@ class _AddAsetState extends State<AddAset> {
 
                 // IT
                 ExpansionTileCard(
-                  baseColor: Colors.cyan[50],
+                  leading: CircleAvatar(
+                    child: Image.asset("img/jaringan.png"),
+                    backgroundColor: Colors.blueGrey,
+                  ),
+                  baseColor: const Color.fromARGB(223, 212, 221, 218),
+                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
                   // expandedColor: Colors.red[50],
                   key: cardIt,
                   title: const Text('Information Technology'),
@@ -361,7 +386,12 @@ class _AddAsetState extends State<AddAset> {
 
                 // Sipil
                 ExpansionTileCard(
-                  baseColor: Colors.cyan[50],
+                  leading: CircleAvatar(
+                    child: Image.asset("img/mekanik.png"),
+                    backgroundColor: Colors.blueGrey,
+                  ),
+                  baseColor: const Color.fromARGB(223, 212, 221, 218),
+                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
                   // expandedColor: Colors.red[50],
                   key: cardSipil,
                   title: const Text('Sipil'),

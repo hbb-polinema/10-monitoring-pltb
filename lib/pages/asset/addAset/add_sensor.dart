@@ -51,6 +51,7 @@ class _AddSensorState extends State<AddSensor> {
         "text_field": InputForm(
           title: "SPD 4.3",
           controller: spd43C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -64,6 +65,7 @@ class _AddSensorState extends State<AddSensor> {
         "text_field": InputForm(
           title: "SPD 4.4",
           controller: spd44C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -77,6 +79,7 @@ class _AddSensorState extends State<AddSensor> {
         "text_field": InputForm(
           title: "SPD 4.5",
           controller: spd45C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';

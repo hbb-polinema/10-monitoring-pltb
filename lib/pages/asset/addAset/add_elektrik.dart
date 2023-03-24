@@ -54,6 +54,7 @@ class _AddElektrikState extends State<AddElektrik> {
         "text_field": InputForm(
           title: "SPD 2.2",
           controller: spd22C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -67,6 +68,7 @@ class _AddElektrikState extends State<AddElektrik> {
         "text_field": InputForm(
           title: "SPD 2.3",
           controller: spd23C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -80,6 +82,7 @@ class _AddElektrikState extends State<AddElektrik> {
         "text_field": InputForm(
           title: "SPD 2.4",
           controller: spd24C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -93,6 +96,7 @@ class _AddElektrikState extends State<AddElektrik> {
         "text_field": InputForm(
           title: "SPD 2.5",
           controller: spd25C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';

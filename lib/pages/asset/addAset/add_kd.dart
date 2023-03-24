@@ -52,6 +52,7 @@ class _AddKdState extends State<AddKd> {
         "text_field": InputForm(
           title: "SPD 3.2",
           controller: spd32C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -65,6 +66,7 @@ class _AddKdState extends State<AddKd> {
         "text_field": InputForm(
           title: "SPD 3.3",
           controller: spd33C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';

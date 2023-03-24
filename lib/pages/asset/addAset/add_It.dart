@@ -52,6 +52,7 @@ class _AddItState extends State<AddIt> {
         "text_field": InputForm(
           title: "SPD 5.2",
           controller: spd52C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -65,6 +66,7 @@ class _AddItState extends State<AddIt> {
         "text_field": InputForm(
           title: "SPD 5.3",
           controller: spd53C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -78,6 +80,7 @@ class _AddItState extends State<AddIt> {
         "text_field": InputForm(
           title: "SPD 5.4",
           controller: spd54C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -91,6 +94,7 @@ class _AddItState extends State<AddIt> {
         "text_field": InputForm(
           title: "SPD 5.5",
           controller: spd55C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';

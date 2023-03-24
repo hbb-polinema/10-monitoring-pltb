@@ -26,22 +26,11 @@ class InputForm extends StatelessWidget {
         decoration: InputDecoration(
           helperText: helperTxt,
           labelText: title,
-          labelStyle: const TextStyle(
-            color: Color.fromARGB(225, 12, 144, 125),
-          ),
           prefixIcon: prefixIcon,
-          prefixIconColor: const Color.fromARGB(225, 12, 144, 125),
-          // focusColor: const Color.fromARGB(225, 12, 144, 125),
-          // fillColor: const Color.fromARGB(225, 12, 144, 125),
-          // hoverColor: const Color.fromARGB(225, 12, 144, 125),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
           focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
-              color: Color.fromARGB(225, 12, 144, 125),
-              width: 2.0,
-            ),
             borderRadius: BorderRadius.circular(10.0),
           ),
         ),
@@ -77,29 +66,31 @@ class NonEditableForm extends StatelessWidget {
   }
 }
 
-class InputNumberForm extends StatelessWidget {
-  final String? title;
-  final TextEditingController? controller;
-  final String? Function(String?)? validator;
-  const InputNumberForm({Key? key, this.title, this.controller, this.validator})
-      : super(key: key);
+// class InputImageForm extends StatelessWidget {
+//   final String? title;
+//   final TextEditingController? controller;
+//   final String? Function(String?)? validator;
+//   const InputImageForm({Key? key, this.title, this.controller, this.validator})
+//       : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      keyboardType: TextInputType.number,
-      autofocus: true,
-      controller: controller,
-      decoration: InputDecoration(
-        labelText: title,
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-      ),
-      validator: validator,
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return TextFormField(
+//       keyboardType: TextInputType.number,
+//       autofocus: true,
+//       controller: controller,
+//       decoration: InputDecoration(
+//         labelText: title,
+//         enabledBorder: OutlineInputBorder(
+//           borderRadius: BorderRadius.circular(10.0),
+//         ),
+//         focusedBorder: OutlineInputBorder(
+//           borderRadius: BorderRadius.circular(10.0),
+//         ),
+//         prefixIcon: const Icon(Icons.image_outlined),
+//       ),
+//       onTap: ,
+//       validator: validator,
+//     );
+//   }
+// }

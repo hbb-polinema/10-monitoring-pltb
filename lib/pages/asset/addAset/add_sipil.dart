@@ -51,6 +51,7 @@ class _AddSipilState extends State<AddSipil> {
         "text_field": InputForm(
           title: "SPD 6.3",
           controller: spd63C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -64,6 +65,7 @@ class _AddSipilState extends State<AddSipil> {
         "text_field": InputForm(
           title: "SPD 6.4",
           controller: spd64C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -77,6 +79,7 @@ class _AddSipilState extends State<AddSipil> {
         "text_field": InputForm(
           title: "SPD 6.5",
           controller: spd65C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';

@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
@@ -41,6 +44,20 @@ class _AddMekanikState extends State<AddMekanik> {
     });
   }
 
+  File? _pickedImage;
+
+  Future openCamera() async {
+    final image = await ImagePicker()
+        .pickImage(source: ImageSource.camera, imageQuality: 50);
+
+    if (image == null) return;
+    File? img = File(image.path);
+    setState(() {
+      _pickedImage = img;
+      // Navigator.of(context).pop();
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -52,6 +69,7 @@ class _AddMekanikState extends State<AddMekanik> {
         "text_field": InputForm(
           title: "SPD 1.4",
           controller: spd14C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -66,6 +84,7 @@ class _AddMekanikState extends State<AddMekanik> {
         "text_field": InputForm(
           title: "SPD 1.5",
           controller: spd15C,
+          prefixIcon: const Icon(Icons.description_outlined),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -243,6 +262,39 @@ class _AddMekanikState extends State<AddMekanik> {
                 ),
                 const SizedBox(
                   height: 16,
+                ),
+
+                // foto 1
+                GestureDetector(
+                  onTap: () {
+                    openCamera();
+                  },
+                  child: Center(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.19,
+                      width: MediaQuery.of(context).size.width * 0.28,
+                      decoration: BoxDecoration(
+                        color: Colors.grey.shade200,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Center(
+                        child: _pickedImage == null
+                            ? Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: const [
+                                  Icon(Icons.camera_alt),
+                                  Text('Add Cover')
+                                ],
+                              )
+                            : ClipRect(
+                                child: Image(
+                                  image: FileImage(_pickedImage!),
+                                  fit: BoxFit.fitHeight,
+                                ),
+                              ),
+                      ),
+                    ),
+                  ),
                 ),
 
                 //submit button
