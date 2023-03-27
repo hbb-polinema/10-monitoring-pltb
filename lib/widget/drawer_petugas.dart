@@ -1,9 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
 import 'package:manajemen_aset/pages/home/home_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/power_screen_total.dart';
 import 'package:manajemen_aset/pages/pengecekan/pengecekan_list_page.dart';
 import 'package:manajemen_aset/pages/perawatan/perawatan_list_page.dart';
 import 'package:manajemen_aset/pages/perbaikan/perbaikan_list_page.dart';

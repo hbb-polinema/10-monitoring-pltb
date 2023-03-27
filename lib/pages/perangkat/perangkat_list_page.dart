@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/asset/add_aset.dart';
+import 'package:manajemen_aset/pages/perangkat/add_perangkat.dart';
 import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/chipBar.dart';
 import 'package:manajemen_aset/widget/perangkat_card.dart';
@@ -180,9 +181,9 @@ class _ListPerangkatState extends State<ListPerangkat> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddAset(
-                          // docId: _docClusterId,
-                          ),
+                      builder: (context) => AddPerangkat(
+                        docId: _docClusterId,
+                      ),
                     ),
                   );
                 },

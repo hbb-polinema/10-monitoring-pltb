@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class DatabaseService {
   final FirebaseAuth auth = FirebaseAuth.instance;
@@ -284,59 +287,362 @@ class DatabaseService {
         .catchError((e) => print(e));
   }
 
-  // menampilkan list perangkat mekanik
-  Stream<QuerySnapshot> listMekanik(String idCluster) {
-    CollectionReference gudangCollection =
-        clusterCollection.doc(idCluster).collection('gudang');
-    return gudangCollection.where('jenis', isEqualTo: 'Mekanik').snapshots();
-  }
+  // // menampilkan list perangkat mekanik
+  // Stream<QuerySnapshot> listMekanik(String idCluster) {
+  //   CollectionReference gudangCollection =
+  //       clusterCollection.doc(idCluster).collection('gudang');
+  //   return gudangCollection.where('jenis', isEqualTo: 'Mekanik').snapshots();
+  // }
 
-  // menampilkan list perangkat elektrik
-  Stream<QuerySnapshot> listElektrik(String idCluster) {
-    CollectionReference gudangCollection =
-        clusterCollection.doc(idCluster).collection('gudang');
-    return gudangCollection.where('jenis', isEqualTo: 'Elektrik').snapshots();
-  }
+  // // menampilkan list perangkat elektrik
+  // Stream<QuerySnapshot> listElektrik(String idCluster) {
+  //   CollectionReference gudangCollection =
+  //       clusterCollection.doc(idCluster).collection('gudang');
+  //   return gudangCollection.where('jenis', isEqualTo: 'Elektrik').snapshots();
+  // }
 
-  // menampilkan list perangkat komunikasi data
-  Stream<QuerySnapshot> listKd(String idCluster) {
-    CollectionReference gudangCollection =
-        clusterCollection.doc(idCluster).collection('gudang');
-    return gudangCollection
-        .where('jenis', isEqualTo: 'Komunikasi Data')
-        .snapshots();
-  }
+  // // menampilkan list perangkat komunikasi data
+  // Stream<QuerySnapshot> listKd(String idCluster) {
+  //   CollectionReference gudangCollection =
+  //       clusterCollection.doc(idCluster).collection('gudang');
+  //   return gudangCollection
+  //       .where('jenis', isEqualTo: 'Komunikasi Data')
+  //       .snapshots();
+  // }
 
-  // menampilkan list sensor
-  Stream<QuerySnapshot> listSensor(String idCluster) {
-    CollectionReference gudangCollection =
-        clusterCollection.doc(idCluster).collection('gudang');
-    return gudangCollection.where('jenis', isEqualTo: 'Sensor').snapshots();
-  }
+  // // menampilkan list sensor
+  // Stream<QuerySnapshot> listSensor(String idCluster) {
+  //   CollectionReference gudangCollection =
+  //       clusterCollection.doc(idCluster).collection('gudang');
+  //   return gudangCollection.where('jenis', isEqualTo: 'Sensor').snapshots();
+  // }
 
-  // menampilkan list IT
-  Stream<QuerySnapshot> listIt(String idCluster) {
-    CollectionReference gudangCollection =
-        clusterCollection.doc(idCluster).collection('gudang');
-    return gudangCollection.where('jenis', isEqualTo: 'IT').snapshots();
-  }
+  // // menampilkan list IT
+  // Stream<QuerySnapshot> listIt(String idCluster) {
+  //   CollectionReference gudangCollection =
+  //       clusterCollection.doc(idCluster).collection('gudang');
+  //   return gudangCollection.where('jenis', isEqualTo: 'IT').snapshots();
+  // }
 
-  // menampilkan list Sipil
-  Stream<QuerySnapshot> listSipil(String idCluster) {
-    CollectionReference gudangCollection =
-        clusterCollection.doc(idCluster).collection('sipil');
-    return gudangCollection.where('jenis', isEqualTo: 'Sipil').snapshots();
-  }
+  // // menampilkan list Sipil
+  // Stream<QuerySnapshot> listSipil(String idCluster) {
+  //   CollectionReference gudangCollection =
+  //       clusterCollection.doc(idCluster).collection('sipil');
+  //   return gudangCollection.where('jenis', isEqualTo: 'Sipil').snapshots();
+  // }
 
 // ASET
-  // menampilkan list aset
-  Stream<QuerySnapshot> listAset(String idCluster, String idPerangkat) {
+  // menampilkan list aset mekanik
+  Stream<QuerySnapshot> listMekanik(String idCluster, String idPerangkat) {
     CollectionReference asetCollection = clusterCollection
         .doc(idCluster)
         .collection('perangkat')
         .doc(idPerangkat)
-        .collection('aset');
+        .collection('mekanik');
     return asetCollection.snapshots();
+  }
+
+  Future<void> addMekanik({
+    String? id,
+    String? spd11,
+    String? spd12,
+    String? spd13,
+    String? spd14,
+    String? spd15,
+    String? lokasi,
+    String? tglPasang,
+    String? idPerangkat,
+    String? idCluster,
+    String? url1,
+    File? img1,
+  }) async {
+    DocumentReference documentReferencer = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat);
+    var time = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = FirebaseStorage.instance.ref('mekanik/$time.png');
+    await ref.putFile(img1!);
+    url1 = await ref.getDownloadURL();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'id': id,
+      'spd11': spd11,
+      'spd12': spd12,
+      'spd13': spd13,
+      'spd14': spd14,
+      'spd15': spd15,
+      'lokasi': lokasi,
+      'tglPasang': tglPasang,
+      'img1': url1,
+    };
+
+    await documentReferencer
+        .collection('mekanik')
+        .doc()
+        .set(data)
+        .whenComplete(() => print("Aset mekanik berhasil ditambahkan"))
+        .catchError((e) => print(e));
+  }
+
+  Stream<QuerySnapshot> listElektrik(String idCluster, String idPerangkat) {
+    CollectionReference asetCollection = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat)
+        .collection('elektrik');
+    return asetCollection.snapshots();
+  }
+
+  Future<void> addElektrik({
+    String? id,
+    String? spd21,
+    String? spd22,
+    String? spd23,
+    String? spd24,
+    String? spd25,
+    String? lokasi,
+    String? tglPasang,
+    String? idPerangkat,
+    String? idCluster,
+    String? url1,
+    File? img1,
+  }) async {
+    DocumentReference documentReferencer = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat);
+    var time = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = FirebaseStorage.instance.ref('elektrik/$time.png');
+    await ref.putFile(img1!);
+    url1 = await ref.getDownloadURL();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'id': id,
+      'spd21': spd21,
+      'spd22': spd22,
+      'spd23': spd23,
+      'spd24': spd24,
+      'spd25': spd25,
+      'lokasi': lokasi,
+      'tglPasang': tglPasang,
+      'img1': url1,
+    };
+
+    await documentReferencer
+        .collection('elektrik')
+        .doc()
+        .set(data)
+        .whenComplete(() => print("Aset elektrik berhasil ditambahkan"))
+        .catchError((e) => print(e));
+  }
+
+  Stream<QuerySnapshot> listKd(String idCluster, String idPerangkat) {
+    CollectionReference asetCollection = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat)
+        .collection('kd');
+    return asetCollection.snapshots();
+  }
+
+  Future<void> addKd({
+    String? id,
+    String? spd31,
+    String? spd32,
+    String? spd33,
+    String? spd34,
+    String? spd35,
+    String? lokasi,
+    String? tglPasang,
+    String? idPerangkat,
+    String? idCluster,
+    String? url1,
+    File? img1,
+  }) async {
+    DocumentReference documentReferencer = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat);
+    var time = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = FirebaseStorage.instance.ref('kd/$time.png');
+    await ref.putFile(img1!);
+    url1 = await ref.getDownloadURL();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'id': id,
+      'spd31': spd31,
+      'spd32': spd32,
+      'spd33': spd33,
+      'spd34': spd34,
+      'spd35': spd35,
+      'lokasi': lokasi,
+      'tglPasang': tglPasang,
+      'img1': url1,
+    };
+
+    await documentReferencer
+        .collection('kd')
+        .doc()
+        .set(data)
+        .whenComplete(() => print("Aset Komunikasi data berhasil ditambahkan"))
+        .catchError((e) => print(e));
+  }
+
+  Stream<QuerySnapshot> listSensor(String idCluster, String idPerangkat) {
+    CollectionReference asetCollection = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat)
+        .collection('sensor');
+    return asetCollection.snapshots();
+  }
+
+  Future<void> addSensor({
+    String? id,
+    String? spd41,
+    String? spd42,
+    String? spd43,
+    String? spd44,
+    String? spd45,
+    String? lokasi,
+    String? tglPasang,
+    String? idPerangkat,
+    String? idCluster,
+    String? url1,
+    File? img1,
+  }) async {
+    DocumentReference documentReferencer = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat);
+    var time = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = FirebaseStorage.instance.ref('sensor/$time.png');
+    await ref.putFile(img1!);
+    url1 = await ref.getDownloadURL();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'id': id,
+      'spd41': spd41,
+      'spd42': spd42,
+      'spd43': spd43,
+      'spd44': spd44,
+      'spd45': spd45,
+      'lokasi': lokasi,
+      'tglPasang': tglPasang,
+      'img1': url1,
+    };
+
+    await documentReferencer
+        .collection('sensor')
+        .doc()
+        .set(data)
+        .whenComplete(() => print("Aset sensor berhasil ditambahkan"))
+        .catchError((e) => print(e));
+  }
+
+  Stream<QuerySnapshot> listIt(String idCluster, String idPerangkat) {
+    CollectionReference asetCollection = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat)
+        .collection('it');
+    return asetCollection.snapshots();
+  }
+
+  Future<void> addIt({
+    String? id,
+    String? spd51,
+    String? spd52,
+    String? spd53,
+    String? spd54,
+    String? spd55,
+    String? lokasi,
+    String? tglPasang,
+    String? idPerangkat,
+    String? idCluster,
+    String? url1,
+    File? img1,
+  }) async {
+    DocumentReference documentReferencer = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat);
+    var time = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = FirebaseStorage.instance.ref('it/$time.png');
+    await ref.putFile(img1!);
+    url1 = await ref.getDownloadURL();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'id': id,
+      'spd51': spd51,
+      'spd52': spd52,
+      'spd53': spd53,
+      'spd54': spd54,
+      'spd55': spd55,
+      'lokasi': lokasi,
+      'tglPasang': tglPasang,
+      'img1': url1,
+    };
+
+    await documentReferencer
+        .collection('it')
+        .doc()
+        .set(data)
+        .whenComplete(() => print("Aset IT berhasil ditambahkan"))
+        .catchError((e) => print(e));
+  }
+
+  Stream<QuerySnapshot> listSipil(String idCluster, String idPerangkat) {
+    CollectionReference asetCollection = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat)
+        .collection('sipil');
+    return asetCollection.snapshots();
+  }
+
+  Future<void> addSipil({
+    String? id,
+    String? spd61,
+    String? spd62,
+    String? spd63,
+    String? spd64,
+    String? spd65,
+    String? lokasi,
+    String? tglPasang,
+    String? idPerangkat,
+    String? idCluster,
+    String? url1,
+    File? img1,
+  }) async {
+    DocumentReference documentReferencer = clusterCollection
+        .doc(idCluster)
+        .collection('perangkat')
+        .doc(idPerangkat);
+    var time = DateTime.now().millisecondsSinceEpoch.toString();
+    final ref = FirebaseStorage.instance.ref('sipil/$time.png');
+    await ref.putFile(img1!);
+    url1 = await ref.getDownloadURL();
+
+    Map<String, dynamic> data = <String, dynamic>{
+      'id': id,
+      'spd61': spd61,
+      'spd62': spd62,
+      'spd63': spd63,
+      'spd64': spd64,
+      'spd65': spd65,
+      'lokasi': lokasi,
+      'tglPasang': tglPasang,
+      'img1': url1,
+    };
+
+    await documentReferencer
+        .collection('sipil')
+        .doc()
+        .set(data)
+        .whenComplete(() => print("Aset sipil berhasil ditambahkan"))
+        .catchError((e) => print(e));
   }
 
   // menampilkan list aset menunggu

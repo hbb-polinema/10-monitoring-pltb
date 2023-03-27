@@ -105,9 +105,12 @@ class _WsChartState extends State<WsChart> {
                 zoomPanBehavior: _zoomPanBehavior,
                 trackballBehavior: _trackballBehavior,
                 legend: Legend(
-                    isVisible: true,
-                    position: LegendPosition.bottom,
-                    overflowMode: LegendItemOverflowMode.wrap),
+                  isVisible: true,
+                  height: '50%',
+                  width: '100%',
+                  position: LegendPosition.bottom,
+                  overflowMode: LegendItemOverflowMode.wrap,
+                ),
                 axes: <ChartAxis>[
                   NumericAxis(
                     name: 'yAxis',

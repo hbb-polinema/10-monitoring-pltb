@@ -82,24 +82,23 @@ class PerangkatCard extends StatelessWidget {
                         const SizedBox(width: 8),
                         // icon status
                         Icon(
-                          status == "Aktif"
-                              ? Icons.task_alt
-                              : Icons.highlight_off,
-                          color: status == "Aktif" ? Colors.green : Colors.red,
+                          status == "kosong" ? Icons.add : Icons.task_alt,
+                          color:
+                              status == "kosong" ? Colors.grey : Colors.green,
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
-                    SizedBox(
-                      // width: 100,
-                      child: Text(
-                        status,
-                        maxLines: 1,
-                        style: const TextStyle(
-                          fontSize: 16,
-                        ),
-                      ),
-                    ),
+                    // const SizedBox(height: 8),
+                    // SizedBox(
+                    //   // width: 100,
+                    //   child: Text(
+                    //     status,
+                    //     maxLines: 1,
+                    //     style: const TextStyle(
+                    //       fontSize: 16,
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
               ),

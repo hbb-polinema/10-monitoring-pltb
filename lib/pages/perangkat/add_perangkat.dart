@@ -45,19 +45,19 @@ class _AddPerangkatState extends State<AddPerangkat> {
             child: Column(
               children: [
                 // Kode
-                InputForm(
-                  title: "Id",
-                  controller: idC,
-                  validator: (val) {
-                    if (val!.isEmpty) {
-                      return 'Wajib diisi';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
+                // InputForm(
+                //   title: "Id",
+                //   controller: idC,
+                //   validator: (val) {
+                //     if (val!.isEmpty) {
+                //       return 'Wajib diisi';
+                //     }
+                //     return null;
+                //   },
+                // ),
+                // const SizedBox(
+                //   height: 16,
+                // ),
 
                 // Kode
                 InputForm(
@@ -102,31 +102,31 @@ class _AddPerangkatState extends State<AddPerangkat> {
                 ),
 
                 // status
-                DropdownButtonFormField(
-                  items: statusList
-                      .map((e) => DropdownMenuItem(child: Text(e), value: e))
-                      .toList(),
-                  onChanged: (val) {
-                    setState(() {
-                      selectedStatus = val as String;
-                    });
-                  },
-                  decoration: InputDecoration(
-                    labelText: 'Status Perangkat',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                  ),
-                  validator: (value) {
-                    if (value == null) {
-                      return 'Pilih Status';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
+                // DropdownButtonFormField(
+                //   items: statusList
+                //       .map((e) => DropdownMenuItem(child: Text(e), value: e))
+                //       .toList(),
+                //   onChanged: (val) {
+                //     setState(() {
+                //       selectedStatus = val as String;
+                //     });
+                //   },
+                //   decoration: InputDecoration(
+                //     labelText: 'Status Perangkat',
+                //     border: OutlineInputBorder(
+                //       borderRadius: BorderRadius.circular(10.0),
+                //     ),
+                //   ),
+                //   validator: (value) {
+                //     if (value == null) {
+                //       return 'Pilih Status';
+                //     }
+                //     return null;
+                //   },
+                // ),
+                // const SizedBox(
+                //   height: 16,
+                // ),
 
                 //submit button
                 SizedBox(
@@ -137,12 +137,12 @@ class _AddPerangkatState extends State<AddPerangkat> {
                       if (_addPerangkatKey.currentState!.validate()) {
                         await DatabaseService().addPerangkat(
                           documentId: widget.docId,
-                          idPerangkat: idC.text,
+                          // idPerangkat: idC.text,
+                          idPerangkat: '0',
                           kodePerangkat: kodeC.text,
                           jenisPerangkat: selectedJenis,
-                          statusPerangkat: selectedStatus,
+                          statusPerangkat: 'kosong',
                         );
-
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(

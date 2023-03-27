@@ -87,7 +87,10 @@ class _ListPState extends State<ListP> with SingleTickerProviderStateMixin {
                   //     widget.docPerangkatId,
                   //   ),
                   // ),
-                  ExpansionTileCardDemo(),
+                  ExpansionTileCardDemo(
+                    idCluster: widget.docClusterId,
+                    idPerangkat: widget.docPerangkatId,
+                  ),
                   // pindah ke halaman untuk cek jenis aset
                   MonitoringScreen(
                     jenisPerangkat: widget.jenisPerangkat,

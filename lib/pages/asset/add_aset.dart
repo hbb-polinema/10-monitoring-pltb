@@ -1,12 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
-import 'package:manajemen_aset/pages/asset/addAset/add_elektrik.dart';
-import 'package:manajemen_aset/pages/asset/addAset/add_kd.dart';
-import 'package:manajemen_aset/pages/asset/addAset/add_mekanik.dart';
-import 'package:manajemen_aset/pages/asset/addAset/add_sensor.dart';
-
-import 'addAset/add_It.dart';
-import 'addAset/add_sipil.dart';
 
 class AddAset extends StatefulWidget {
   // final String docId;
@@ -92,12 +85,12 @@ class _AddAsetState extends State<AddAset> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AddMekanik(),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => const AddMekanik(),
+                                  //   ),
+                                  // );
                                 },
                                 icon: const Icon(Icons.add),
                               )
@@ -160,12 +153,12 @@ class _AddAsetState extends State<AddAset> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AddElektrik(),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => const AddElektrik(),
+                                  //   ),
+                                  // );
                                 },
                                 icon: const Icon(Icons.add),
                               )
@@ -228,12 +221,12 @@ class _AddAsetState extends State<AddAset> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AddKd(),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => const AddKd(),
+                                  //   ),
+                                  // );
                                 },
                                 icon: const Icon(Icons.add),
                               )
@@ -296,12 +289,12 @@ class _AddAsetState extends State<AddAset> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AddSensor(),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => const AddSensor(),
+                                  //   ),
+                                  // );
                                 },
                                 icon: const Icon(Icons.add),
                               )
@@ -364,12 +357,12 @@ class _AddAsetState extends State<AddAset> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AddIt(),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => const AddIt(),
+                                  //   ),
+                                  // );
                                 },
                                 icon: const Icon(Icons.add),
                               )
@@ -432,12 +425,12 @@ class _AddAsetState extends State<AddAset> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AddSipil(),
-                                    ),
-                                  );
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => const AddSipil(),
+                                  //   ),
+                                  // );
                                 },
                                 icon: const Icon(Icons.add),
                               )

@@ -3,10 +3,16 @@ import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
+import 'package:sqflite/sqflite.dart';
 
 class AddMekanik extends StatefulWidget {
-  const AddMekanik({Key? key}) : super(key: key);
+  final String perangkatId;
+  final String clusterId;
+  const AddMekanik(
+      {Key? key, required this.clusterId, required this.perangkatId})
+      : super(key: key);
 
   @override
   State<AddMekanik> createState() => _AddMekanikState();
@@ -25,6 +31,7 @@ class _AddMekanikState extends State<AddMekanik> {
 
   TextEditingController lokasiC = TextEditingController();
   TextEditingController tglPasangC = TextEditingController();
+  TextEditingController idC = TextEditingController();
 
   List allTextField = [];
 
@@ -265,36 +272,45 @@ class _AddMekanikState extends State<AddMekanik> {
                 ),
 
                 // foto 1
-                GestureDetector(
-                  onTap: () {
-                    openCamera();
-                  },
-                  child: Center(
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.19,
-                      width: MediaQuery.of(context).size.width * 0.28,
-                      decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Foto 1"),
+                    GestureDetector(
+                      onTap: () {
+                        openCamera();
+                      },
                       child: Center(
-                        child: _pickedImage == null
-                            ? Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(Icons.camera_alt),
-                                  Text('Add Cover')
-                                ],
-                              )
-                            : ClipRect(
-                                child: Image(
-                                  image: FileImage(_pickedImage!),
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.19,
+                          width: MediaQuery.of(context).size.width * 0.28,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: _pickedImage == null
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Icon(Icons.camera_alt),
+                                      Text('Add Foto')
+                                    ],
+                                  )
+                                : ClipRect(
+                                    child: Image(
+                                      image: FileImage(_pickedImage!),
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ),
+                          ),
+                        ),
                       ),
                     ),
-                  ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
                 ),
 
                 //submit button
@@ -303,16 +319,34 @@ class _AddMekanikState extends State<AddMekanik> {
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
-                      // if (_addAssetKey.currentState!.validate()) {
-                      //   await DatabaseService().addCluster(nama: clusterC.text);
-
-                      //   Navigator.pop(context);
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     const SnackBar(
-                      //       content: Text('Data Cluster Berhasil ditambahkan'),
-                      //     ),
-                      //   );
-                      // }
+                      if (_addMekanikKey.currentState!.validate() &&
+                          _pickedImage != null) {
+                        await DatabaseService().addMekanik(
+                          id: '0',
+                          spd11: spd11C.text,
+                          spd12: spd12C.text,
+                          spd13: spd13C.text,
+                          spd14: spd14C.text,
+                          spd15: spd15C.text,
+                          lokasi: lokasiC.text,
+                          tglPasang: tglPasangC.text,
+                          img1: _pickedImage,
+                          idPerangkat: widget.perangkatId,
+                          idCluster: widget.clusterId,
+                        );
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Asset Berhasil Tersimpan'),
+                          ),
+                        );
+                      } else if (_pickedImage == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please fill image'),
+                          ),
+                        );
+                      }
                     },
                     child: const Text(
                       "Simpan",

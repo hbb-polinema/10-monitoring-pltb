@@ -1,9 +1,16 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:manajemen_aset/service/database.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
 
 class AddKd extends StatefulWidget {
-  const AddKd({Key? key}) : super(key: key);
+  final String perangkatId;
+  final String clusterId;
+  const AddKd({Key? key, required this.perangkatId, required this.clusterId})
+      : super(key: key);
 
   @override
   State<AddKd> createState() => _AddKdState();
@@ -39,6 +46,20 @@ class _AddKdState extends State<AddKd> {
         _dateTimeP = value!;
         tglPasangC.text = DateFormat('dd MMM yyyy').format(_dateTimeP!);
       });
+    });
+  }
+
+  File? _pickedImage;
+
+  Future openCamera() async {
+    final image = await ImagePicker()
+        .pickImage(source: ImageSource.camera, imageQuality: 50);
+
+    if (image == null) return;
+    File? img = File(image.path);
+    setState(() {
+      _pickedImage = img;
+      // Navigator.of(context).pop();
     });
   }
 
@@ -240,22 +261,82 @@ class _AddKdState extends State<AddKd> {
                   height: 16,
                 ),
 
+                // foto 1
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Foto 1"),
+                    GestureDetector(
+                      onTap: () {
+                        openCamera();
+                      },
+                      child: Center(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.19,
+                          width: MediaQuery.of(context).size.width * 0.28,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: _pickedImage == null
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Icon(Icons.camera_alt),
+                                      Text('Add Foto')
+                                    ],
+                                  )
+                                : ClipRect(
+                                    child: Image(
+                                      image: FileImage(_pickedImage!),
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
+                ),
+
                 //submit button
                 SizedBox(
                   width: double.infinity,
                   height: 50,
                   child: ElevatedButton(
                     onPressed: () async {
-                      // if (_addAssetKey.currentState!.validate()) {
-                      //   await DatabaseService().addCluster(nama: clusterC.text);
-
-                      //   Navigator.pop(context);
-                      //   ScaffoldMessenger.of(context).showSnackBar(
-                      //     const SnackBar(
-                      //       content: Text('Data Cluster Berhasil ditambahkan'),
-                      //     ),
-                      //   );
-                      // }
+                      if (_addKdKey.currentState!.validate() &&
+                          _pickedImage != null) {
+                        await DatabaseService().addKd(
+                          id: '0',
+                          spd31: spd31C.text,
+                          spd32: spd32C.text,
+                          spd33: spd33C.text,
+                          spd34: spd34C.text,
+                          spd35: spd35C.text,
+                          lokasi: lokasiC.text,
+                          tglPasang: tglPasangC.text,
+                          img1: _pickedImage,
+                          idPerangkat: widget.perangkatId,
+                          idCluster: widget.clusterId,
+                        );
+                        Navigator.pop(context);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Asset Berhasil Tersimpan'),
+                          ),
+                        );
+                      } else if (_pickedImage == null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please fill image'),
+                          ),
+                        );
+                      }
                     },
                     child: const Text(
                       "Simpan",

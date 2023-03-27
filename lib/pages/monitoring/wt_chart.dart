@@ -132,9 +132,12 @@ class _WtChartState extends State<WtChart> {
                   zoomPanBehavior: _zoomPanBehavior,
                   trackballBehavior: _trackballBehavior,
                   legend: Legend(
-                      isVisible: true,
-                      position: LegendPosition.bottom,
-                      overflowMode: LegendItemOverflowMode.wrap),
+                    isVisible: true,
+                    height: '50%',
+                    width: '100%',
+                    position: LegendPosition.bottom,
+                    overflowMode: LegendItemOverflowMode.wrap,
+                  ),
                   axes: <ChartAxis>[
                     NumericAxis(
                       name: 'yAxis',
@@ -152,7 +155,7 @@ class _WtChartState extends State<WtChart> {
                   ),
                   series: <ChartSeries<WtData, dynamic>>[
                     SplineSeries<WtData, dynamic>(
-                      name: 'Power AC',
+                      name: 'Power AC (W)',
                       dataSource: _dataWt,
                       enableTooltip: true,
                       color: const Color.fromARGB(225, 0, 74, 173),
@@ -165,7 +168,7 @@ class _WtChartState extends State<WtChart> {
                       ),
                     ),
                     SplineSeries<WtData, dynamic>(
-                      name: 'Power DC',
+                      name: 'Power DC (W)',
                       dataSource: _dataWt,
                       enableTooltip: true,
                       color: const Color.fromARGB(224, 173, 0, 29),
@@ -178,7 +181,7 @@ class _WtChartState extends State<WtChart> {
                       ),
                     ),
                     SplineSeries<WtData, dynamic>(
-                      name: 'Wind Speed',
+                      name: 'Wind Speed (m/s)',
                       dataSource: _dataWt,
                       enableTooltip: true,
                       color: const Color.fromARGB(224, 255, 152, 34),

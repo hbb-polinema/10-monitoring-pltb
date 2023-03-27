@@ -1,13 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/asset/asset_list_page.dart';
 import 'package:manajemen_aset/pages/home/maps.dart';
-import 'package:manajemen_aset/pages/laporan/laporan_screen.dart';
 import 'package:manajemen_aset/pages/location/location_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/monitoring_screen.dart';
-import 'package:manajemen_aset/pages/monitoring/power_screen_total.dart';
 import 'package:manajemen_aset/pages/monitoring/wt_realtime.dart';
-import 'package:manajemen_aset/pages/perangkat/perangkat_list_page.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class DrawerPemilik extends StatefulWidget {
