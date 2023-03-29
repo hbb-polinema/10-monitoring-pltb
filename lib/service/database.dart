@@ -354,16 +354,21 @@ class DatabaseService {
     String? idPerangkat,
     String? idCluster,
     String? url1,
+    String? url2,
     File? img1,
+    File? img2,
   }) async {
     DocumentReference documentReferencer = clusterCollection
         .doc(idCluster)
         .collection('perangkat')
         .doc(idPerangkat);
     var time = DateTime.now().millisecondsSinceEpoch.toString();
-    final ref = FirebaseStorage.instance.ref('mekanik/$time.png');
+    final ref = FirebaseStorage.instance.ref('mekanik/$time/1.png');
+    final ref2 = FirebaseStorage.instance.ref('mekanik/$time/2.png');
     await ref.putFile(img1!);
+    await ref2.putFile(img2!);
     url1 = await ref.getDownloadURL();
+    url2 = await ref2.getDownloadURL();
 
     Map<String, dynamic> data = <String, dynamic>{
       'id': id,
@@ -375,6 +380,7 @@ class DatabaseService {
       'lokasi': lokasi,
       'tglPasang': tglPasang,
       'img1': url1,
+      'img2': url2,
     };
 
     await documentReferencer
@@ -406,16 +412,21 @@ class DatabaseService {
     String? idPerangkat,
     String? idCluster,
     String? url1,
+    String? url2,
     File? img1,
+    File? img2,
   }) async {
     DocumentReference documentReferencer = clusterCollection
         .doc(idCluster)
         .collection('perangkat')
         .doc(idPerangkat);
     var time = DateTime.now().millisecondsSinceEpoch.toString();
-    final ref = FirebaseStorage.instance.ref('elektrik/$time.png');
+    final ref = FirebaseStorage.instance.ref('elektrik/$time/1.png');
+    final ref2 = FirebaseStorage.instance.ref('elektrik/$time/2.png');
     await ref.putFile(img1!);
+    await ref2.putFile(img2!);
     url1 = await ref.getDownloadURL();
+    url2 = await ref2.getDownloadURL();
 
     Map<String, dynamic> data = <String, dynamic>{
       'id': id,
@@ -427,6 +438,7 @@ class DatabaseService {
       'lokasi': lokasi,
       'tglPasang': tglPasang,
       'img1': url1,
+      'img2': url2,
     };
 
     await documentReferencer
@@ -458,16 +470,21 @@ class DatabaseService {
     String? idPerangkat,
     String? idCluster,
     String? url1,
+    String? url2,
     File? img1,
+    File? img2,
   }) async {
     DocumentReference documentReferencer = clusterCollection
         .doc(idCluster)
         .collection('perangkat')
         .doc(idPerangkat);
     var time = DateTime.now().millisecondsSinceEpoch.toString();
-    final ref = FirebaseStorage.instance.ref('kd/$time.png');
+    final ref = FirebaseStorage.instance.ref('kd/$time/1.png');
+    final ref2 = FirebaseStorage.instance.ref('kd/$time/2.png');
     await ref.putFile(img1!);
+    await ref2.putFile(img2!);
     url1 = await ref.getDownloadURL();
+    url2 = await ref2.getDownloadURL();
 
     Map<String, dynamic> data = <String, dynamic>{
       'id': id,
@@ -479,6 +496,7 @@ class DatabaseService {
       'lokasi': lokasi,
       'tglPasang': tglPasang,
       'img1': url1,
+      'img2': url2,
     };
 
     await documentReferencer
@@ -510,16 +528,21 @@ class DatabaseService {
     String? idPerangkat,
     String? idCluster,
     String? url1,
+    String? url2,
     File? img1,
+    File? img2,
   }) async {
     DocumentReference documentReferencer = clusterCollection
         .doc(idCluster)
         .collection('perangkat')
         .doc(idPerangkat);
     var time = DateTime.now().millisecondsSinceEpoch.toString();
-    final ref = FirebaseStorage.instance.ref('sensor/$time.png');
+    final ref = FirebaseStorage.instance.ref('sensor/$time/1.png');
+    final ref2 = FirebaseStorage.instance.ref('sensor/$time/2.png');
     await ref.putFile(img1!);
+    await ref2.putFile(img2!);
     url1 = await ref.getDownloadURL();
+    url2 = await ref2.getDownloadURL();
 
     Map<String, dynamic> data = <String, dynamic>{
       'id': id,
@@ -531,6 +554,7 @@ class DatabaseService {
       'lokasi': lokasi,
       'tglPasang': tglPasang,
       'img1': url1,
+      'img2': url2,
     };
 
     await documentReferencer
@@ -562,16 +586,21 @@ class DatabaseService {
     String? idPerangkat,
     String? idCluster,
     String? url1,
+    String? url2,
     File? img1,
+    File? img2,
   }) async {
     DocumentReference documentReferencer = clusterCollection
         .doc(idCluster)
         .collection('perangkat')
         .doc(idPerangkat);
     var time = DateTime.now().millisecondsSinceEpoch.toString();
-    final ref = FirebaseStorage.instance.ref('it/$time.png');
+    final ref = FirebaseStorage.instance.ref('it/$time/1.png');
+    final ref2 = FirebaseStorage.instance.ref('it/$time/2.png');
     await ref.putFile(img1!);
+    await ref2.putFile(img2!);
     url1 = await ref.getDownloadURL();
+    url2 = await ref2.getDownloadURL();
 
     Map<String, dynamic> data = <String, dynamic>{
       'id': id,
@@ -583,6 +612,7 @@ class DatabaseService {
       'lokasi': lokasi,
       'tglPasang': tglPasang,
       'img1': url1,
+      'img2': url2,
     };
 
     await documentReferencer
@@ -614,16 +644,21 @@ class DatabaseService {
     String? idPerangkat,
     String? idCluster,
     String? url1,
+    String? url2,
     File? img1,
+    File? img2,
   }) async {
     DocumentReference documentReferencer = clusterCollection
         .doc(idCluster)
         .collection('perangkat')
         .doc(idPerangkat);
     var time = DateTime.now().millisecondsSinceEpoch.toString();
-    final ref = FirebaseStorage.instance.ref('sipil/$time.png');
+    final ref = FirebaseStorage.instance.ref('sipil/$time/1.png');
+    final ref2 = FirebaseStorage.instance.ref('sipil/$time/2.png');
     await ref.putFile(img1!);
+    await ref2.putFile(img2!);
     url1 = await ref.getDownloadURL();
+    url2 = await ref2.getDownloadURL();
 
     Map<String, dynamic> data = <String, dynamic>{
       'id': id,
@@ -635,6 +670,7 @@ class DatabaseService {
       'lokasi': lokasi,
       'tglPasang': tglPasang,
       'img1': url1,
+      'img2': url2,
     };
 
     await documentReferencer

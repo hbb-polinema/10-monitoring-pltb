@@ -137,21 +137,21 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
   @override
   void initState() {
     super.initState();
-    fetchFuture = fetchData();
+    // fetchFuture = fetchData();
   }
 
-  Future<DataModel> fetchData() async {
-    Uri url = Uri.parse("https://ebt-polinema.id/api/power-production/daily");
-    var response = await http.post(
-      url,
-      body: {"date_day": DateFormat('yyyy-MM-dd').format(DateTime.now())},
-    );
-    if (response.statusCode == 200) {
-      return DataModel.fromJson(jsonDecode(response.body));
-    } else {
-      throw Exception('Failed to load data');
-    }
-  }
+  // Future<DataModel> fetchData() async {
+  //   Uri url = Uri.parse("https://ebt-polinema.id/api/power-production/daily");
+  //   var response = await http.post(
+  //     url,
+  //     body: {"date_day": DateFormat('yyyy-MM-dd').format(DateTime.now())},
+  //   );
+  //   if (response.statusCode == 200) {
+  //     return DataModel.fromJson(jsonDecode(response.body));
+  //   } else {
+  //     throw Exception('Failed to load data');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -222,71 +222,71 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
               ],
             ),
 
-            const SizedBox(height: 16),
-            FutureBuilder<DataModel>(
-              future: fetchData(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else {
-                  if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else {
-                    return GridView.builder(
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        childAspectRatio: 1,
-                        mainAxisSpacing: 8,
-                        crossAxisSpacing: 8,
-                      ),
-                      physics: const NeverScrollableScrollPhysics(),
-                      // scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: snapshot.data?.khwProd?.length,
-                      itemBuilder: (context, index) {
-                        final snap = snapshot.data?.khwProd?[index];
-                        String name = snap?.name ?? "";
-                        double kwhDc = snap?.kwhDc ?? 0.0;
-                        return SingleChildScrollView(
-                          physics: const NeverScrollableScrollPhysics(),
-                          child: Column(
-                            children: [
-                              Image.asset(
-                                snap?.getImageAsset() ?? "",
-                                width: 40,
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                name,
-                                style: const TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                kwhDc.toString(),
-                                style: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.w600,
-                                  color: Color.fromARGB(225, 12, 144, 125),
-                                ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  }
-                }
-              },
-            ),
-            const SizedBox(height: 16),
-            const Divider(
-              thickness: 2,
-              color: Colors.black45,
-            ),
+            // const SizedBox(height: 16),
+            // FutureBuilder<DataModel>(
+            //   future: fetchData(),
+            //   builder: (context, snapshot) {
+            //     if (snapshot.connectionState == ConnectionState.waiting) {
+            //       return const Center(child: CircularProgressIndicator());
+            //     } else {
+            //       if (snapshot.hasError) {
+            //         return Text('Error: ${snapshot.error}');
+            //       } else {
+            //         return GridView.builder(
+            //           gridDelegate:
+            //               const SliverGridDelegateWithFixedCrossAxisCount(
+            //             crossAxisCount: 3,
+            //             childAspectRatio: 1,
+            //             mainAxisSpacing: 8,
+            //             crossAxisSpacing: 8,
+            //           ),
+            //           physics: const NeverScrollableScrollPhysics(),
+            //           // scrollDirection: Axis.horizontal,
+            //           shrinkWrap: true,
+            //           itemCount: snapshot.data?.khwProd?.length,
+            //           itemBuilder: (context, index) {
+            //             final snap = snapshot.data?.khwProd?[index];
+            //             String name = snap?.name ?? "";
+            //             double kwhDc = snap?.kwhDc ?? 0.0;
+            //             return SingleChildScrollView(
+            //               physics: const NeverScrollableScrollPhysics(),
+            //               child: Column(
+            //                 children: [
+            //                   Image.asset(
+            //                     snap?.getImageAsset() ?? "",
+            //                     width: 40,
+            //                   ),
+            //                   const SizedBox(height: 8),
+            //                   Text(
+            //                     name,
+            //                     style: const TextStyle(
+            //                       fontSize: 16,
+            //                       fontWeight: FontWeight.w400,
+            //                     ),
+            //                   ),
+            //                   const SizedBox(height: 8),
+            //                   Text(
+            //                     kwhDc.toString(),
+            //                     style: const TextStyle(
+            //                       fontSize: 24,
+            //                       fontWeight: FontWeight.w600,
+            //                       color: Color.fromARGB(225, 12, 144, 125),
+            //                     ),
+            //                   ),
+            //                 ],
+            //               ),
+            //             );
+            //           },
+            //         );
+            //       }
+            //     }
+            //   },
+            // ),
+            // const SizedBox(height: 16),
+            // const Divider(
+            //   thickness: 2,
+            //   color: Colors.black45,
+            // ),
 
             // chart realtime monitoring produksi energi
             Row(

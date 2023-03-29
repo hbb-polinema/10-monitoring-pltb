@@ -50,6 +50,7 @@ class _AddItState extends State<AddIt> {
   }
 
   File? _pickedImage;
+  File? _pickedImage2;
 
   Future openCamera() async {
     final image = await ImagePicker()
@@ -59,6 +60,18 @@ class _AddItState extends State<AddIt> {
     File? img = File(image.path);
     setState(() {
       _pickedImage = img;
+      // Navigator.of(context).pop();
+    });
+  }
+
+  Future openCamera2() async {
+    final image2 = await ImagePicker()
+        .pickImage(source: ImageSource.camera, imageQuality: 50);
+
+    if (image2 == null) return;
+    File? img2 = File(image2.path);
+    setState(() {
+      _pickedImage2 = img2;
       // Navigator.of(context).pop();
     });
   }
@@ -305,6 +318,48 @@ class _AddItState extends State<AddIt> {
                   ],
                 ),
 
+                // foto 2
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text("Foto 2"),
+                    GestureDetector(
+                      onTap: () {
+                        openCamera2();
+                      },
+                      child: Center(
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.19,
+                          width: MediaQuery.of(context).size.width * 0.28,
+                          decoration: BoxDecoration(
+                            color: Colors.grey.shade200,
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Center(
+                            child: _pickedImage2 == null
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Icon(Icons.camera_alt),
+                                      Text('Add Foto')
+                                    ],
+                                  )
+                                : ClipRect(
+                                    child: Image(
+                                      image: FileImage(_pickedImage2!),
+                                      fit: BoxFit.fitHeight,
+                                    ),
+                                  ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                  ],
+                ),
+
                 //submit button
                 SizedBox(
                   width: double.infinity,
@@ -323,6 +378,7 @@ class _AddItState extends State<AddIt> {
                           lokasi: lokasiC.text,
                           tglPasang: tglPasangC.text,
                           img1: _pickedImage,
+                          img2: _pickedImage2,
                           idPerangkat: widget.perangkatId,
                           idCluster: widget.clusterId,
                         );
