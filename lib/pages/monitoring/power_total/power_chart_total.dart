@@ -89,7 +89,8 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
       var rpmBilah = prodKwh[i]['rpm_bilah']?.toDouble() ?? 0.0;
       var rpmGenerator = prodKwh[i]['rpm_generator']?.toDouble() ?? 0.0;
       var powerAc = prodKwh[i]['power_ac']?.toDouble() ?? 0.0;
-      var powerDc = prodKwh[i]['power_dc']?.toDouble() ?? 0.0;
+      var powerKw = prodKwh[i]['power_kw']?.toDouble() ?? 0.0;
+      var powerWatt = prodKwh[i]['power_watt']?.toDouble() ?? 0.0;
 
       dataReal.add(RealtimeEnergy(
         dateUtc,
@@ -97,7 +98,8 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
         rpmBilah,
         rpmGenerator,
         powerAc,
-        powerDc,
+        powerKw,
+        powerWatt,
         0,
         0,
         0,
@@ -123,7 +125,13 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
               DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idCluster)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return SizedBox(
+            // width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         } else {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -152,31 +160,18 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
 
   Row datePicker() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        Row(
-          children: [
-            const Icon(Icons.place),
-            const Text('Tuban'),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.expand_more),
-            ),
-          ],
-        ),
-        Row(
-          children: [
-            const Icon(Icons.calendar_month_rounded),
-            Text(_dateTime == null
-                ? DateFormat('dd MM yyyy').format(DateTime.now())
-                : DateFormat('dd MMM yyyy').format(_dateTime!)),
-            IconButton(
-              onPressed: () async {
-                _showDatePicker();
-              },
-              icon: const Icon(Icons.expand_more),
-            ),
-          ],
+        const Icon(Icons.calendar_month_outlined),
+        const SizedBox(width: 6),
+        Text(_dateTime == null
+            ? DateFormat('dd MM yyyy').format(DateTime.now())
+            : DateFormat('dd MMM yyyy').format(_dateTime!)),
+        IconButton(
+          onPressed: () async {
+            _showDatePicker();
+          },
+          icon: const Icon(Icons.expand_more),
         ),
       ],
     );

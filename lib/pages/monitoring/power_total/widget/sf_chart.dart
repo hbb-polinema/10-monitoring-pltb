@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/models/realtime_energy.dart';
-import 'package:syncfusion_flutter_charts/charts.dart'; 
+import 'package:syncfusion_flutter_charts/charts.dart';
+
 class SfChart extends StatelessWidget {
   const SfChart({
     Key? key,
@@ -54,7 +55,7 @@ class SfChart extends StatelessWidget {
           enableTooltip: true,
           color: const Color.fromARGB(255, 248, 56, 56),
           xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
-          yValueMapper: (RealtimeEnergy data, _) => data.powerDc,
+          yValueMapper: (RealtimeEnergy data, _) => data.powerWatt,
           markerSettings: const MarkerSettings(
             isVisible: true,
             height: 5,
@@ -108,7 +109,7 @@ class SfChart extends StatelessWidget {
           name: 'Power PLTD (W)',
           dataSource: _dataReal,
           enableTooltip: true,
-          color: const Color.fromARGB(223, 173, 40, 0),
+          color: const Color.fromARGB(255, 19, 156, 190),
           xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
           yValueMapper: (RealtimeEnergy data, _) => data.powerDiesel,
           markerSettings: const MarkerSettings(
@@ -121,7 +122,7 @@ class SfChart extends StatelessWidget {
           name: 'BBM (liter)',
           dataSource: _dataReal,
           enableTooltip: true,
-          color: const Color.fromARGB(223, 173, 6, 0),
+          color: const Color.fromARGB(255, 109, 38, 34),
           xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
           yValueMapper: (RealtimeEnergy data, _) => data.bbm,
           markerSettings: const MarkerSettings(

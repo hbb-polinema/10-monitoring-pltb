@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/monitoring/power_total/power_chart_total.dart';
 
-
 class PowerScreenTotal extends StatefulWidget {
   final String idCluster;
   const PowerScreenTotal({Key? key, required this.idCluster}) : super(key: key);
@@ -27,7 +26,7 @@ class _PowerScreenTotalState extends State<PowerScreenTotal> {
             child: Column(
               children: [
                 const Text(
-                  'Produksi Realtime Energy Listrik (EBT)',
+                  'Produksi Realtime \nEnergy Listrik (EBT)',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,

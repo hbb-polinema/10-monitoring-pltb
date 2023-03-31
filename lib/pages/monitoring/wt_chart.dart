@@ -241,8 +241,8 @@ class _WtChartState extends State<WtChart> {
           children: [
             const Icon(Icons.calendar_month_rounded),
             Text(_dateTime == null
-                ? DateFormat('dd MM yyyy').format(DateTime.now())
-                : DateFormat('dd MMM yyyy').format(_dateTime!)),
+                ? DateFormat('dd MM yyyy HH:mm').format(DateTime.now())
+                : DateFormat('dd MMM yyyy HH:mm').format(_dateTime!)),
             IconButton(
               onPressed: () async {
                 _showDatePicker();

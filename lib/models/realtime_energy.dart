@@ -4,7 +4,8 @@ class RealtimeEnergy {
   double rpmBilah;
   double rpmGenerator;
   double powerAc;
-  double powerDc;
+  double powerKw;
+  double powerWatt;
 
   double powerSp;
   double powerDiesel;
@@ -16,7 +17,8 @@ class RealtimeEnergy {
     this.rpmBilah,
     this.rpmGenerator,
     this.powerAc,
-    this.powerDc,
+    this.powerKw,
+    this.powerWatt,
     this.powerSp,
     this.powerDiesel,
     this.solarRad,
