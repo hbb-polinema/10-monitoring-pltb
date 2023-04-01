@@ -32,8 +32,7 @@ class _WtChartState extends State<WtChart> {
       setState(() {
         _dateTime = value!;
         _dateTime = _dateTime;
-        fetchFuture =
-            fetchData(DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idWt);
+        fetchData(DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idWt);
       });
     });
   }
@@ -55,7 +54,7 @@ class _WtChartState extends State<WtChart> {
       enablePinching: true,
       enableDoubleTapZooming: true,
       enablePanning: true,
-      zoomMode: ZoomMode.xy,
+      zoomMode: ZoomMode.x,
     );
   }
 
@@ -66,33 +65,34 @@ class _WtChartState extends State<WtChart> {
 
   // mangambil data
   Future fetchData(String date, String id) async {
-    Uri url =
-        Uri.parse("https://ebt-polinema.id/api/wind-turbine/power-status");
+    Uri url = Uri.parse("https://ebt-polinema.id/api/wind-turbine/status");
     var response = await http.post(
       url,
       body: {"id": id, "date": date, "draw": "1"},
     );
     final jsonData = json.decode(response.body);
-    List<dynamic> prodKwh = jsonData['prod_kwh'];
+    List<dynamic> realData = jsonData['real_data'];
 
     List<WtData> dataWt = [];
 
-    for (var i = 0; i < prodKwh.length; i++) {
+    for (var i = 0; i < realData.length; i++) {
       var dateUtc =
-          DateFormat('HH:mm:ss').format(DateTime.parse(prodKwh[i]['date_utc']));
-      var windSpeed = prodKwh[i]['wind_speed']?.toDouble() ?? 0.0;
-      var rpmBilah = prodKwh[i]['rpm_bilah']?.toDouble() ?? 0.0;
-      var rpmGenerator = prodKwh[i]['rpm_generator']?.toDouble() ?? 0.0;
-      var powerAc = prodKwh[i]['power_ac']?.toDouble() ?? 0.0;
-      var powerDc = prodKwh[i]['power_dc']?.toDouble() ?? 0.0;
+          DateFormat('HH:mm:ss').format(DateTime.parse(realData[i]['date']));
+      var windSpeed = realData[i]['wind_speed']?.toDouble() ?? 0.0;
+      var rpmBilah = realData[i]['rpm_bilah']?.toDouble() ?? 0.0;
+      var rpmGenerator = realData[i]['rpm_generator']?.toDouble() ?? 0.0;
+      var powerWatt = realData[i]['value']?.toDouble() ?? 0.0;
+      var ampereDc = realData[i]['ampere_dc']?.toDouble() ?? 0.0;
+      var voltDc = realData[i]['volt_dc']?.toDouble() ?? 0.0;
 
       dataWt.add(WtData(
         dateUtc,
         windSpeed,
         rpmBilah,
         rpmGenerator,
-        powerAc,
-        powerDc,
+        powerWatt,
+        ampereDc,
+        voltDc,
       ));
     }
 
@@ -107,14 +107,19 @@ class _WtChartState extends State<WtChart> {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      // future: Future.delayed(
-      //     const Duration(seconds: 2),
-      //     () => fetchData(
-      //         DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idWt)),
-      future: fetchFuture,
+      future: Future.delayed(
+          const Duration(seconds: 2),
+          () => fetchData(
+              DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idWt)),
+      // future: fetchFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
+          return const SizedBox(
+            // height: MediaQuery.of(context).size.height,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
+          );
         } else {
           if (snapshot.hasError) {
             return Text('Error: ${snapshot.error}');
@@ -155,36 +160,10 @@ class _WtChartState extends State<WtChart> {
                   ),
                   series: <ChartSeries<WtData, dynamic>>[
                     SplineSeries<WtData, dynamic>(
-                      name: 'Power AC (W)',
-                      dataSource: _dataWt,
-                      enableTooltip: true,
-                      color: const Color.fromARGB(225, 0, 74, 173),
-                      xValueMapper: (WtData data, _) => data.dateUtc,
-                      yValueMapper: (WtData data, _) => data.powerAc,
-                      markerSettings: const MarkerSettings(
-                        isVisible: true,
-                        height: 5,
-                        width: 5,
-                      ),
-                    ),
-                    SplineSeries<WtData, dynamic>(
-                      name: 'Power DC (W)',
-                      dataSource: _dataWt,
-                      enableTooltip: true,
-                      color: const Color.fromARGB(224, 173, 0, 29),
-                      xValueMapper: (WtData data, _) => data.dateUtc,
-                      yValueMapper: (WtData data, _) => data.powerDc,
-                      markerSettings: const MarkerSettings(
-                        isVisible: true,
-                        height: 5,
-                        width: 5,
-                      ),
-                    ),
-                    SplineSeries<WtData, dynamic>(
                       name: 'Wind Speed (m/s)',
                       dataSource: _dataWt,
                       enableTooltip: true,
-                      color: const Color.fromARGB(224, 255, 152, 34),
+                      color: const Color.fromARGB(225, 0, 74, 173),
                       xValueMapper: (WtData data, _) => data.dateUtc,
                       yValueMapper: (WtData data, _) => data.windSpeed,
                       yAxisName: 'yAxis',
@@ -205,6 +184,7 @@ class _WtChartState extends State<WtChart> {
                       yAxisName: 'yAxis',
                       markerSettings: const MarkerSettings(
                         isVisible: true,
+                        shape: DataMarkerType.triangle,
                         height: 5,
                         width: 5,
                       ),
@@ -216,9 +196,49 @@ class _WtChartState extends State<WtChart> {
                       color: const Color.fromARGB(255, 27, 223, 102),
                       xValueMapper: (WtData data, _) => data.dateUtc,
                       yValueMapper: (WtData data, _) => data.rpmGenerator,
-                      // yAxisName: 'yAxis',
                       markerSettings: const MarkerSettings(
                         isVisible: true,
+                        height: 5,
+                        width: 5,
+                      ),
+                    ),
+                    SplineSeries<WtData, dynamic>(
+                      name: 'Power (W)',
+                      dataSource: _dataWt,
+                      enableTooltip: true,
+                      color: const Color.fromARGB(255, 248, 56, 56),
+                      xValueMapper: (WtData data, _) => data.dateUtc,
+                      yValueMapper: (WtData data, _) => data.powerWatt,
+                      markerSettings: const MarkerSettings(
+                        isVisible: true,
+                        height: 5,
+                        width: 5,
+                      ),
+                    ),
+                    SplineSeries<WtData, dynamic>(
+                      name: 'Tegangan (V)',
+                      dataSource: _dataWt,
+                      enableTooltip: true,
+                      color: const Color.fromARGB(223, 255, 136, 0),
+                      xValueMapper: (WtData data, _) => data.dateUtc,
+                      yValueMapper: (WtData data, _) => data.voltDc,
+                      markerSettings: const MarkerSettings(
+                        isVisible: true,
+                        shape: DataMarkerType.triangle,
+                        height: 5,
+                        width: 5,
+                      ),
+                    ),
+                    SplineSeries<WtData, dynamic>(
+                      name: 'Arus (A)',
+                      dataSource: _dataWt,
+                      enableTooltip: true,
+                      color: const Color.fromARGB(223, 0, 110, 255),
+                      xValueMapper: (WtData data, _) => data.dateUtc,
+                      yValueMapper: (WtData data, _) => data.ampereDc,
+                      markerSettings: const MarkerSettings(
+                        isVisible: true,
+                        shape: DataMarkerType.triangle,
                         height: 5,
                         width: 5,
                       ),

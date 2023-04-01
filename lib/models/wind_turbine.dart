@@ -4,15 +4,17 @@ class WtData {
   double windSpeed;
   double rpmBilah;
   double rpmGenerator;
-  double powerAc;
-  double powerDc;
+  double powerWatt;
+  double ampereDc;
+  double voltDc;
 
   WtData(
     this.dateUtc,
     this.windSpeed,
     this.rpmBilah,
     this.rpmGenerator,
-    this.powerAc,
-    this.powerDc,
+    this.powerWatt,
+    this.ampereDc,
+    this.voltDc,
   );
 }
