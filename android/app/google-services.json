@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:238219247834:android:9718906d2ffc284a1365e3",
         "android_client_info": {
-          "package_name": "com.example.manajemen_aset"
+          "package_name": "com.ebt.manajemen_aset"
         }
       },
       "oauth_client": [
@@ -17,7 +17,7 @@
           "client_id": "238219247834-g9a9okv2fbptemivhv3g6nnm5lhqvqid.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.manajemen_aset",
+            "package_name": "com.ebt.manajemen_aset",
             "certificate_hash": "75b6a0a92317b99188e8419e990ca306240c6136"
           }
         },

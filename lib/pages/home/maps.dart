@@ -9,6 +9,7 @@ import 'package:manajemen_aset/pages/monitoring/power_total/power_screen_total.d
 import 'package:manajemen_aset/pages/monitoring/produksi_energi_screen.dart';
 import 'package:manajemen_aset/pages/perangkat/perangkat_list_page.dart';
 import 'package:intl/intl.dart';
+import 'package:geolocator/geolocator.dart' as geo;
 import 'package:http/http.dart' as http;
 
 class Maps extends StatefulWidget {
@@ -80,9 +81,79 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
     });
   }
 
+  // fungsi untuk mendapatkan lokasi terkini
+  void _getCurrentLocation() async {
+    try {
+      // Request permission to access the location
+      final permission = await geo.Geolocator.requestPermission();
+
+      if (permission == geo.LocationPermission.denied) {
+        // Permission was denied, show error message
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Location permission denied'),
+          ),
+        );
+        return;
+      }
+
+      // Get the current position
+      final position = await geo.Geolocator.getCurrentPosition();
+
+      // Update the map controller to center on the current position
+      mapController.move(LatLng(position.latitude, position.longitude), 8);
+
+      // Update the state to trigger a rebuild
+      setState(() {
+        currentLocation = LatLng(position.latitude, position.longitude);
+        markers.add(
+          Marker(
+            height: 40,
+            width: 40,
+            point: currentLocation,
+            builder: (context) => IconButton(
+              icon: const Icon(
+                Icons.location_on,
+                color: Colors.red,
+              ),
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text("Lokasi Terkini"),
+                      content: Text(
+                          "${currentLocation.latitude}, ${currentLocation.longitude}"),
+                      actions: [
+                        TextButton(
+                          child: const Text("OK"),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                );
+              },
+            ),
+          ),
+        );
+      });
+    } catch (e) {
+      print(e.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to get the current location'),
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
       body: Stack(
         children: [
           FlutterMap(
@@ -109,6 +180,21 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
                 markers: markers,
               ),
             ],
+          ),
+          // tombol lokasi terkini
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Align(
+              alignment: Alignment.topRight,
+              child: FloatingActionButton(
+                onPressed: _getCurrentLocation,
+                tooltip: 'Current Location',
+                child: const Icon(
+                  Icons.my_location,
+                  color: Colors.white,
+                ),
+              ),
+            ),
           ),
         ],
       ),
