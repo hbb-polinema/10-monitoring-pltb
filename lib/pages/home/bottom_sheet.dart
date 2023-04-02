@@ -187,7 +187,7 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              powerKwh2.toStringAsFixed(4),
+                              powerKwh2.toStringAsFixed(3),
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,

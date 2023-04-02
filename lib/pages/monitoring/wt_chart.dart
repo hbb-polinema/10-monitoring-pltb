@@ -63,7 +63,7 @@ class _WtChartState extends State<WtChart> {
     super.dispose();
   }
 
-  // mangambil data
+  // mangambil data wind turbine
   Future fetchData(String date, String id) async {
     Uri url = Uri.parse("https://ebt-polinema.id/api/wind-turbine/status");
     var response = await http.post(

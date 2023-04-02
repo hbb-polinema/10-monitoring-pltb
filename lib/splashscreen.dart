@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
               const SizedBox(height: 8),
               const CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(
-                  Color.fromARGB(225, 0, 74, 173),
+                  Color.fromARGB(225, 12, 144, 125),
                 ),
               ),
             ],
@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                        color: Color.fromARGB(225, 0, 74, 173),
+                        color: Color.fromARGB(225, 12, 144, 125),
                       ),
                     ),
                     const SizedBox(height: 8),

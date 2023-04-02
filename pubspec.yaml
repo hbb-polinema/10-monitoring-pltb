@@ -74,19 +74,15 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - img/login.png
-    - img/turbine.jpg
     - img/polinema.png
     - img/pln.png
     - img/turbine.png
     - img/solar-panel.png
-    - img/battery-charge.png
     - img/partly-cloudy.png
     - img/Logo.png
     - img/Wind turbine-pana.png
     - img/no-image.png
     - img/power.png
-    - img/windmill.png
     - img/pltb.png
     - img/plts.png
     - img/pltd.png
@@ -98,6 +94,7 @@ flutter:
     - img/jaringan.png
     - img/mekanik.png
     - img/sensor.png
+    - img/login.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
