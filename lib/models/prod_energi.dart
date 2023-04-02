@@ -1,32 +1,32 @@
 // model
 class DataModel {
   String? day;
-  List<KhwProd>? khwProd;
+  List<KwhProd>? kwhProd;
 
-  DataModel({this.day, this.khwProd});
+  DataModel({this.day, this.kwhProd});
 
   factory DataModel.fromJson(Map<String, dynamic> json) {
     return DataModel(
       day: json['day'],
-      khwProd: List<KhwProd>.from(
-        json['khw_prod'].map(
-          (khwProdJson) => KhwProd.fromJson(khwProdJson),
+      kwhProd: List<KwhProd>.from(
+        json['kwh_prod'].map(
+          (kwhProdJson) => KwhProd.fromJson(kwhProdJson),
         ),
       ),
     );
   }
 }
 
-class KhwProd {
+class KwhProd {
   String? name;
-  double? kwhAc;
-  double? kwhDc;
+  double? prodKwh;
+  double? powerWatt;
 
-  KhwProd({this.name, this.kwhAc, this.kwhDc});
+  KwhProd({this.name, this.prodKwh, this.powerWatt});
 
-  factory KhwProd.fromJson(Map<String, dynamic> json) {
+  factory KwhProd.fromJson(Map<String, dynamic> json) {
     String name = '';
-    switch (json['name']) {
+    switch (json['device_name']) {
       case 'Wind Turbine':
         name = 'PLTB';
         break;
@@ -39,10 +39,10 @@ class KhwProd {
       default:
         name = '';
     }
-    return KhwProd(
+    return KwhProd(
       name: name,
-      kwhAc: json['kwh_ac']?.toDouble() ?? 0,
-      kwhDc: json['kwh_dc']?.toDouble() ?? 0,
+      prodKwh: json['prod_kwh']?.toDouble() ?? 0,
+      powerWatt: json['power_Watt']?.toDouble() ?? 0,
     );
   }
   String getImageAsset() {
