@@ -86,19 +86,11 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
       var dateUtc =
           DateFormat('HH:mm:ss').format(DateTime.parse(prodKwh[i]['date_utc']));
       var windSpeed = prodKwh[i]['wind_speed']?.toDouble() ?? 0.0;
-      var rpmBilah = prodKwh[i]['rpm_bilah']?.toDouble() ?? 0.0;
-      var rpmGenerator = prodKwh[i]['rpm_generator']?.toDouble() ?? 0.0;
-      var powerAc = prodKwh[i]['power_ac']?.toDouble() ?? 0.0;
-      var powerKw = prodKwh[i]['power_kw']?.toDouble() ?? 0.0;
       var powerWatt = prodKwh[i]['power_watt']?.toDouble() ?? 0.0;
 
       dataReal.add(RealtimeEnergy(
         dateUtc,
         windSpeed,
-        rpmBilah,
-        rpmGenerator,
-        powerAc,
-        powerKw,
         powerWatt,
         0,
         0,

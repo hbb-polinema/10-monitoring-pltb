@@ -205,7 +205,10 @@ class _ListPerangkatState extends State<ListPerangkat> {
             (item) => Padding(
               padding: const EdgeInsets.only(left: 16.0, bottom: 0),
               child: ChoiceChip(
-                label: Text(item.title),
+                label: Text(
+                  item.title,
+                  style: const TextStyle(fontSize: 14),
+                ),
                 selected: idSelected == item.id,
                 labelStyle: TextStyle(
                   color: idSelected == item.id ? Colors.white : Colors.black,

@@ -18,3 +18,21 @@ class WtData {
     this.voltDc,
   );
 }
+
+class WtDailyProd {
+  String id;
+  String day;
+  double avgWindSpeed;
+  double avgCurahHujan;
+  double totalKwh;
+  double totalWatt;
+
+  WtDailyProd(
+    this.id,
+    this.day,
+    this.avgWindSpeed,
+    this.avgCurahHujan,
+    this.totalKwh,
+    this.totalWatt,
+  );
+}

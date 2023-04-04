@@ -35,6 +35,7 @@ class PerangkatCard extends StatelessWidget {
               docPerangkatId: docPerangkatId,
               perangkatId: id,
               jenisPerangkat: jenis,
+              kodePerangkat: kode,
             ),
           ),
         );

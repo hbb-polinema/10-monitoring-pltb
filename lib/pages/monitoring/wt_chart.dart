@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -16,9 +17,12 @@ class WtChart extends StatefulWidget {
 
 class _WtChartState extends State<WtChart> {
   List<WtData> _dataWt = [];
+  List<WtDailyProd> _dailyProd = [];
   TooltipBehavior? _tooltipBehavior;
   late ZoomPanBehavior _zoomPanBehavior;
   late TrackballBehavior _trackballBehavior;
+  late Future fetchFuture;
+  late Future fetchDailyProd;
 
   DateTime? _dateTime = DateTime.now();
   // menampilkan date picker
@@ -37,13 +41,13 @@ class _WtChartState extends State<WtChart> {
     });
   }
 
-  late Future fetchFuture;
-
   @override
   void initState() {
     super.initState();
-    fetchFuture =
-        fetchData(DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idWt);
+    fetchFuture = fetchData(
+        DateFormat('yyyy-MM-dd HH:mm:ss').format(_dateTime!), widget.idWt);
+    fetchDailyProd =
+        fetchDataProd(DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idWt);
     _tooltipBehavior = TooltipBehavior(enable: true);
     _trackballBehavior = TrackballBehavior(
       enable: true,
@@ -104,13 +108,51 @@ class _WtChartState extends State<WtChart> {
     return _dataWt = dataWt;
   }
 
+  // mangambil data wind turbine
+  Future<WtDailyProd> fetchDataProd(String date, String id) async {
+    Uri url =
+        Uri.parse("https://ebt-polinema.id/api/wind-turbine/daily-production");
+    var response = await http.post(
+      url,
+      body: {"id": id, "date_day": date},
+    );
+
+    final jsonData = json.decode(response.body);
+    final idP = jsonData['id'];
+    final day =
+        DateFormat('yyyy-mm-dd').format(DateTime.parse(jsonData['day']));
+    final avgWindSpeed = jsonData['avg_wind_speed']?.toDouble() ?? 0.0;
+    final avgCurahHujan = jsonData['avg_curah_hujan']?.toDouble() ?? 0.0;
+    final totalKwh = jsonData['total_kwh']?.toDouble() ?? 0.0;
+    final totalWatt = jsonData['total_watt']?.toDouble() ?? 0.0;
+
+    List<WtDailyProd> dailyProd = [];
+
+    dailyProd.add(WtDailyProd(
+      idP,
+      day,
+      avgWindSpeed,
+      avgCurahHujan,
+      totalKwh,
+      totalWatt,
+    ));
+
+    // if (mounted) {
+    //   setState(() {
+    //     _dataWt = dataWt;
+    //   });
+    // }
+    return WtDailyProd(
+        idP, day, avgWindSpeed, avgCurahHujan, totalKwh, totalWatt);
+  }
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: Future.delayed(
           const Duration(seconds: 2),
-          () => fetchData(
-              DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idWt)),
+          () => fetchData(DateFormat('yyyy-MM-dd HH:mm:ss').format(_dateTime!),
+              widget.idWt)),
       // future: fetchFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
@@ -129,6 +171,44 @@ class _WtChartState extends State<WtChart> {
                 //date
                 datePicker(),
                 const Divider(thickness: 1),
+                const SizedBox(
+                  height: 8,
+                ),
+                FutureBuilder<WtDailyProd>(
+                    future: Future.delayed(
+                      const Duration(seconds: 2),
+                      () => fetchDataProd(
+                          DateFormat('yyyy-MM-dd').format(_dateTime!),
+                          widget.idWt),
+                    ),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Text('Error: ${snapshot.error}');
+                      } else if (snapshot.hasData) {
+                        final dailyProd = snapshot.data;
+                        return Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                              'Produksi Energi',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Text(
+                              '${dailyProd!.totalKwh} kWh',
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return const Text("Total Produksi");
+                      }
+                    }),
                 const SizedBox(
                   height: 8,
                 ),
@@ -255,19 +335,25 @@ class _WtChartState extends State<WtChart> {
 
   Row datePicker() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
           children: [
-            const Icon(Icons.calendar_month_rounded),
-            Text(_dateTime == null
-                ? DateFormat('dd MM yyyy HH:mm').format(DateTime.now())
-                : DateFormat('dd MMM yyyy HH:mm').format(_dateTime!)),
+            const Icon(Icons.calendar_month_outlined),
+            const SizedBox(
+              width: 16,
+            ),
+            Text(
+              _dateTime == null
+                  ? DateFormat('dd/MM/yyyy HH:mm:ss').format(DateTime.now())
+                  : DateFormat('dd/MM/yyyy HH:mm:ss').format(_dateTime!),
+              style: const TextStyle(fontSize: 16),
+            ),
             IconButton(
               onPressed: () async {
                 _showDatePicker();
               },
-              icon: const Icon(Icons.expand_more),
+              icon: const Icon(Icons.expand_more_outlined),
             ),
           ],
         ),

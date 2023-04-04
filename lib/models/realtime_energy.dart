@@ -1,10 +1,6 @@
 class RealtimeEnergy {
   String dateUtc;
   double windSpeed;
-  double rpmBilah;
-  double rpmGenerator;
-  double powerAc;
-  double powerKw;
   double powerWatt;
 
   double powerSp;
@@ -14,10 +10,6 @@ class RealtimeEnergy {
   RealtimeEnergy(
     this.dateUtc,
     this.windSpeed,
-    this.rpmBilah,
-    this.rpmGenerator,
-    this.powerAc,
-    this.powerKw,
     this.powerWatt,
     this.powerSp,
     this.powerDiesel,

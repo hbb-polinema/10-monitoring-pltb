@@ -24,17 +24,6 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Text(
-              jenisPerangkat,
-              style: const TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(
-              height: 8,
-            ),
             if (jenisPerangkat == 'PLTB')
               WtChart(idWt: widget.idPerangkat)
             else if (jenisPerangkat == 'PLTS')

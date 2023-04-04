@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:manajemen_aset/pages/home/maps.dart';
+import 'package:manajemen_aset/pages/monitoring/datetime.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class DrawerPimpinan extends StatefulWidget {
@@ -22,6 +23,8 @@ class _DrawerPimpinanState extends State<DrawerPimpinan> {
       container = const Maps();
     } else if (currentPage == DrawerSectionsPemilik.logout) {
       _logOut();
+    } else if (currentPage == DrawerSectionsPemilik.datetime) {
+      container = datetime();
     }
     return Scaffold(
       appBar: AppBar(
@@ -55,6 +58,8 @@ class _DrawerPimpinanState extends State<DrawerPimpinan> {
               currentPage == DrawerSectionsPemilik.home ? true : false),
           menuItem(2, "Logout", Icons.logout,
               currentPage == DrawerSectionsPemilik.logout ? true : false),
+          menuItem(3, "datetime", Icons.abc,
+              currentPage == DrawerSectionsPemilik.datetime ? true : false),
         ],
       ),
     );
@@ -71,6 +76,8 @@ class _DrawerPimpinanState extends State<DrawerPimpinan> {
               currentPage = DrawerSectionsPemilik.home;
             } else if (id == 2) {
               currentPage = DrawerSectionsPemilik.logout;
+            } else if (id == 3) {
+              currentPage = DrawerSectionsPemilik.datetime;
             }
           });
         },
@@ -104,10 +111,7 @@ class _DrawerPimpinanState extends State<DrawerPimpinan> {
   }
 }
 
-enum DrawerSectionsPemilik {
-  home,
-  logout,
-}
+enum DrawerSectionsPemilik { home, logout, datetime }
 
 Future<void> _logOut() async {
   await FirebaseAuth.instance.signOut();
