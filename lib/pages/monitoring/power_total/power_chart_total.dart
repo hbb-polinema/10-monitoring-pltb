@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:manajemen_aset/models/realtime_energy.dart';
-import 'package:manajemen_aset/pages/monitoring/power_total/widget/sf_chart.dart';
+import 'package:manajemen_aset/pages/monitoring/power_total/sf_chart_p.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:intl/intl.dart';
 
@@ -35,7 +35,7 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
       setState(() {
         _dateTime = value!;
         _dateTime = _dateTime;
-        fetchData(
+        fetchFuture = fetchData(
             DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idCluster);
       });
     });
@@ -61,6 +61,7 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
       enableDoubleTapZooming: true,
       enablePanning: true,
       zoomMode: ZoomMode.x,
+      // maximumZoomLevel: 1,
     );
   }
 
@@ -115,6 +116,7 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
           const Duration(seconds: 2),
           () => fetchData(
               DateFormat('yyyy-MM-dd').format(_dateTime!), widget.idCluster)),
+      // future: fetchFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return SizedBox(
@@ -152,18 +154,23 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
 
   Row datePicker() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Icon(Icons.calendar_month_outlined),
-        const SizedBox(width: 6),
-        Text(_dateTime == null
-            ? DateFormat('dd MM yyyy').format(DateTime.now())
-            : DateFormat('dd MMM yyyy').format(_dateTime!)),
+        const SizedBox(width: 16),
+        Text(
+          _dateTime == null
+              ? DateFormat('dd/MM/yyyy').format(DateTime.now())
+              : DateFormat('dd/MM/yyyy').format(_dateTime!),
+          style: const TextStyle(
+            fontSize: 16,
+          ),
+        ),
         IconButton(
           onPressed: () async {
             _showDatePicker();
           },
-          icon: const Icon(Icons.expand_more),
+          icon: const Icon(Icons.expand_more_outlined),
         ),
       ],
     );

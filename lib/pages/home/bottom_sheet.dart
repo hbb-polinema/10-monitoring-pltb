@@ -213,9 +213,9 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                             ),
                             SizedBox(height: 8),
                             Text(
-                              'Belum \nTerpasang',
+                              '0',
                               style: TextStyle(
-                                fontSize: 16,
+                                fontSize: 20,
                                 fontWeight: FontWeight.w600,
                                 color: Color.fromARGB(225, 12, 144, 125),
                               ),

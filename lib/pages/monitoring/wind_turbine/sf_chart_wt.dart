@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/models/realtime_energy.dart';
+import 'package:manajemen_aset/models/wind_turbine.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
-class SfChart extends StatelessWidget {
-  const SfChart({
+class SfChartWt extends StatelessWidget {
+  const SfChartWt({
     Key? key,
     required TooltipBehavior? tooltipBehavior,
     required ZoomPanBehavior zoomPanBehavior,
     required TrackballBehavior trackballBehavior,
-    required List<RealtimeEnergy> dataReal,
+    required List<WtData> dataWt,
   })  : _tooltipBehavior = tooltipBehavior,
         _zoomPanBehavior = zoomPanBehavior,
         _trackballBehavior = trackballBehavior,
-        _dataReal = dataReal,
+        _dataWt = dataWt,
         super(key: key);
 
   final TooltipBehavior? _tooltipBehavior;
   final ZoomPanBehavior _zoomPanBehavior;
   final TrackballBehavior _trackballBehavior;
-  final List<RealtimeEnergy> _dataReal;
+  final List<WtData> _dataWt;
 
   @override
   Widget build(BuildContext context) {
@@ -46,29 +46,20 @@ class SfChart extends StatelessWidget {
       ],
       primaryXAxis: CategoryAxis(
         edgeLabelPlacement: EdgeLabelPlacement.shift,
-        interval: 3,
+        interval: 10,
+        zoomFactor: 0.95,
+        visibleMinimum:
+            ((_dataWt.length <= 30) ? 0 : ((_dataWt.length).toDouble() - 20)),
+        visibleMaximum: ((_dataWt.length - 1).toDouble()),
       ),
-      series: <ChartSeries<dynamic, dynamic>>[
-        SplineSeries<RealtimeEnergy, dynamic>(
-          name: 'Power PLTB (W)',
-          dataSource: _dataReal,
-          enableTooltip: true,
-          color: const Color.fromARGB(255, 248, 56, 56),
-          xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
-          yValueMapper: (RealtimeEnergy data, _) => data.powerWatt,
-          markerSettings: const MarkerSettings(
-            isVisible: true,
-            height: 5,
-            width: 5,
-          ),
-        ),
-        SplineSeries<RealtimeEnergy, dynamic>(
+      series: <ChartSeries<WtData, dynamic>>[
+        SplineSeries<WtData, dynamic>(
           name: 'Wind Speed (m/s)',
-          dataSource: _dataReal,
+          dataSource: _dataWt,
           enableTooltip: true,
           color: const Color.fromARGB(225, 0, 74, 173),
-          xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
-          yValueMapper: (RealtimeEnergy data, _) => data.windSpeed,
+          xValueMapper: (WtData data, _) => data.dateUtc,
+          yValueMapper: (WtData data, _) => data.windSpeed,
           yAxisName: 'yAxis',
           markerSettings: const MarkerSettings(
             isVisible: true,
@@ -77,27 +68,52 @@ class SfChart extends StatelessWidget {
             width: 5,
           ),
         ),
-        SplineSeries<RealtimeEnergy, dynamic>(
-          name: 'Power PLTS (W)',
-          dataSource: _dataReal,
+        SplineSeries<WtData, dynamic>(
+          name: 'Rpm Bilah',
+          dataSource: _dataWt,
           enableTooltip: true,
-          color: const Color.fromARGB(224, 0, 173, 43),
-          xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
-          yValueMapper: (RealtimeEnergy data, _) => data.powerSp,
+          color: const Color.fromARGB(224, 190, 27, 223),
+          xValueMapper: (WtData data, _) => data.dateUtc,
+          yValueMapper: (WtData data, _) => data.rpmBilah,
           markerSettings: const MarkerSettings(
             isVisible: true,
             height: 5,
             width: 5,
           ),
         ),
-        SplineSeries<RealtimeEnergy, dynamic>(
-          name: 'Solar Rad (W/m²)',
-          dataSource: _dataReal,
+        SplineSeries<WtData, dynamic>(
+          name: 'Rpm Generator',
+          dataSource: _dataWt,
           enableTooltip: true,
-          color: const Color.fromARGB(223, 230, 172, 14),
-          xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
-          yValueMapper: (RealtimeEnergy data, _) => data.solarRad,
-          yAxisName: 'yAxis',
+          color: const Color.fromARGB(255, 27, 223, 102),
+          xValueMapper: (WtData data, _) => data.dateUtc,
+          yValueMapper: (WtData data, _) => data.rpmGenerator,
+          markerSettings: const MarkerSettings(
+            isVisible: true,
+            height: 5,
+            width: 5,
+          ),
+        ),
+        SplineSeries<WtData, dynamic>(
+          name: 'Power (W)',
+          dataSource: _dataWt,
+          enableTooltip: true,
+          color: const Color.fromARGB(255, 248, 56, 56),
+          xValueMapper: (WtData data, _) => data.dateUtc,
+          yValueMapper: (WtData data, _) => data.powerWatt,
+          markerSettings: const MarkerSettings(
+            isVisible: true,
+            height: 5,
+            width: 5,
+          ),
+        ),
+        SplineSeries<WtData, dynamic>(
+          name: 'Tegangan (V)',
+          dataSource: _dataWt,
+          enableTooltip: true,
+          color: const Color.fromARGB(223, 255, 136, 0),
+          xValueMapper: (WtData data, _) => data.dateUtc,
+          yValueMapper: (WtData data, _) => data.voltDc,
           markerSettings: const MarkerSettings(
             isVisible: true,
             shape: DataMarkerType.triangle,
@@ -105,28 +121,16 @@ class SfChart extends StatelessWidget {
             width: 5,
           ),
         ),
-        SplineSeries<RealtimeEnergy, dynamic>(
-          name: 'Power PLTD (W)',
-          dataSource: _dataReal,
+        SplineSeries<WtData, dynamic>(
+          name: 'Arus (A)',
+          dataSource: _dataWt,
           enableTooltip: true,
-          color: const Color.fromARGB(255, 19, 156, 190),
-          xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
-          yValueMapper: (RealtimeEnergy data, _) => data.powerDiesel,
+          color: const Color.fromARGB(223, 0, 110, 255),
+          xValueMapper: (WtData data, _) => data.dateUtc,
+          yValueMapper: (WtData data, _) => data.ampereDc,
           markerSettings: const MarkerSettings(
             isVisible: true,
-            height: 5,
-            width: 5,
-          ),
-        ),
-        SplineSeries<RealtimeEnergy, dynamic>(
-          name: 'BBM (liter)',
-          dataSource: _dataReal,
-          enableTooltip: true,
-          color: const Color.fromARGB(255, 109, 38, 34),
-          xValueMapper: (RealtimeEnergy data, _) => data.dateUtc,
-          yValueMapper: (RealtimeEnergy data, _) => data.bbm,
-          markerSettings: const MarkerSettings(
-            isVisible: true,
+            shape: DataMarkerType.triangle,
             height: 5,
             width: 5,
           ),
