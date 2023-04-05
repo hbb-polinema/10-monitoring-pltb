@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:manajemen_aset/pages/monitoring/solar_panel/sp_chart.dart';
 import 'package:manajemen_aset/pages/monitoring/ws_chart.dart';
 import 'package:manajemen_aset/pages/monitoring/wind_turbine/wt_chart.dart';
 import 'package:manajemen_aset/pages/report/report_screen.dart';
@@ -28,8 +29,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
             if (jenisPerangkat == 'PLTB')
               WtChart(idWt: widget.idPerangkat)
             else if (jenisPerangkat == 'PLTS')
-              // WsChart(idWs: widget.idPerangkat)
-              const ReportScreen()
+              SpChart(idSp: widget.idPerangkat)
             else if (jenisPerangkat == 'Diesel')
               // WsChart(idWs: widget.idPerangkat)
               const ReportScreen()
