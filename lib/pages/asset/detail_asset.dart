@@ -139,7 +139,7 @@ class _DetailAssetState extends State<DetailAsset> {
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
-                      color: Color.fromARGB(225, 12, 144, 125),
+                      color: Color.fromARGB(225, 18, 149, 117),
                     ),
                   ),
                 ),

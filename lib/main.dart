@@ -17,14 +17,14 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme:
-            const ColorScheme.light(primary: Color.fromARGB(225, 12, 144, 125)),
+            const ColorScheme.light(primary: Color.fromARGB(225, 18, 149, 117)),
         buttonTheme: const ButtonThemeData(textTheme: ButtonTextTheme.primary),
-        primaryColor: const Color.fromARGB(225, 12, 144, 125),
+        primaryColor: const Color.fromARGB(225, 18, 149, 117),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           backgroundColor: Color.fromARGB(225, 12, 144, 125),
         ),
         appBarTheme: const AppBarTheme(
-            backgroundColor: Color.fromARGB(225, 12, 144, 125), elevation: 0),
+            backgroundColor: Color.fromARGB(225, 18, 149, 117), elevation: 0),
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),

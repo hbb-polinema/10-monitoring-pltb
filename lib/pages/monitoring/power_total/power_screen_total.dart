@@ -15,7 +15,7 @@ class _PowerScreenTotalState extends State<PowerScreenTotal> {
     return Scaffold(
       appBar: AppBar(
         // title: const Text("Produksi Realtime Energy Listrik (EBT)"),
-        backgroundColor: const Color.fromARGB(225, 12, 144, 125),
+        backgroundColor: const Color.fromARGB(225, 18, 149, 117),
         elevation: 0,
       ),
       body: SafeArea(
@@ -28,7 +28,7 @@ class _PowerScreenTotalState extends State<PowerScreenTotal> {
                 const Text(
                   'Produksi Realtime \nEnergy Listrik (EBT)',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
                   textAlign: TextAlign.center,

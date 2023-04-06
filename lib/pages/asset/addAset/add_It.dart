@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,7 @@ class _AddItState extends State<AddIt> {
         "text_field": InputForm(
           title: "SPD 5.2",
           controller: spd52C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -100,7 +101,7 @@ class _AddItState extends State<AddIt> {
         "text_field": InputForm(
           title: "SPD 5.3",
           controller: spd53C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -114,7 +115,7 @@ class _AddItState extends State<AddIt> {
         "text_field": InputForm(
           title: "SPD 5.4",
           controller: spd54C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -128,7 +129,7 @@ class _AddItState extends State<AddIt> {
         "text_field": InputForm(
           title: "SPD 5.5",
           controller: spd55C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -180,7 +181,7 @@ class _AddItState extends State<AddIt> {
                 InputForm(
                   title: "SPD 5.1*",
                   controller: spd51C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -203,7 +204,7 @@ class _AddItState extends State<AddIt> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        primary: const Color.fromARGB(225, 12, 144, 125),
+                        primary: const Color.fromARGB(225, 18, 149, 117),
                       ),
                     ),
                     ElevatedButton(
@@ -239,7 +240,7 @@ class _AddItState extends State<AddIt> {
                 NonEditableForm(
                   title: "Lokasi Asset*",
                   controller: lokasiC,
-                  prefixIcon: const Icon(Icons.location_on_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                 ),
                 const SizedBox(
                   height: 16,
@@ -251,7 +252,7 @@ class _AddItState extends State<AddIt> {
                   controller: tglPasangC,
                   decoration: InputDecoration(
                     labelText: 'Tanggal Dipasang*',
-                    prefixIcon: const Icon(Icons.event_outlined),
+                    prefixIcon: const Icon(Iconsax.calendar_1),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -298,7 +299,7 @@ class _AddItState extends State<AddIt> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
@@ -340,7 +341,7 @@ class _AddItState extends State<AddIt> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
@@ -404,7 +405,7 @@ class _AddItState extends State<AddIt> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                   ),
                 )

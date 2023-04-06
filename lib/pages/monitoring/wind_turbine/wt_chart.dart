@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:iconsax/iconsax.dart';
 import 'package:manajemen_aset/models/wind_turbine.dart';
 import 'package:manajemen_aset/pages/monitoring/wind_turbine/sf_chart_wt.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -235,7 +236,7 @@ class _WtChartState extends State<WtChart> {
       children: [
         Row(
           children: [
-            const Icon(Icons.calendar_month_outlined),
+            const Icon(Iconsax.calendar_1),
             const SizedBox(
               width: 16,
             ),
@@ -244,14 +245,14 @@ class _WtChartState extends State<WtChart> {
                   ? DateFormat('dd/MM/yyyy').format(DateTime.now())
                   : DateFormat('dd/MM/yyyy').format(_dateTime!),
               style: const TextStyle(
-                fontSize: 16,
+                fontSize: 18,
               ),
             ),
             IconButton(
               onPressed: () async {
                 _showDatePicker();
               },
-              icon: const Icon(Icons.expand_more_outlined),
+              icon: const Icon(Iconsax.arrow_down_1),
             ),
           ],
         ),

@@ -160,7 +160,7 @@ class _AddPerangkatState extends State<AddPerangkat> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                   ),
                 )

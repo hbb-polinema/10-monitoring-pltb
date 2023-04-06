@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:manajemen_aset/pages/home/maps.dart';
-import 'package:manajemen_aset/pages/monitoring/datetime.dart';
 import 'package:manajemen_aset/widget/my_header_drawer.dart';
 
 class DrawerPimpinan extends StatefulWidget {
@@ -23,12 +23,10 @@ class _DrawerPimpinanState extends State<DrawerPimpinan> {
       container = const Maps();
     } else if (currentPage == DrawerSectionsPemilik.logout) {
       _logOut();
-    } else if (currentPage == DrawerSectionsPemilik.datetime) {
-      container = datetime();
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(225, 12, 144, 125),
+        backgroundColor: const Color.fromARGB(225, 18, 149, 117),
         elevation: 0,
         title: title,
       ),
@@ -54,12 +52,10 @@ class _DrawerPimpinanState extends State<DrawerPimpinan> {
       child: Column(
         // shows the list of menu drawer
         children: [
-          menuItem(1, "Home", Icons.home,
+          menuItem(1, "Home", Iconsax.home,
               currentPage == DrawerSectionsPemilik.home ? true : false),
-          menuItem(2, "Logout", Icons.logout,
+          menuItem(2, "Logout", Iconsax.logout,
               currentPage == DrawerSectionsPemilik.logout ? true : false),
-          menuItem(3, "datetime", Icons.abc,
-              currentPage == DrawerSectionsPemilik.datetime ? true : false),
         ],
       ),
     );
@@ -76,8 +72,6 @@ class _DrawerPimpinanState extends State<DrawerPimpinan> {
               currentPage = DrawerSectionsPemilik.home;
             } else if (id == 2) {
               currentPage = DrawerSectionsPemilik.logout;
-            } else if (id == 3) {
-              currentPage = DrawerSectionsPemilik.datetime;
             }
           });
         },
@@ -111,7 +105,7 @@ class _DrawerPimpinanState extends State<DrawerPimpinan> {
   }
 }
 
-enum DrawerSectionsPemilik { home, logout, datetime }
+enum DrawerSectionsPemilik { home, logout }
 
 Future<void> _logOut() async {
   await FirebaseAuth.instance.signOut();

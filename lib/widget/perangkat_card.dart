@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:manajemen_aset/pages/perangkat/edit_perangkat.dart';
 import 'package:manajemen_aset/pages/perangkat/list.dart';
-import 'package:manajemen_aset/service/database.dart';
 
 class PerangkatCard extends StatelessWidget {
   const PerangkatCard({
@@ -77,7 +75,7 @@ class PerangkatCard extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(225, 12, 144, 125),
+                            color: Color.fromARGB(225, 18, 149, 117),
                           ),
                         ),
                         const SizedBox(width: 8),

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -85,7 +86,7 @@ class _AddSipilState extends State<AddSipil> {
         "text_field": InputForm(
           title: "SPD 6.3",
           controller: spd63C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -99,7 +100,7 @@ class _AddSipilState extends State<AddSipil> {
         "text_field": InputForm(
           title: "SPD 6.4",
           controller: spd64C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -113,7 +114,7 @@ class _AddSipilState extends State<AddSipil> {
         "text_field": InputForm(
           title: "SPD 6.5",
           controller: spd65C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -165,7 +166,7 @@ class _AddSipilState extends State<AddSipil> {
                 InputForm(
                   title: "SPD 6.1*",
                   controller: spd61C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -181,7 +182,7 @@ class _AddSipilState extends State<AddSipil> {
                 InputForm(
                   title: "SPD 6.2*",
                   controller: spd62C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -240,7 +241,7 @@ class _AddSipilState extends State<AddSipil> {
                 NonEditableForm(
                   title: "Lokasi Asset*",
                   controller: lokasiC,
-                  prefixIcon: const Icon(Icons.location_on_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                 ),
                 const SizedBox(
                   height: 16,
@@ -252,7 +253,7 @@ class _AddSipilState extends State<AddSipil> {
                   controller: tglPasangC,
                   decoration: InputDecoration(
                     labelText: 'Tanggal Dipasang*',
-                    prefixIcon: const Icon(Icons.event_outlined),
+                    prefixIcon: const Icon(Iconsax.calendar_1),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -299,7 +300,7 @@ class _AddSipilState extends State<AddSipil> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
@@ -341,7 +342,7 @@ class _AddSipilState extends State<AddSipil> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )

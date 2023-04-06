@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:manajemen_aset/pages/cluster/cluster_list_page.dart';
 import 'package:manajemen_aset/pages/home/home_screen.dart';
 import 'package:manajemen_aset/pages/user/user_list_page.dart';
@@ -34,7 +35,7 @@ class _DrawerAdminITState extends State<DrawerAdminIT> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(225, 12, 144, 125),
+        backgroundColor: const Color.fromARGB(225, 18, 149, 117),
         elevation: 0,
         title: title,
       ),
@@ -60,7 +61,7 @@ class _DrawerAdminITState extends State<DrawerAdminIT> {
       child: Column(
         // shows the list of menu drawer
         children: [
-          menuItem(1, "Home", Icons.home,
+          menuItem(1, "Home", Iconsax.home,
               currentPage == DrawerSectionsAdmin.home ? true : false),
           menuItem(2, "User", Icons.people,
               currentPage == DrawerSectionsAdmin.users ? true : false),

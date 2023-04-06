@@ -38,7 +38,7 @@ class _ListPState extends State<ListP> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(225, 12, 144, 125),
+        backgroundColor: const Color.fromARGB(225, 18, 149, 117),
         elevation: 0,
         title: Text(widget.kodePerangkat),
       ),
@@ -55,7 +55,7 @@ class _ListPState extends State<ListP> with SingleTickerProviderStateMixin {
               unselectedLabelColor: Colors.black54,
               indicator: const BubbleTabIndicator(
                 indicatorHeight: 33,
-                indicatorColor: Color.fromARGB(225, 12, 144, 125),
+                indicatorColor:Color.fromARGB(225, 18, 149, 117),
                 tabBarIndicatorSize: TabBarIndicatorSize.tab,
                 indicatorRadius: 30,
               ),

@@ -50,6 +50,7 @@ dependencies:
   sqflite: ^2.0.3+1
   firebase_storage: ^11.0.16
   bubble_tab_indicator: ^0.1.6
+  iconsax: ^0.0.8
   # geocoding: ^2.1.0
 
 dev_dependencies:

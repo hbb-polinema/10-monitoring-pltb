@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:iconsax/iconsax.dart';
 import 'package:manajemen_aset/models/realtime_energy.dart';
 import 'package:manajemen_aset/pages/monitoring/power_total/sf_chart_p.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -156,21 +157,21 @@ class _PowerChartTotalState extends State<PowerChartTotal> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.calendar_month_outlined),
+        const Icon(Iconsax.calendar_1),
         const SizedBox(width: 16),
         Text(
           _dateTime == null
               ? DateFormat('dd/MM/yyyy').format(DateTime.now())
               : DateFormat('dd/MM/yyyy').format(_dateTime!),
           style: const TextStyle(
-            fontSize: 16,
+            fontSize: 18,
           ),
         ),
         IconButton(
           onPressed: () async {
             _showDatePicker();
           },
-          icon: const Icon(Icons.expand_more_outlined),
+          icon: const Icon(Iconsax.arrow_down_1),
         ),
       ],
     );

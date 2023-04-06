@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ class _AddMekanikState extends State<AddMekanik> {
         "text_field": InputForm(
           title: "SPD 1.4",
           controller: spd14C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -104,7 +105,7 @@ class _AddMekanikState extends State<AddMekanik> {
         "text_field": InputForm(
           title: "SPD 1.5",
           controller: spd15C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -156,7 +157,7 @@ class _AddMekanikState extends State<AddMekanik> {
                 InputForm(
                   title: "SPD 1.1*",
                   controller: spd11C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -172,7 +173,7 @@ class _AddMekanikState extends State<AddMekanik> {
                 InputForm(
                   title: "SPD 1.2*",
                   controller: spd12C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -188,7 +189,7 @@ class _AddMekanikState extends State<AddMekanik> {
                 InputForm(
                   title: "SPD 1.3*",
                   controller: spd13C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -247,7 +248,7 @@ class _AddMekanikState extends State<AddMekanik> {
                 NonEditableForm(
                   title: "Lokasi Asset*",
                   controller: lokasiC,
-                  prefixIcon: const Icon(Icons.location_on_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                 ),
                 const SizedBox(
                   height: 16,
@@ -259,7 +260,7 @@ class _AddMekanikState extends State<AddMekanik> {
                   controller: tglPasangC,
                   decoration: InputDecoration(
                     labelText: 'Tanggal Dipasang*',
-                    prefixIcon: const Icon(Icons.event_outlined),
+                    prefixIcon: const Icon(Iconsax.calendar_1),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -306,7 +307,7 @@ class _AddMekanikState extends State<AddMekanik> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
@@ -348,7 +349,7 @@ class _AddMekanikState extends State<AddMekanik> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )

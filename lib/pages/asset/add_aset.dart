@@ -44,7 +44,7 @@ class _AddAsetState extends State<AddAset> {
                     backgroundColor: Colors.blueGrey,
                   ),
                   baseColor: const Color.fromARGB(223, 212, 221, 218),
-                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+                  expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
                   // expandedColor: Colors.red[50],
                   key: cardMekanik,
                   title: const Text('Mekanik'),
@@ -79,7 +79,7 @@ class _AddAsetState extends State<AddAset> {
                           },
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
-                            primary: const Color.fromARGB(225, 12, 144, 125),
+                            primary: const Color.fromARGB(225, 18, 149, 117),
                           ),
                           child: Column(
                             children: [
@@ -112,7 +112,7 @@ class _AddAsetState extends State<AddAset> {
                     backgroundColor: Colors.blueGrey,
                   ),
                   baseColor: const Color.fromARGB(223, 212, 221, 218),
-                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+                  expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
                   // expandedColor: Colors.red[50],
                   key: cardElektrik,
                   title: const Text('Elektrik'),
@@ -147,7 +147,7 @@ class _AddAsetState extends State<AddAset> {
                           },
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
-                            primary: const Color.fromARGB(225, 12, 144, 125),
+                            primary: const Color.fromARGB(225, 18, 149, 117),
                           ),
                           child: Column(
                             children: [
@@ -180,7 +180,7 @@ class _AddAsetState extends State<AddAset> {
                     backgroundColor: Colors.blueGrey,
                   ),
                   baseColor: const Color.fromARGB(223, 212, 221, 218),
-                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+                  expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
                   // expandedColor: Colors.red[50],
                   key: cardKd,
                   title: const Text('Komunikasi Data'),
@@ -215,7 +215,7 @@ class _AddAsetState extends State<AddAset> {
                           },
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
-                            primary: const Color.fromARGB(225, 12, 144, 125),
+                            primary: const Color.fromARGB(225, 18, 149, 117),
                           ),
                           child: Column(
                             children: [
@@ -248,7 +248,7 @@ class _AddAsetState extends State<AddAset> {
                     backgroundColor: Colors.blueGrey,
                   ),
                   baseColor: const Color.fromARGB(223, 212, 221, 218),
-                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+                  expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
                   // expandedColor: Colors.red[50],
                   key: cardSensor,
                   title: const Text('Sensor'),
@@ -283,7 +283,7 @@ class _AddAsetState extends State<AddAset> {
                           },
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
-                            primary: const Color.fromARGB(225, 12, 144, 125),
+                            primary: const Color.fromARGB(225, 18, 149, 117),
                           ),
                           child: Column(
                             children: [
@@ -316,7 +316,7 @@ class _AddAsetState extends State<AddAset> {
                     backgroundColor: Colors.blueGrey,
                   ),
                   baseColor: const Color.fromARGB(223, 212, 221, 218),
-                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+                  expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
                   // expandedColor: Colors.red[50],
                   key: cardIt,
                   title: const Text('Information Technology'),
@@ -351,7 +351,7 @@ class _AddAsetState extends State<AddAset> {
                           },
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
-                            primary: const Color.fromARGB(225, 12, 144, 125),
+                            primary: const Color.fromARGB(225, 18, 149, 117),
                           ),
                           child: Column(
                             children: [
@@ -384,7 +384,7 @@ class _AddAsetState extends State<AddAset> {
                     backgroundColor: Colors.blueGrey,
                   ),
                   baseColor: const Color.fromARGB(223, 212, 221, 218),
-                  expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+                  expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
                   // expandedColor: Colors.red[50],
                   key: cardSipil,
                   title: const Text('Sipil'),
@@ -419,7 +419,7 @@ class _AddAsetState extends State<AddAset> {
                           },
                           style: ElevatedButton.styleFrom(
                             shape: const CircleBorder(),
-                            primary: const Color.fromARGB(225, 12, 144, 125),
+                            primary: const Color.fromARGB(225, 18, 149, 117),
                           ),
                           child: Column(
                             children: [
@@ -470,7 +470,7 @@ class _AddAsetState extends State<AddAset> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                   ),
                 )

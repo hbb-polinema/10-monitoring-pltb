@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:manajemen_aset/models/prod_energi.dart';
 import 'package:manajemen_aset/pages/monitoring/power_total/power_screen_total.dart';
 import 'package:manajemen_aset/pages/monitoring/produksi_energi_screen.dart';
@@ -165,7 +166,7 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Color.fromARGB(225, 12, 144, 125),
+                                color: Color.fromARGB(225, 18, 149, 117),
                               ),
                             ),
                           ],
@@ -191,7 +192,7 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Color.fromARGB(225, 12, 144, 125),
+                                color: Color.fromARGB(225, 18, 149, 117),
                               ),
                             ),
                           ],
@@ -217,7 +218,7 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Color.fromARGB(225, 12, 144, 125),
+                                color: Color.fromARGB(225, 18, 149, 117),
                               ),
                               textAlign: TextAlign.center,
                             ),
@@ -244,7 +245,7 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w600,
-                                color: Color.fromARGB(225, 12, 144, 125),
+                                color: Color.fromARGB(225, 18, 149, 117),
                               ),
                             ),
                           ],
@@ -281,7 +282,7 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                       ),
                     );
                   },
-                  icon: const Icon(Icons.bar_chart),
+                  icon: const Icon(Iconsax.chart_1),
                 )
               ],
             ),
@@ -312,9 +313,7 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                       ),
                     );
                   },
-                  icon: const Icon(
-                    Icons.stacked_line_chart,
-                  ),
+                  icon: const Icon(Iconsax.diagram),
                 )
               ],
             ),
@@ -344,7 +343,7 @@ class _BottomSheetMapState extends State<BottomSheetMap> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  primary: const Color.fromARGB(225, 12, 144, 125),
+                  primary: const Color.fromARGB(225, 18, 149, 117),
                 ),
               ),
             ),

@@ -42,7 +42,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
               backgroundColor: Colors.blueGrey,
             ),
             baseColor: const Color.fromARGB(223, 212, 221, 218),
-            expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+            expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
             key: cardMekanik,
             title: const Text('Mekanik'),
             subtitle: const Text('Deskripsi'),
@@ -114,7 +114,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                     child: Column(
                       children: [
@@ -149,7 +149,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
               backgroundColor: Colors.blueGrey,
             ),
             baseColor: const Color.fromARGB(223, 212, 221, 218),
-            expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+            expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
             key: cardElektrik,
             title: const Text('Elektrik'),
             subtitle: const Text('Elektrik'),
@@ -221,7 +221,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                     child: Column(
                       children: [
@@ -256,7 +256,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
               backgroundColor: Colors.blueGrey,
             ),
             baseColor: const Color.fromARGB(223, 212, 221, 218),
-            expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+            expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
             key: cardKd,
             title: const Text('Komunikasi Data'),
             subtitle: const Text('Deskripsi'),
@@ -328,7 +328,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                     child: Column(
                       children: [
@@ -363,7 +363,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
               backgroundColor: Colors.blueGrey,
             ),
             baseColor: const Color.fromARGB(223, 212, 221, 218),
-            expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+            expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
             key: cardSensor,
             title: const Text('Sensor'),
             subtitle: const Text('Deskripsi'),
@@ -434,7 +434,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                     child: Column(
                       children: [
@@ -469,7 +469,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
               backgroundColor: Colors.blueGrey,
             ),
             baseColor: const Color.fromARGB(223, 212, 221, 218),
-            expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+            expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
             key: cardIt,
             title: const Text('Information Technology'),
             subtitle: const Text('Deskripsi'),
@@ -541,7 +541,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                     child: Column(
                       children: [
@@ -576,7 +576,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
               backgroundColor: Colors.blueGrey,
             ),
             baseColor: const Color.fromARGB(223, 212, 221, 218),
-            expandedTextColor: const Color.fromARGB(225, 12, 144, 125),
+            expandedTextColor: const Color.fromARGB(225, 18, 149, 117),
             key: cardSipil,
             title: const Text('Sipil'),
             subtitle: const Text('Deskripsi'),
@@ -648,7 +648,7 @@ class _ExpansionTileCardDemoState extends State<ExpansionTileCardDemo> {
                     },
                     style: ElevatedButton.styleFrom(
                       shape: const CircleBorder(),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                     child: Column(
                       children: [

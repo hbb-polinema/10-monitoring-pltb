@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:manajemen_aset/pages/home/bottom_sheet.dart';
 import 'package:geolocator/geolocator.dart' as geo;
@@ -183,7 +184,7 @@ class _MapsState extends State<Maps> with TickerProviderStateMixin {
                 onPressed: _getCurrentLocation,
                 tooltip: 'Current Location',
                 child: const Icon(
-                  Icons.my_location,
+                  Iconsax.gps,
                   color: Colors.white,
                 ),
               ),

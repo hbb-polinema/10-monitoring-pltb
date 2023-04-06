@@ -124,7 +124,7 @@ class AsetCard extends StatelessWidget {
                           style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(225, 12, 144, 125),
+                            color: Color.fromARGB(225, 18, 149, 117),
                           ),
                         ),
                         const SizedBox(width: 8),

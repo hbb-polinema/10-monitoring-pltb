@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -86,7 +87,7 @@ class _AddKdState extends State<AddKd> {
         "text_field": InputForm(
           title: "SPD 3.2",
           controller: spd32C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -100,7 +101,7 @@ class _AddKdState extends State<AddKd> {
         "text_field": InputForm(
           title: "SPD 3.3",
           controller: spd33C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -178,7 +179,7 @@ class _AddKdState extends State<AddKd> {
                 InputForm(
                   title: "SPD 3.1*",
                   controller: spd31C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -237,7 +238,7 @@ class _AddKdState extends State<AddKd> {
                 NonEditableForm(
                   title: "Lokasi Asset*",
                   controller: lokasiC,
-                  prefixIcon: const Icon(Icons.location_on_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                 ),
                 const SizedBox(
                   height: 16,
@@ -249,7 +250,7 @@ class _AddKdState extends State<AddKd> {
                   controller: tglPasangC,
                   decoration: InputDecoration(
                     labelText: 'Tanggal Dipasang*',
-                    prefixIcon: const Icon(Icons.event_outlined),
+                    prefixIcon: const Icon(Iconsax.calendar_1),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -296,7 +297,7 @@ class _AddKdState extends State<AddKd> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
@@ -338,7 +339,7 @@ class _AddKdState extends State<AddKd> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )

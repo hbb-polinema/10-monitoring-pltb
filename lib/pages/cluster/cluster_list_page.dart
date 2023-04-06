@@ -26,7 +26,7 @@ class _ClusterListState extends State<ClusterList> {
                 Container(
                   padding: const EdgeInsets.fromLTRB(16, 8, 16, 20),
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(225, 12, 144, 125),
+                    color: Color.fromARGB(225, 18, 149, 117),
                     borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(20),
                       bottomRight: Radius.circular(20),
@@ -81,7 +81,7 @@ class _ClusterListState extends State<ClusterList> {
                               leading: const Icon(
                                 Icons.location_on,
                                 size: 30,
-                                color: Color.fromARGB(225, 12, 144, 125),
+                                color: Color.fromARGB(225, 18, 149, 117),
                               ),
                               title: Text(namaCluster),
                               trailing: PopupMenuButton<int>(

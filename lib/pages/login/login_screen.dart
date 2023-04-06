@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:manajemen_aset/widget/input_form.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -101,14 +102,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
                                   // email input form
                                   component(
-                                    Icons.email_outlined,
+                                    Iconsax.sms,
                                     'Email...',
                                     false,
                                     true,
                                   ),
                                   // password input form
                                   component(
-                                    Icons.lock_outline,
+                                    Iconsax.lock_1,
                                     'Password...',
                                     true,
                                     false,
@@ -251,10 +252,10 @@ class _LoginScreenState extends State<LoginScreen> {
               ? IconButton(
                   icon: securePassword
                       ? const Icon(
-                          Icons.visibility_off,
+                          Iconsax.eye_slash,
                           color: Color.fromARGB(248, 34, 36, 33),
                         )
-                      : const Icon(Icons.remove_red_eye,
+                      : const Icon(Iconsax.eye,
                           color: Color.fromARGB(146, 204, 228, 144)),
                   onPressed: () {
                     if (securePassword) {

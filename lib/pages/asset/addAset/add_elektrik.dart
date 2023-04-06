@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,7 @@ class _AddElektrikState extends State<AddElektrik> {
         "text_field": InputForm(
           title: "SPD 2.2",
           controller: spd22C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -101,7 +102,7 @@ class _AddElektrikState extends State<AddElektrik> {
         "text_field": InputForm(
           title: "SPD 2.3",
           controller: spd23C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -115,7 +116,7 @@ class _AddElektrikState extends State<AddElektrik> {
         "text_field": InputForm(
           title: "SPD 2.4",
           controller: spd24C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -129,7 +130,7 @@ class _AddElektrikState extends State<AddElektrik> {
         "text_field": InputForm(
           title: "SPD 2.5",
           controller: spd25C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -181,7 +182,7 @@ class _AddElektrikState extends State<AddElektrik> {
                 InputForm(
                   title: "SPD 2.1*",
                   controller: spd21C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -204,7 +205,7 @@ class _AddElektrikState extends State<AddElektrik> {
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
                         ),
-                        primary: const Color.fromARGB(225, 12, 144, 125),
+                        primary: const Color.fromARGB(225, 18, 149, 117),
                       ),
                     ),
                     ElevatedButton(
@@ -240,7 +241,7 @@ class _AddElektrikState extends State<AddElektrik> {
                 NonEditableForm(
                   title: "Lokasi Asset*",
                   controller: lokasiC,
-                  prefixIcon: const Icon(Icons.location_on_outlined),
+                  prefixIcon: const Icon(Iconsax.location),
                 ),
                 const SizedBox(
                   height: 16,
@@ -252,7 +253,7 @@ class _AddElektrikState extends State<AddElektrik> {
                   controller: tglPasangC,
                   decoration: InputDecoration(
                     labelText: 'Tanggal Dipasang*',
-                    prefixIcon: const Icon(Icons.event_outlined),
+                    prefixIcon: const Icon(Iconsax.calendar_1),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -299,7 +300,7 @@ class _AddElektrikState extends State<AddElektrik> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
@@ -341,7 +342,7 @@ class _AddElektrikState extends State<AddElektrik> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
@@ -405,7 +406,7 @@ class _AddElektrikState extends State<AddElektrik> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      primary: const Color.fromARGB(225, 12, 144, 125),
+                      primary: const Color.fromARGB(225, 18, 149, 117),
                     ),
                   ),
                 )

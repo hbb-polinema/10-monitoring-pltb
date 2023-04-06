@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
@@ -88,7 +89,7 @@ class _AddSensorState extends State<AddSensor> {
         "text_field": InputForm(
           title: "SPD 4.3",
           controller: spd43C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -102,7 +103,7 @@ class _AddSensorState extends State<AddSensor> {
         "text_field": InputForm(
           title: "SPD 4.4",
           controller: spd44C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -116,7 +117,7 @@ class _AddSensorState extends State<AddSensor> {
         "text_field": InputForm(
           title: "SPD 4.5",
           controller: spd45C,
-          prefixIcon: const Icon(Icons.description_outlined),
+          prefixIcon: const Icon(Iconsax.document_text),
           validator: (val) {
             if (val!.isEmpty) {
               return 'Wajib diisi';
@@ -168,7 +169,7 @@ class _AddSensorState extends State<AddSensor> {
                 InputForm(
                   title: "SPD 4.1*",
                   controller: spd41C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -184,7 +185,7 @@ class _AddSensorState extends State<AddSensor> {
                 InputForm(
                   title: "SPD 4.2*",
                   controller: spd42C,
-                  prefixIcon: const Icon(Icons.description_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                   validator: (val) {
                     if (val!.isEmpty) {
                       return 'Wajib diisi';
@@ -243,7 +244,7 @@ class _AddSensorState extends State<AddSensor> {
                 NonEditableForm(
                   title: "Lokasi Asset*",
                   controller: lokasiC,
-                  prefixIcon: const Icon(Icons.location_on_outlined),
+                  prefixIcon: const Icon(Iconsax.document_text),
                 ),
                 const SizedBox(
                   height: 16,
@@ -255,7 +256,7 @@ class _AddSensorState extends State<AddSensor> {
                   controller: tglPasangC,
                   decoration: InputDecoration(
                     labelText: 'Tanggal Dipasang*',
-                    prefixIcon: const Icon(Icons.event_outlined),
+                    prefixIcon: const Icon(Iconsax.calendar_1),
                     enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -302,7 +303,7 @@ class _AddSensorState extends State<AddSensor> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
@@ -344,7 +345,7 @@ class _AddSensorState extends State<AddSensor> {
                                 ? Column(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Icon(Icons.camera_alt),
+                                      Icon(Iconsax.camera),
                                       Text('Add Foto')
                                     ],
                                   )
